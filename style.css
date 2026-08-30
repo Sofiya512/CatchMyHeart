@@ -1,0 +1,132 @@
+body {
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    background: #ffe6f0;
+
+    margin: 0;
+
+    padding: 20px;
+
+}
+
+h1 {
+
+    color: #e91e63;
+
+}
+
+#game {
+
+    position: relative;
+
+    width: 90%;
+
+    max-width: 500px;
+
+    height: 450px;
+
+    margin: 20px auto;
+
+    background: white;
+
+    border: 3px solid #ffb6d2;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+#player {
+
+    position: absolute;
+
+    bottom: 15px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 45px;
+
+}
+
+.heart {
+
+    position: absolute;
+
+    font-size: 30px;
+
+}
+
+.buttons button {
+
+    width: 80px;
+
+    height: 50px;
+
+    margin: 10px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: #e91e63;
+
+    color: white;
+
+    font-size: 25px;
+
+}
+
+#questionBox,
+#finalBox {
+
+    display: none;
+
+    position: fixed;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 80%;
+
+    max-width: 400px;
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow: 0 10px 40px #999;
+
+}
+
+#answers button {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin: 10px 0;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ffd6e5;
+
+    color: #d81b60;
+
+    font-size: 16px;
+
+}
