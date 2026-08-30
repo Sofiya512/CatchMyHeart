@@ -1,47 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>A Little Game ❤️</title>
-
+    <title>Hello Lotte ❤️</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <!-- Background -->
     <div class="floating-hearts">
         <span>❤️</span>
         <span>💕</span>
         <span>💗</span>
         <span>💖</span>
         <span>❤️</span>
-        <span>💕</span>
+        <span>💞</span>
+        <span>💓</span>
     </div>
 
 
-    <!-- START -->
+    <!-- ALERT 1 -->
 
-    <div id="startScreen" class="screen">
+    <div id="alertOne" class="overlay">
 
-        <div class="card">
+        <div class="alert-card">
 
-            <div class="logo">💌</div>
+            <div class="alert-icon">👀</div>
 
-            <h1>A Little Game</h1>
+            <h1>Edaaaaaaa…… Lotte! ❤️</h1>
 
             <p>
-                I made something small for you...
+                Waittt… where are you going? 😂
             </p>
 
-            <p class="small-text">
-                Let's see how well you know me 👀
+            <p>
+                I made something for you. 🎁
             </p>
+
+            <p class="cute-text">
+                Open it! 😌💕
+            </p>
+
+            <button onclick="showAlertTwo()">
+                OK ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ALERT 2 -->
+
+    <div id="alertTwo" class="overlay hidden">
+
+        <div class="alert-card warning">
+
+            <div class="alert-icon">🚨</div>
+
+            <h1>WARNING, LOTTE! 🚨</h1>
+
+            <p>
+                Don't open this in front of anyone! 👀😂
+            </p>
+
+            <p>
+                Because if you open it in front of them,
+                they might hit you with a
+                <strong>boomstick! 💥😂</strong>
+            </p>
+
+            <p class="eva">
+                Your lovely Eva 😌❤️
+            </p>
+
+            <p class="developer">
+                [Developer with a brilliant brain 🧠✨]
+            </p>
+
+            <p>
+                Someone who made this just for you
+                as a gift. 🎁❤️
+            </p>
+
+            <p class="cute-text">
+                Now go ahead... 😏<br>
+                Open it only when you're alone! 😂💕
+            </p>
+
+            <button onclick="showStart()">
+                OK 😏
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- START SCREEN -->
+
+    <div id="startScreen" class="screen hidden">
+
+        <div class="start-card">
+
+            <div class="big-heart">💌</div>
+
+            <h1>Hello Lotteee! ❤️</h1>
+
+            <p class="intro">
+                I made a little game just for you. 🎁
+            </p>
+
+            <p>
+                No cheating! 👀😂
+            </p>
+
+            <p>
+                Answer honestly...
+            </p>
+
+            <h3>
+                Ready? 🥹💕
+            </h3>
 
             <button onclick="startGame()">
-                Start ❤️
+                START ❤️
             </button>
 
         </div>
@@ -55,17 +140,16 @@
 
         <div class="game-header">
 
-            <h1>Catch My Heart ❤️</h1>
+            <div>
+                <h1>Catch My Heart ❤️</h1>
+                <p>Catch the hearts!</p>
+            </div>
 
             <div class="score-box">
-                ❤️ <span id="score">0</span> / 10
+                ❤️ <span id="score">0</span>/5
             </div>
 
         </div>
-
-        <p class="instruction">
-            Catch the hearts... something is waiting for you 👀
-        </p>
 
 
         <div id="game">
@@ -79,14 +163,18 @@
 
         <div class="controls">
 
-            <button id="leftBtn">⬅️</button>
+            <button id="leftBtn">
+                ⬅️
+            </button>
 
-            <button id="rightBtn">➡️</button>
+            <button id="rightBtn">
+                ➡️
+            </button>
 
         </div>
 
-        <p class="pc-text">
-            PC: Use ← →
+        <p class="mobile-help">
+            Move the basket and catch the ❤️
         </p>
 
     </div>
@@ -98,15 +186,53 @@
 
         <div class="question-card">
 
-            <div id="questionEmoji" class="question-emoji">
-                💗
+            <div id="questionEmoji"
+                 class="question-emoji">
+                ❤️
             </div>
 
-            <p id="questionNumber" class="question-number"></p>
+            <div id="questionNumber"
+                 class="question-number">
+            </div>
 
-            <h2 id="question"></h2>
+            <h2 id="question">
+            </h2>
 
-            <div id="answers"></div>
+            <div id="answers">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TEXT QUESTION -->
+
+    <div id="textQuestionBox" class="overlay hidden">
+
+        <div class="question-card">
+
+            <div class="question-emoji">
+                🥺💭
+            </div>
+
+            <div class="question-number">
+                QUESTION 3
+            </div>
+
+            <h2>
+                Who am I to you? ❤️
+            </h2>
+
+            <textarea
+                id="textAnswer"
+                placeholder="Type your answer here... 👀❤️"
+                maxlength="300">
+            </textarea>
+
+            <button onclick="submitTextAnswer()">
+                Submit ❤️
+            </button>
 
         </div>
 
@@ -119,11 +245,15 @@
 
         <div class="reaction-card">
 
-            <div id="reactionEmoji" class="reaction-emoji"></div>
+            <div id="reactionEmoji"
+                 class="reaction-emoji">
+            </div>
 
-            <h2 id="reactionTitle"></h2>
+            <h2 id="reactionTitle">
+            </h2>
 
-            <p id="reactionText"></p>
+            <p id="reactionText">
+            </p>
 
             <button onclick="closeReaction()">
                 Continue 😂
@@ -147,7 +277,7 @@
             <h1>You Finished! 🥹</h1>
 
             <p>
-                You survived all my questions. 😂
+                You survived my questions. 😂
             </p>
 
             <p>
@@ -155,8 +285,24 @@
             </p>
 
             <h2>
-                You are stuck with me now. 😌💕
+                Thank you for playing, Lotte ❤️
             </h2>
+
+            <div class="call-box">
+
+                <p>
+                    If you need me, call me. ❤️
+                </p>
+
+                <a href="tel:8089305057">
+                    📞 8089305057
+                </a>
+
+            </div>
+
+            <p class="signature">
+                — Your lovely Eva 😌❤️
+            </p>
 
         </div>
 
@@ -166,5 +312,4 @@
     <script src="script.js"></script>
 
 </body>
-
 </html>
