@@ -1,15 +1,282 @@
+/* =========================================
+   GOOGLE SHEETS CONNECTION
+   ========================================= */
+
+const GOOGLE_SCRIPT_URL =
+    "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+
+/* =========================================
+   GAME VARIABLES
+   ========================================= */
+
 let score = 0;
 
 let playerPosition = 50;
 
 let paused = false;
 
-const game = document.getElementById("game");
 
-const player = document.getElementById("player");
+/* =========================================
+   QUESTIONS
+   ========================================= */
 
-const scoreText = document.getElementById("score");
+const questions = {
 
+    2: {
+
+        emoji: "👀",
+
+        text:
+            "Be honest... Who is more annoying? 😂",
+
+        answers: [
+
+            {
+                text: "Obviously you 😂",
+
+                reaction: "😭",
+
+                title: "WOWWW 😂",
+
+                message:
+                    "I asked for honesty... not betrayal. 😭"
+            },
+
+            {
+                text: "Me 😌",
+
+                reaction: "🥹",
+
+                title: "Good answer ❤️",
+
+                message:
+                    "At least you know yourself. 😂"
+            },
+
+            {
+                text: "Both 😂",
+
+                reaction: "🤝",
+
+                title: "Diplomatic answer!",
+
+                message:
+                    "Okay... I'll allow it. 😂"
+            }
+
+        ]
+
+    },
+
+
+    5: {
+
+        emoji: "📱",
+
+        text:
+            "If I say 'I'm fine'... what should you do? 😂",
+
+        answers: [
+
+            {
+                text: "Say sorry immediately 😭",
+
+                reaction: "😂",
+
+                title: "Correct!",
+
+                message:
+                    "You have learned the rules. 😂❤️"
+            },
+
+            {
+                text: "Run 🏃",
+
+                reaction: "🏃",
+
+                title: "COWARD! 😂",
+
+                message:
+                    "Come back here! 😂"
+            },
+
+            {
+                text: "Bring food 🍫",
+
+                reaction: "🍫",
+
+                title: "Actually...",
+
+                message:
+                    "This might be the smartest answer. 😂"
+            }
+
+        ]
+
+    },
+
+
+    8: {
+
+        emoji: "🫀",
+
+        text:
+            "Very important question... Will you give me your kidney? 🫀😂",
+
+        answers: [
+
+            {
+                text: "Of course, take it ❤️",
+
+                reaction: "🥹❤️",
+
+                title: "AWWW 😭",
+
+                message:
+                    "Okay okay! Keep the other one. 😂❤️"
+            },
+
+            {
+                text: "One kidney is enough 😂",
+
+                reaction: "😂",
+
+                title: "NEGOTIATING?!",
+
+                message:
+                    "Fine... I'll take one. For now. 😌😂"
+            },
+
+            {
+                text: "NOPE! 🏃",
+
+                reaction: "🏃💨",
+
+                title: "EXCUSE ME?! 😭",
+
+                message:
+                    "After everything I've done for you?! 😂💔"
+            }
+
+        ]
+
+    },
+
+
+    10: {
+
+        emoji: "🥺",
+
+        text:
+            "Last question... Do you want to meet me? ❤️",
+
+        answers: [
+
+            {
+                text: "YES ❤️",
+
+                reaction: "🥹❤️",
+
+                title: "I KNEW IT! ❤️",
+
+                message:
+                    "Okay then... when are we meeting? 👀"
+            },
+
+            {
+                text: "Of course 🥰",
+
+                reaction: "😍",
+
+                title: "GOOD ANSWER! ❤️",
+
+                message:
+                    "You better keep that promise. 😌"
+            },
+
+            {
+                text: "Maybe 👀",
+
+                reaction: "👀",
+
+                title: "MAYBE?!",
+
+                message:
+                    "Interesting answer... I'll remember this. 😂"
+            }
+
+        ]
+
+    }
+
+};
+
+
+/* =========================================
+   HTML ELEMENTS
+   ========================================= */
+
+const game =
+    document.getElementById("game");
+
+const player =
+    document.getElementById("player");
+
+const scoreText =
+    document.getElementById("score");
+
+const questionBox =
+    document.getElementById("questionBox");
+
+const question =
+    document.getElementById("question");
+
+const answers =
+    document.getElementById("answers");
+
+const questionEmoji =
+    document.getElementById("questionEmoji");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const reactionBox =
+    document.getElementById("reactionBox");
+
+const reactionEmoji =
+    document.getElementById("reactionEmoji");
+
+const reactionTitle =
+    document.getElementById("reactionTitle");
+
+const reactionText =
+    document.getElementById("reactionText");
+
+const finalBox =
+    document.getElementById("finalBox");
+
+
+/* =========================================
+   START GAME
+   ========================================= */
+
+function startGame() {
+
+    document
+        .getElementById("startScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("gameScreen")
+        .classList.remove("hidden");
+
+}
+
+
+/* =========================================
+   PLAYER MOVEMENT
+   ========================================= */
 
 function moveLeft() {
 
@@ -23,7 +290,8 @@ function moveLeft() {
 
     }
 
-    player.style.left = playerPosition + "%";
+    player.style.left =
+        playerPosition + "%";
 
 }
 
@@ -40,200 +308,382 @@ function moveRight() {
 
     }
 
-    player.style.left = playerPosition + "%";
+    player.style.left =
+        playerPosition + "%";
 
 }
 
 
-document.addEventListener("keydown", function(event) {
+/* =========================================
+   KEYBOARD
+   ========================================= */
 
-    if (event.key === "ArrowLeft") {
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-        moveLeft();
+        if (event.key === "ArrowLeft") {
+
+            moveLeft();
+
+        }
+
+        if (event.key === "ArrowRight") {
+
+            moveRight();
+
+        }
 
     }
+);
 
-    if (event.key === "ArrowRight") {
 
-        moveRight();
+/* =========================================
+   PHONE BUTTONS
+   ========================================= */
 
-    }
+document
+    .getElementById("leftBtn")
+    .addEventListener(
+        "click",
+        moveLeft
+    );
 
-});
 
+document
+    .getElementById("rightBtn")
+    .addEventListener(
+        "click",
+        moveRight
+    );
+
+
+/* =========================================
+   CREATE FALLING HEART
+   ========================================= */
 
 function createHeart() {
 
-    if (paused || score >= 10) return;
+    if (paused || score >= 10)
+        return;
 
-    const heart = document.createElement("div");
 
-    heart.className = "heart";
+    const heart =
+        document.createElement("div");
 
-    heart.innerText = "❤️";
+    heart.className =
+        "heart";
+
+    heart.innerText =
+        "❤️";
+
 
     heart.style.left =
         Math.random() * 90 + "%";
 
-    heart.style.top = "0px";
+    heart.style.top =
+        "-40px";
+
 
     game.appendChild(heart);
 
 
-    let position = 0;
+    let position = -40;
 
 
-    const fall = setInterval(function() {
+    const fall =
+        setInterval(function() {
 
-        if (paused) return;
-
-
-        position += 3;
-
-        heart.style.top =
-            position + "px";
+            if (paused) return;
 
 
-        const heartRect =
-            heart.getBoundingClientRect();
+            position += 3;
 
-        const playerRect =
-            player.getBoundingClientRect();
-
-
-        if (
-
-            heartRect.bottom >= playerRect.top &&
-
-            heartRect.left < playerRect.right &&
-
-            heartRect.right > playerRect.left
-
-        ) {
-
-            score++;
-
-            scoreText.innerText = score;
-
-            heart.remove();
-
-            clearInterval(fall);
+            heart.style.top =
+                position + "px";
 
 
-            if (score === 3) {
+            const heartRect =
+                heart.getBoundingClientRect();
 
-                showQuestion(
-                    "Do you want to meet me? 🥺❤️",
-                    [
-                        "Definitely ❤️",
-                        "Yes 🥰",
-                        "Maybe 👀"
-                    ]
-                );
-
-            }
+            const playerRect =
+                player.getBoundingClientRect();
 
 
-            if (score === 6) {
+            /* Collision */
 
-                showQuestion(
-                    "Do you miss me? 🥹",
-                    [
-                        "Yes ❤️",
-                        "Sometimes 😌",
-                        "Every day 🥺"
-                    ]
-                );
+            if (
 
-            }
+                heartRect.bottom >=
+                playerRect.top &&
 
+                heartRect.left <
+                playerRect.right &&
 
-            if (score === 9) {
+                heartRect.right >
+                playerRect.left
 
-                showQuestion(
-                    "Would you choose me again? 💕",
-                    [
-                        "Always ❤️",
-                        "Of course 🥰",
-                        "Without thinking twice 💗"
-                    ]
-                );
+            ) {
 
-            }
+                score++;
+
+                scoreText.innerText =
+                    score;
 
 
-            if (score === 10) {
+                heart.remove();
 
-                document.getElementById("finalBox")
-                    .style.display = "block";
+                clearInterval(fall);
+
+
+                /* Show question */
+
+                if (questions[score]) {
+
+                    showQuestion(
+                        score
+                    );
+
+                }
+
+
+                /* Final screen */
+
+                if (score >= 10) {
+
+                    setTimeout(
+                        function() {
+
+                            finalBox
+                                .classList
+                                .remove(
+                                    "hidden"
+                                );
+
+                        },
+                        500
+                    );
+
+                }
 
             }
 
-        }
 
+            /* Heart missed */
 
-        if (position > 450) {
+            if (position > 500) {
 
-            heart.remove();
+                heart.remove();
 
-            clearInterval(fall);
+                clearInterval(fall);
 
-        }
+            }
 
-    }, 30);
+        }, 30);
 
 }
 
 
-function showQuestion(text, options) {
+/* =========================================
+   SHOW QUESTION
+   ========================================= */
+
+function showQuestion(number) {
 
     paused = true;
 
 
-    const box =
-        document.getElementById("questionBox");
-
-    const question =
-        document.getElementById("question");
-
-    const answers =
-        document.getElementById("answers");
+    const q =
+        questions[number];
 
 
-    question.innerText = text;
-
-    answers.innerHTML = "";
-
-
-    options.forEach(function(option) {
-
-        const button =
-            document.createElement("button");
-
-        button.innerText = option;
+    questionEmoji.innerText =
+        q.emoji;
 
 
-        button.onclick = function() {
-
-            box.style.display = "none";
-
-            paused = false;
-
-        };
+    questionNumber.innerText =
+        "QUESTION " + number;
 
 
-        answers.appendChild(button);
+    question.innerText =
+        q.text;
 
-    });
+
+    answers.innerHTML =
+        "";
 
 
-    box.style.display = "block";
+    q.answers.forEach(
+        function(item) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "answer-btn";
+
+
+            button.innerText =
+                item.text;
+
+
+            button.onclick =
+                function() {
+
+
+                    /* SAVE HIS ANSWER */
+
+                    saveAnswer(
+                        q.text,
+                        item.text
+                    );
+
+
+                    /* CLOSE QUESTION */
+
+                    questionBox
+                        .classList
+                        .add(
+                            "hidden"
+                        );
+
+
+                    /* SHOW FUNNY REACTION */
+
+                    showReaction(
+                        item
+                    );
+
+                };
+
+
+            answers.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    questionBox
+        .classList
+        .remove(
+            "hidden"
+        );
 
 }
 
 
-setInterval(function() {
+/* =========================================
+   SAVE ANSWER TO GOOGLE SHEET
+   ========================================= */
 
-    createHeart();
+function saveAnswer(
+    questionText,
+    answerText
+) {
 
-}, 800);
+    if (
+        GOOGLE_SCRIPT_URL ===
+        "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE"
+    ) {
+
+        console.log(
+            "Google Script URL not added."
+        );
+
+        return;
+
+    }
+
+
+    fetch(
+        GOOGLE_SCRIPT_URL,
+        {
+
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+
+            },
+
+            body: JSON.stringify({
+
+                question:
+                    questionText,
+
+                answer:
+                    answerText
+
+            })
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   SHOW REACTION
+   ========================================= */
+
+function showReaction(item) {
+
+    reactionEmoji.innerText =
+        item.reaction;
+
+
+    reactionTitle.innerText =
+        item.title;
+
+
+    reactionText.innerText =
+        item.message;
+
+
+    reactionBox
+        .classList
+        .remove(
+            "hidden"
+        );
+
+}
+
+
+/* =========================================
+   CONTINUE
+   ========================================= */
+
+function closeReaction() {
+
+    reactionBox
+        .classList
+        .add(
+            "hidden"
+        );
+
+    paused = false;
+
+}
+
+
+/* =========================================
+   START FALLING HEARTS
+   ========================================= */
+
+setInterval(
+    function() {
+
+        createHeart();
+
+    },
+    800
+);
