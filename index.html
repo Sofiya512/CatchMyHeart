@@ -2,61 +2,166 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Catch My Heart ❤️</title>
+    <title>A Little Game ❤️</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-    <h1>Catch My Heart ❤️</h1>
+    <div class="floating-hearts">
+        <span>❤️</span>
+        <span>💕</span>
+        <span>💗</span>
+        <span>💖</span>
+        <span>❤️</span>
+        <span>💕</span>
+    </div>
 
-    <p>Catch 10 hearts to unlock a surprise 💕</p>
 
-    <h3>
-        Hearts: <span id="score">0</span> / 10
-    </h3>
+    <!-- START -->
 
-    <div id="game">
+    <div id="startScreen" class="screen">
 
-        <div id="player">🧺</div>
+        <div class="card">
+
+            <div class="logo">💌</div>
+
+            <h1>A Little Game</h1>
+
+            <p>
+                I made something small for you...
+            </p>
+
+            <p class="small-text">
+                Let's see how well you know me 👀
+            </p>
+
+            <button onclick="startGame()">
+                Start ❤️
+            </button>
+
+        </div>
 
     </div>
 
-    <div class="buttons">
 
-        <button onclick="moveLeft()">⬅️</button>
+    <!-- GAME -->
 
-        <button onclick="moveRight()">➡️</button>
+    <div id="gameScreen" class="screen hidden">
+
+        <div class="game-header">
+
+            <h1>Catch My Heart ❤️</h1>
+
+            <div class="score-box">
+                ❤️ <span id="score">0</span> / 10
+            </div>
+
+        </div>
+
+        <p class="instruction">
+            Catch the hearts... something is waiting for you 👀
+        </p>
+
+
+        <div id="game">
+
+            <div id="player">
+                🧺
+            </div>
+
+        </div>
+
+
+        <div class="controls">
+
+            <button id="leftBtn">⬅️</button>
+
+            <button id="rightBtn">➡️</button>
+
+        </div>
+
+        <p class="pc-text">
+            PC: Use ← →
+        </p>
 
     </div>
 
-    <div id="questionBox">
 
-        <h2 id="question"></h2>
+    <!-- QUESTION -->
 
-        <div id="answers"></div>
+    <div id="questionBox" class="overlay hidden">
+
+        <div class="question-card">
+
+            <div id="questionEmoji" class="question-emoji">
+                💗
+            </div>
+
+            <p id="questionNumber" class="question-number"></p>
+
+            <h2 id="question"></h2>
+
+            <div id="answers"></div>
+
+        </div>
 
     </div>
 
-    <div id="finalBox">
 
-        <h1>You Won! ❤️</h1>
+    <!-- REACTION -->
 
-        <p>You caught all my hearts 🥹</p>
+    <div id="reactionBox" class="overlay hidden">
 
-        <h2>
-            But you already have my heart ❤️
-        </h2>
+        <div class="reaction-card">
+
+            <div id="reactionEmoji" class="reaction-emoji"></div>
+
+            <h2 id="reactionTitle"></h2>
+
+            <p id="reactionText"></p>
+
+            <button onclick="closeReaction()">
+                Continue 😂
+            </button>
+
+        </div>
 
     </div>
+
+
+    <!-- FINAL -->
+
+    <div id="finalBox" class="overlay hidden">
+
+        <div class="final-card">
+
+            <div class="final-heart">
+                ❤️
+            </div>
+
+            <h1>You Finished! 🥹</h1>
+
+            <p>
+                You survived all my questions. 😂
+            </p>
+
+            <p>
+                And yes... your answers were recorded. 👀
+            </p>
+
+            <h2>
+                You are stuck with me now. 😌💕
+            </h2>
+
+        </div>
+
+    </div>
+
 
     <script src="script.js"></script>
 
