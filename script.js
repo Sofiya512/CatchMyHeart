@@ -1,221 +1,37 @@
-/* =========================================
-   GOOGLE SHEETS CONNECTION
-   ========================================= */
+/* ==========================================
+   GOOGLE SHEETS
+   ========================================== */
 
 const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbw5-DFT1UkPMG-RVBCG6ELH9NCjS-bW5unAm3JvzWPv5PhtpDL7F82UysZ1GlMvkrQg/exec";
 
 
-/* =========================================
+/* ==========================================
    GAME VARIABLES
-   ========================================= */
+   ========================================== */
 
 let score = 0;
 
 let playerPosition = 50;
 
-let paused = false;
+let paused = true;
 
 
-/* =========================================
-   QUESTIONS
-   ========================================= */
+/* ==========================================
+   ELEMENTS
+   ========================================== */
 
-const questions = {
+const alertOne =
+    document.getElementById("alertOne");
 
-    2: {
+const alertTwo =
+    document.getElementById("alertTwo");
 
-        emoji: "👀",
+const startScreen =
+    document.getElementById("startScreen");
 
-        text:
-            "Be honest... Who is more annoying? 😂",
-
-        answers: [
-
-            {
-                text: "Obviously you 😂",
-
-                reaction: "😭",
-
-                title: "WOWWW 😂",
-
-                message:
-                    "I asked for honesty... not betrayal. 😭"
-            },
-
-            {
-                text: "Me 😌",
-
-                reaction: "🥹",
-
-                title: "Good answer ❤️",
-
-                message:
-                    "At least you know yourself. 😂"
-            },
-
-            {
-                text: "Both 😂",
-
-                reaction: "🤝",
-
-                title: "Diplomatic answer!",
-
-                message:
-                    "Okay... I'll allow it. 😂"
-            }
-
-        ]
-
-    },
-
-
-    5: {
-
-        emoji: "📱",
-
-        text:
-            "If I say 'I'm fine'... what should you do? 😂",
-
-        answers: [
-
-            {
-                text: "Say sorry immediately 😭",
-
-                reaction: "😂",
-
-                title: "Correct!",
-
-                message:
-                    "You have learned the rules. 😂❤️"
-            },
-
-            {
-                text: "Run 🏃",
-
-                reaction: "🏃",
-
-                title: "COWARD! 😂",
-
-                message:
-                    "Come back here! 😂"
-            },
-
-            {
-                text: "Bring food 🍫",
-
-                reaction: "🍫",
-
-                title: "Actually...",
-
-                message:
-                    "This might be the smartest answer. 😂"
-            }
-
-        ]
-
-    },
-
-
-    8: {
-
-        emoji: "🫀",
-
-        text:
-            "Very important question... Will you give me your kidney? 🫀😂",
-
-        answers: [
-
-            {
-                text: "Of course, take it ❤️",
-
-                reaction: "🥹❤️",
-
-                title: "AWWW 😭",
-
-                message:
-                    "Okay okay! Keep the other one. 😂❤️"
-            },
-
-            {
-                text: "One kidney is enough 😂",
-
-                reaction: "😂",
-
-                title: "NEGOTIATING?!",
-
-                message:
-                    "Fine... I'll take one. For now. 😌😂"
-            },
-
-            {
-                text: "NOPE! 🏃",
-
-                reaction: "🏃💨",
-
-                title: "EXCUSE ME?! 😭",
-
-                message:
-                    "After everything I've done for you?! 😂💔"
-            }
-
-        ]
-
-    },
-
-
-    10: {
-
-        emoji: "🥺",
-
-        text:
-            "Last question... Do you want to meet me? ❤️",
-
-        answers: [
-
-            {
-                text: "YES ❤️",
-
-                reaction: "🥹❤️",
-
-                title: "I KNEW IT! ❤️",
-
-                message:
-                    "Okay then... when are we meeting? 👀"
-            },
-
-            {
-                text: "Of course 🥰",
-
-                reaction: "😍",
-
-                title: "GOOD ANSWER! ❤️",
-
-                message:
-                    "You better keep that promise. 😌"
-            },
-
-            {
-                text: "Maybe 👀",
-
-                reaction: "👀",
-
-                title: "MAYBE?!",
-
-                message:
-                    "Interesting answer... I'll remember this. 😂"
-            }
-
-        ]
-
-    }
-
-};
-
-
-/* =========================================
-   HTML ELEMENTS
-   ========================================= */
+const gameScreen =
+    document.getElementById("gameScreen");
 
 const game =
     document.getElementById("game");
@@ -229,17 +45,23 @@ const scoreText =
 const questionBox =
     document.getElementById("questionBox");
 
+const questionEmoji =
+    document.getElementById("questionEmoji");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
 const question =
     document.getElementById("question");
 
 const answers =
     document.getElementById("answers");
 
-const questionEmoji =
-    document.getElementById("questionEmoji");
+const textQuestionBox =
+    document.getElementById("textQuestionBox");
 
-const questionNumber =
-    document.getElementById("questionNumber");
+const textAnswer =
+    document.getElementById("textAnswer");
 
 const reactionBox =
     document.getElementById("reactionBox");
@@ -257,56 +79,244 @@ const finalBox =
     document.getElementById("finalBox");
 
 
-/* =========================================
+/* ==========================================
+   OPEN SECOND ALERT
+   ========================================== */
+
+function showAlertTwo() {
+
+    alertOne.classList.add("hidden");
+
+    alertTwo.classList.remove("hidden");
+
+}
+
+
+/* ==========================================
+   OPEN START SCREEN
+   ========================================== */
+
+function showStart() {
+
+    alertTwo.classList.add("hidden");
+
+    startScreen.classList.remove("hidden");
+
+}
+
+
+/* ==========================================
    START GAME
-   ========================================= */
+   ========================================== */
 
 function startGame() {
 
-    document
-        .getElementById("startScreen")
-        .classList.add("hidden");
+    startScreen.classList.add("hidden");
 
-    document
-        .getElementById("gameScreen")
-        .classList.remove("hidden");
+    gameScreen.classList.remove("hidden");
+
+    paused = false;
 
 }
 
 
-/* =========================================
-   PLAYER MOVEMENT
-   ========================================= */
+/* ==========================================
+   QUESTIONS
+   ========================================== */
+
+const questions = {
+
+    1: {
+
+        emoji: "❤️",
+
+        text:
+            "Do you love me? ❤️",
+
+        answers: [
+
+            {
+                text: "YES ❤️",
+
+                reaction: "🥹❤️",
+
+                title: "I KNEW IT! 😭",
+
+                message:
+                    "Good boy. That's the answer I wanted. 😌❤️"
+            },
+
+            {
+                text: "NO 😂",
+
+                reaction: "😭💔",
+
+                title: "PODAAAA POTTE LOTTE! 😂",
+
+                message:
+                    "KINDIYEEEE! 😭😂 How dare you!"
+            }
+
+        ]
+
+    },
+
+
+    2: {
+
+        emoji: "👀",
+
+        text:
+            "Do you want to meet me? ❤️",
+
+        answers: [
+
+            {
+                text: "YESSS ❤️",
+
+                reaction: "🥹❤️",
+
+                title: "I KNEW IT! 😍",
+
+                message:
+                    "Then tell me when you're coming. 👀❤️"
+            },
+
+            {
+                text: "NO 😂",
+
+                reaction: "😭😂",
+
+                title: "ENI ANTHE MAMI VARUM?!",
+
+                message:
+                    "Eni anthe mami varum? 😭😂 I'll be waiting!"
+            }
+
+        ]
+
+    },
+
+
+    3: {
+
+        emoji: "🥺",
+
+        text:
+            "Who am I to you?",
+
+        textAnswer: true
+
+    },
+
+
+    4: {
+
+        emoji: "🌧️",
+
+        text:
+            "Are you ready to hug me in the rainy season? 🌧️🤗",
+
+        answers: [
+
+            {
+                text: "YES ❤️",
+
+                reaction: "🤗❤️",
+
+                title: "COME HEREEE! 🥹",
+
+                message:
+                    "Rain + you + me = perfect. 🌧️❤️"
+            },
+
+            {
+                text: "NO 😂",
+
+                reaction: "🌧️😭",
+
+                title: "NO?! 😭",
+
+                message:
+                    "Okay... I'll hug the umbrella then. 😂☂️"
+            }
+
+        ]
+
+    },
+
+
+    5: {
+
+        emoji: "🫀",
+
+        text:
+            "Will you give me your kidney? 🫀😂",
+
+        answers: [
+
+            {
+                text: "YES, TAKE IT ❤️",
+
+                reaction: "🥹🫀",
+
+                title: "TRUE LOVE! 😭❤️",
+
+                message:
+                    "Okay okay... I'll only take one. 😂❤️"
+            },
+
+            {
+                text: "NOPE! 🏃",
+
+                reaction: "🏃💨😭",
+
+                title: "WHAT?! 😭",
+
+                message:
+                    "After everything I've done for you?! 😂💔"
+            }
+
+        ]
+
+    }
+
+};
+
+
+/* ==========================================
+   MOVE LEFT
+   ========================================== */
 
 function moveLeft() {
 
-    if (paused) return;
+    if (paused)
+        return;
 
     playerPosition -= 8;
 
-    if (playerPosition < 5) {
-
+    if (playerPosition < 5)
         playerPosition = 5;
-
-    }
 
     player.style.left =
         playerPosition + "%";
 
 }
 
+
+/* ==========================================
+   MOVE RIGHT
+   ========================================== */
 
 function moveRight() {
 
-    if (paused) return;
+    if (paused)
+        return;
 
     playerPosition += 8;
 
-    if (playerPosition > 95) {
-
+    if (playerPosition > 95)
         playerPosition = 95;
-
-    }
 
     player.style.left =
         playerPosition + "%";
@@ -314,9 +324,9 @@ function moveRight() {
 }
 
 
-/* =========================================
+/* ==========================================
    KEYBOARD
-   ========================================= */
+   ========================================== */
 
 document.addEventListener(
     "keydown",
@@ -338,9 +348,9 @@ document.addEventListener(
 );
 
 
-/* =========================================
-   PHONE BUTTONS
-   ========================================= */
+/* ==========================================
+   MOBILE BUTTONS
+   ========================================== */
 
 document
     .getElementById("leftBtn")
@@ -358,13 +368,13 @@ document
     );
 
 
-/* =========================================
-   CREATE FALLING HEART
-   ========================================= */
+/* ==========================================
+   CREATE HEART
+   ========================================== */
 
 function createHeart() {
 
-    if (paused || score >= 10)
+    if (paused || score >= 5)
         return;
 
 
@@ -392,101 +402,93 @@ function createHeart() {
 
 
     const fall =
-        setInterval(function() {
+        setInterval(
+            function() {
 
-            if (paused) return;
-
-
-            position += 3;
-
-            heart.style.top =
-                position + "px";
+                if (paused)
+                    return;
 
 
-            const heartRect =
-                heart.getBoundingClientRect();
+                position += 3;
 
-            const playerRect =
-                player.getBoundingClientRect();
-
-
-            /* Collision */
-
-            if (
-
-                heartRect.bottom >=
-                playerRect.top &&
-
-                heartRect.left <
-                playerRect.right &&
-
-                heartRect.right >
-                playerRect.left
-
-            ) {
-
-                score++;
-
-                scoreText.innerText =
-                    score;
+                heart.style.top =
+                    position + "px";
 
 
-                heart.remove();
+                const heartRect =
+                    heart.getBoundingClientRect();
 
-                clearInterval(fall);
-
-
-                /* Show question */
-
-                if (questions[score]) {
-
-                    showQuestion(
-                        score
-                    );
-
-                }
+                const playerRect =
+                    player.getBoundingClientRect();
 
 
-                /* Final screen */
+                /* Collision */
 
-                if (score >= 10) {
+                if (
 
-                    setTimeout(
-                        function() {
+                    heartRect.bottom >=
+                    playerRect.top &&
 
-                            finalBox
-                                .classList
-                                .remove(
-                                    "hidden"
-                                );
+                    heartRect.left <
+                    playerRect.right &&
 
-                        },
-                        500
-                    );
+                    heartRect.right >
+                    playerRect.left
+
+                ) {
+
+                    score++;
+
+                    scoreText.innerText =
+                        score;
+
+
+                    heart.remove();
+
+                    clearInterval(fall);
+
+
+                    if (questions[score]) {
+
+                        showQuestion(
+                            score
+                        );
+
+                    }
+
+
+                    if (score >= 5) {
+
+                        setTimeout(
+                            showFinal,
+                            500
+                        );
+
+                    }
 
                 }
 
-            }
 
+                /* Missed */
 
-            /* Heart missed */
+                if (position > 500) {
 
-            if (position > 500) {
+                    heart.remove();
 
-                heart.remove();
+                    clearInterval(fall);
 
-                clearInterval(fall);
+                }
 
-            }
-
-        }, 30);
+            },
+            30
+        );
 
 }
 
 
-/* =========================================
+/* ==========================================
    SHOW QUESTION
-   ========================================= */
+   ========================================== */
 
 function showQuestion(number) {
 
@@ -495,6 +497,17 @@ function showQuestion(number) {
 
     const q =
         questions[number];
+
+
+    if (q.textAnswer) {
+
+        textQuestionBox
+            .classList
+            .remove("hidden");
+
+        return;
+
+    }
 
 
     questionEmoji.innerText =
@@ -533,25 +546,16 @@ function showQuestion(number) {
             button.onclick =
                 function() {
 
-
-                    /* SAVE HIS ANSWER */
-
                     saveAnswer(
                         q.text,
                         item.text
                     );
 
 
-                    /* CLOSE QUESTION */
-
                     questionBox
                         .classList
-                        .add(
-                            "hidden"
-                        );
+                        .add("hidden");
 
-
-                    /* SHOW FUNNY REACTION */
 
                     showReaction(
                         item
@@ -570,16 +574,116 @@ function showQuestion(number) {
 
     questionBox
         .classList
-        .remove(
-            "hidden"
-        );
+        .remove("hidden");
 
 }
 
 
-/* =========================================
-   SAVE ANSWER TO GOOGLE SHEET
-   ========================================= */
+/* ==========================================
+   TEXT ANSWER
+   ========================================== */
+
+function submitTextAnswer() {
+
+    const answer =
+        textAnswer.value.trim();
+
+
+    if (answer === "") {
+
+        alert(
+            "Come on Lotte 😂❤️ Type something!"
+        );
+
+        return;
+
+    }
+
+
+    saveAnswer(
+        "Who am I to you?",
+        answer
+    );
+
+
+    textAnswer.value =
+        "";
+
+
+    textQuestionBox
+        .classList
+        .add("hidden");
+
+
+    showReaction({
+
+        reaction: "🥹❤️",
+
+        title: "Awww... 👀❤️",
+
+        message:
+            "I hope you meant something nice. 😂💕"
+
+    });
+
+}
+
+
+/* ==========================================
+   SHOW REACTION
+   ========================================== */
+
+function showReaction(item) {
+
+    reactionEmoji.innerText =
+        item.reaction;
+
+    reactionTitle.innerText =
+        item.title;
+
+    reactionText.innerText =
+        item.message;
+
+
+    reactionBox
+        .classList
+        .remove("hidden");
+
+}
+
+
+/* ==========================================
+   CLOSE REACTION
+   ========================================== */
+
+function closeReaction() {
+
+    reactionBox
+        .classList
+        .add("hidden");
+
+
+    paused = false;
+
+}
+
+
+/* ==========================================
+   FINAL SCREEN
+   ========================================== */
+
+function showFinal() {
+
+    finalBox
+        .classList
+        .remove("hidden");
+
+}
+
+
+/* ==========================================
+   SAVE TO GOOGLE SHEETS
+   ========================================== */
 
 function saveAnswer(
     questionText,
@@ -592,7 +696,7 @@ function saveAnswer(
     ) {
 
         console.log(
-            "Google Script URL not added."
+            "Google Apps Script URL not added."
         );
 
         return;
@@ -631,53 +735,9 @@ function saveAnswer(
 }
 
 
-/* =========================================
-   SHOW REACTION
-   ========================================= */
-
-function showReaction(item) {
-
-    reactionEmoji.innerText =
-        item.reaction;
-
-
-    reactionTitle.innerText =
-        item.title;
-
-
-    reactionText.innerText =
-        item.message;
-
-
-    reactionBox
-        .classList
-        .remove(
-            "hidden"
-        );
-
-}
-
-
-/* =========================================
-   CONTINUE
-   ========================================= */
-
-function closeReaction() {
-
-    reactionBox
-        .classList
-        .add(
-            "hidden"
-        );
-
-    paused = false;
-
-}
-
-
-/* =========================================
-   START FALLING HEARTS
-   ========================================= */
+/* ==========================================
+   HEART SPAWNER
+   ========================================== */
 
 setInterval(
     function() {
