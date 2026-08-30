@@ -11,9 +11,7 @@ const GOOGLE_SCRIPT_URL =
    ========================================== */
 
 let score = 0;
-
 let playerPosition = 50;
-
 let paused = true;
 
 
@@ -369,10 +367,16 @@ document
 
 
 /* ==========================================
-   CREATE HEART
+   CREATE FALLING HEART
    ========================================== */
 
 function createHeart() {
+
+    /*
+       IMPORTANT:
+       Stop creating new hearts after
+       the 5th heart has been caught.
+    */
 
     if (paused || score >= 5)
         return;
@@ -405,6 +409,12 @@ function createHeart() {
         setInterval(
             function() {
 
+                /*
+                   If game is paused because a
+                   question/reaction is showing,
+                   keep the heart in place.
+                */
+
                 if (paused)
                     return;
 
@@ -422,7 +432,9 @@ function createHeart() {
                     player.getBoundingClientRect();
 
 
-                /* Collision */
+                /* ==================================
+                   COLLISION
+                   ================================== */
 
                 if (
 
@@ -448,6 +460,17 @@ function createHeart() {
                     clearInterval(fall);
 
 
+                    /*
+                       Show the question.
+
+                       IMPORTANT:
+                       We DO NOT call showFinal()
+                       here anymore.
+
+                       Question 5 must be answered
+                       first.
+                    */
+
                     if (questions[score]) {
 
                         showQuestion(
@@ -456,20 +479,12 @@ function createHeart() {
 
                     }
 
-
-                    if (score >= 5) {
-
-                        setTimeout(
-                            showFinal,
-                            500
-                        );
-
-                    }
-
                 }
 
 
-                /* Missed */
+                /* ==================================
+                   HEART MISSED
+                   ================================== */
 
                 if (position > 500) {
 
@@ -499,6 +514,11 @@ function showQuestion(number) {
         questions[number];
 
 
+    /*
+       QUESTION 3
+       Textbox question
+    */
+
     if (q.textAnswer) {
 
         textQuestionBox
@@ -509,6 +529,10 @@ function showQuestion(number) {
 
     }
 
+
+    /*
+       NORMAL YES / NO QUESTION
+    */
 
     questionEmoji.innerText =
         q.emoji;
@@ -546,16 +570,28 @@ function showQuestion(number) {
             button.onclick =
                 function() {
 
+                    /*
+                       SAVE HIS ANSWER
+                    */
+
                     saveAnswer(
                         q.text,
                         item.text
                     );
 
 
+                    /*
+                       CLOSE QUESTION
+                    */
+
                     questionBox
                         .classList
                         .add("hidden");
 
+
+                    /*
+                       SHOW FUNNY REACTION
+                    */
 
                     showReaction(
                         item
@@ -580,7 +616,7 @@ function showQuestion(number) {
 
 
 /* ==========================================
-   TEXT ANSWER
+   TEXT QUESTION - QUESTION 3
    ========================================== */
 
 function submitTextAnswer() {
@@ -600,20 +636,36 @@ function submitTextAnswer() {
     }
 
 
+    /*
+       SAVE TEXT ANSWER
+    */
+
     saveAnswer(
         "Who am I to you?",
         answer
     );
 
 
+    /*
+       CLEAR TEXTBOX
+    */
+
     textAnswer.value =
         "";
 
+
+    /*
+       CLOSE TEXT QUESTION
+    */
 
     textQuestionBox
         .classList
         .add("hidden");
 
+
+    /*
+       SHOW REACTION
+    */
 
     showReaction({
 
@@ -630,7 +682,7 @@ function submitTextAnswer() {
 
 
 /* ==========================================
-   SHOW REACTION
+   SHOW FUNNY REACTION
    ========================================== */
 
 function showReaction(item) {
@@ -638,8 +690,10 @@ function showReaction(item) {
     reactionEmoji.innerText =
         item.reaction;
 
+
     reactionTitle.innerText =
         item.title;
+
 
     reactionText.innerText =
         item.message;
@@ -658,12 +712,33 @@ function showReaction(item) {
 
 function closeReaction() {
 
+    /*
+       Close reaction first.
+    */
+
     reactionBox
         .classList
         .add("hidden");
 
 
-    paused = false;
+    /*
+       IMPORTANT:
+
+       If this was Question 5,
+       show the final screen.
+
+       Otherwise continue the game.
+    */
+
+    if (score >= 5) {
+
+        showFinal();
+
+    } else {
+
+        paused = false;
+
+    }
 
 }
 
@@ -674,6 +749,13 @@ function closeReaction() {
 
 function showFinal() {
 
+    /*
+       Keep the game paused.
+    */
+
+    paused = true;
+
+
     finalBox
         .classList
         .remove("hidden");
@@ -682,7 +764,7 @@ function showFinal() {
 
 
 /* ==========================================
-   SAVE TO GOOGLE SHEETS
+   SAVE ANSWER TO GOOGLE SHEETS
    ========================================== */
 
 function saveAnswer(
@@ -703,6 +785,10 @@ function saveAnswer(
 
     }
 
+
+    /*
+       Send answer to Google Apps Script
+    */
 
     fetch(
         GOOGLE_SCRIPT_URL,
@@ -725,9 +811,33 @@ function saveAnswer(
                     questionText,
 
                 answer:
-                    answerText
+                    answerText,
+
+                time:
+                    new Date().toLocaleString()
 
             })
+
+        }
+    )
+
+    .then(
+        function() {
+
+            console.log(
+                "Answer sent to Google Sheet."
+            );
+
+        }
+    )
+
+    .catch(
+        function(error) {
+
+            console.log(
+                "Could not send answer:",
+                error
+            );
 
         }
     );
