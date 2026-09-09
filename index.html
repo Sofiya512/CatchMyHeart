@@ -3,313 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Lotte ❤️</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>For You ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #080808;
+            color: #fff;
+            font-family: Consolas, monospace;
+            overflow-x: hidden;
+        }
+
+        /* Developer opening screen */
+        #terminal {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .terminal-box {
+            width: 100%;
+            max-width: 700px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(255, 0, 100, 0.15);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #1c1c1c;
+            padding: 12px 15px;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .terminal-body {
+            padding: 25px;
+            line-height: 1.9;
+            color: #ddd;
+            min-height: 350px;
+        }
+
+        .pink {
+            color: #ff5c93;
+        }
+
+        .green {
+            color: #72f1b8;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 17px;
+            background: #fff;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Love letter */
+        #letter {
+            display: none;
+            min-height: 100vh;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .letter-card {
+            width: 100%;
+            max-width: 750px;
+            margin: auto;
+            padding: 40px 30px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #151515, #0d0d0d);
+            border: 1px solid #333;
+            box-shadow: 0 0 50px rgba(255, 60, 120, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        .heart {
+            font-size: 55px;
+            animation: heartbeat 1.3s infinite;
+        }
+
+        @keyframes heartbeat {
+            50% {
+                transform: scale(1.18);
+            }
+        }
+
+        h1 {
+            margin: 20px 0;
+            color: #ff5c93;
+            font-family: Georgia, serif;
+            font-size: 38px;
+        }
+
+        .letter {
+            text-align: left;
+            font-family: Georgia, serif;
+            font-size: 18px;
+            line-height: 1.9;
+            color: #eee;
+        }
+
+        .letter p {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 35px;
+            font-size: 20px;
+            color: #ff7aa8;
+        }
+
+        button {
+            margin-top: 35px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 30px;
+            background: #ff4f8b;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(255, 79, 139, 0.5);
+        }
+
+        #surprise {
+            display: none;
+            margin-top: 25px;
+            font-family: Georgia, serif;
+            font-size: 24px;
+            color: #ff7aa8;
+        }
+
+        /* Floating hearts */
+        .floating-heart {
+            position: fixed;
+            bottom: -30px;
+            font-size: 20px;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-110vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .letter-card {
+                padding: 30px 20px;
+            }
+
+            .letter {
+                font-size: 17px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Background -->
-    <div class="floating-hearts">
-        <span>❤️</span>
-        <span>💕</span>
-        <span>💗</span>
-        <span>💖</span>
-        <span>❤️</span>
-        <span>💞</span>
-        <span>💓</span>
-    </div>
+    <!-- Developer Intro -->
+    <section id="terminal">
+        <div class="terminal-box">
 
+            <div class="terminal-header">
+                ❤️ love.exe — Terminal
+            </div>
 
-    <!-- ALERT 1 -->
+            <div class="terminal-body">
 
-    <div id="alertOne" class="overlay">
+                <div>
+                    <span class="green">user@heart</span>:~$ npm start love
+                </div>
 
-        <div class="alert-card">
+                <br>
 
-            <div class="alert-icon">👀</div>
+                <div class="pink">
+                    Initializing feelings...
+                </div>
 
-            <h1>Edaaaaaaa…… Lotte! ❤️</h1>
+                <div id="loading">
+                    Loading memories... 0%
+                </div>
 
-            <p>
-                Waittt… where are you going? 😂
-            </p>
+                <div>
+                    Checking compatibility...
+                    <span class="green">100%</span>
+                </div>
 
-            <p>
-                I made something for you. 🎁
-            </p>
+                <div>
+                    Searching heart...
+                    <span class="pink">Found ❤️</span>
+                </div>
 
-            <p class="cute-text">
-                Open it! 😌💕
-            </p>
+                <br>
 
-            <button onclick="showAlertTwo()">
-                OK ❤️
-            </button>
+                <div id="finalLine"></div>
 
+                <br>
+
+                <div>
+                    <span class="green">user@heart</span>:~$
+                    <span class="cursor"></span>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-    </div>
 
+    <!-- Love Letter -->
+    <section id="letter">
 
-    <!-- ALERT 2 -->
+        <div class="letter-card">
 
-    <div id="alertTwo" class="overlay hidden">
+            <div class="heart">❤️</div>
 
-        <div class="alert-card warning">
+            <h1>To The One I Love</h1>
 
-            <div class="alert-icon">🚨</div>
-
-            <h1>WARNING, LOTTE! 🚨</h1>
-
-            <p>
-                Don't open this in front of anyone! 👀😂
-            </p>
-
-            <p>
-                Because if you open it in front of them,
-                they might hit you with a
-                <strong>boomstick! 💥😂</strong>
-            </p>
-
-            <p class="eva">
-                Your lovely Eva 😌❤️
-            </p>
-
-            <p class="developer">
-                [Developer with a brilliant brain 🧠✨]
-            </p>
-
-            <p>
-                Someone who made this just for you
-                as a gift. 🎁❤️
-            </p>
-
-            <p class="cute-text">
-                Now go ahead... 😏<br>
-                Open it only when you're alone! 😂💕
-            </p>
-
-            <button onclick="showStart()">
-                OK 😏
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- START SCREEN -->
-
-    <div id="startScreen" class="screen hidden">
-
-        <div class="start-card">
-
-            <div class="big-heart">💌</div>
-
-            <h1>Hello Lotteee! ❤️</h1>
-
-            <p class="intro">
-                I made a little game just for you. 🎁
-            </p>
-
-            <p>
-                No cheating! 👀😂
-            </p>
-
-            <p>
-                Answer honestly...
-            </p>
-
-            <h3>
-                Ready? 🥹💕
-            </h3>
-
-            <button onclick="startGame()">
-                START ❤️
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- GAME -->
-
-    <div id="gameScreen" class="screen hidden">
-
-        <div class="game-header">
-
-            <div>
-                <h1>Catch My Heart ❤️</h1>
-                <p>Catch the hearts!</p>
-            </div>
-
-            <div class="score-box">
-                ❤️ <span id="score">0</span>/5
-            </div>
-
-        </div>
-
-
-        <div id="game">
-
-            <div id="player">
-                🧺
-            </div>
-
-        </div>
-
-
-        <div class="controls">
-
-            <button id="leftBtn">
-                ⬅️
-            </button>
-
-            <button id="rightBtn">
-                ➡️
-            </button>
-
-        </div>
-
-        <p class="mobile-help">
-            Move the basket and catch the ❤️
-        </p>
-
-    </div>
-
-
-    <!-- QUESTION -->
-
-    <div id="questionBox" class="overlay hidden">
-
-        <div class="question-card">
-
-            <div id="questionEmoji"
-                 class="question-emoji">
-                ❤️
-            </div>
-
-            <div id="questionNumber"
-                 class="question-number">
-            </div>
-
-            <h2 id="question">
-            </h2>
-
-            <div id="answers">
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- TEXT QUESTION -->
-
-    <div id="textQuestionBox" class="overlay hidden">
-
-        <div class="question-card">
-
-            <div class="question-emoji">
-                🥺💭
-            </div>
-
-            <div class="question-number">
-                QUESTION 3
-            </div>
-
-            <h2>
-                Who am I to you? ❤️
-            </h2>
-
-            <textarea
-                id="textAnswer"
-                placeholder="Type your answer here... 👀❤️"
-                maxlength="300">
-            </textarea>
-
-            <button onclick="submitTextAnswer()">
-                Submit ❤️
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- REACTION -->
-
-    <div id="reactionBox" class="overlay hidden">
-
-        <div class="reaction-card">
-
-            <div id="reactionEmoji"
-                 class="reaction-emoji">
-            </div>
-
-            <h2 id="reactionTitle">
-            </h2>
-
-            <p id="reactionText">
-            </p>
-
-            <button onclick="closeReaction()">
-                Continue 😂
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- FINAL -->
-
-    <div id="finalBox" class="overlay hidden">
-
-        <div class="final-card">
-
-            <div class="final-heart">
-                ❤️
-            </div>
-
-            <h1>You Finished! 🥹</h1>
-
-            <p>
-                You survived my questions. 😂
-            </p>
-
-            <p>
-                And yes... your answers were recorded. 👀
-            </p>
-
-            <h2>
-                Thank you for playing, Lotte ❤️
-            </h2>
-
-            <div class="call-box">
+            <div class="letter">
 
                 <p>
-                    If you need me, call me. ❤️
+                    Hey you...
                 </p>
 
-                <a href="tel:8089305057">
-                    📞 8089305057
-                </a>
+                <p>
+                    As a developer, I spend so much time thinking about
+                    code, fixing bugs, building things and making everything
+                    work perfectly.
+                </p>
+
+                <p>
+                    But then you came into my life and made me realize
+                    something...
+                </p>
+
+                <p>
+                    Not everything beautiful needs to be coded.
+                    Some things are simply felt.
+                </p>
+
+                <p>
+                    You became one of the most special parts of my life.
+                    Your smile, your voice, your little habits,
+                    our conversations and even our silly moments
+                    mean more to me than I can explain.
+                </p>
+
+                <p>
+                    If my life were a project, you would be my favorite
+                    feature. ❤️
+                </p>
+
+                <p>
+                    If my heart were a database, your name would be
+                    permanently stored with no DELETE permission.
+                </p>
+
+                <p>
+                    And if love were code...
+                    I think I would choose you again and again,
+                    every time I ran it.
+                </p>
+
+                <p>
+                    I don't know what the future will look like,
+                    but I know that the memories we have created
+                    will always be special to me.
+                </p>
+
+                <p>
+                    Thank you for being a part of my story.
+                    And thank you for giving my heart something
+                    worth writing about.
+                </p>
+
+                <p>
+                    I love you. ❤️
+                </p>
 
             </div>
 
-            <p class="signature">
-                — Your lovely Eva 😌❤️
-            </p>
+            <div class="signature">
+                — Yours forever ❤️
+            </div>
+
+            <button onclick="showSurprise()">
+                One More Thing... 💌
+            </button>
+
+            <div id="surprise">
+                No matter how many bugs life gives us...<br><br>
+                <strong>
+                    I still choose you. ❤️
+                </strong>
+            </div>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <script src="script.js"></script>
+    <script>
+
+        // Loading animation
+        let progress = 0;
+
+        const loading = document.getElementById("loading");
+
+        const loader = setInterval(() => {
+
+            progress += 10;
+
+            loading.innerHTML =
+                "Loading memories... " + progress + "%";
+
+            if (progress >= 100) {
+
+                clearInterval(loader);
+
+                setTimeout(() => {
+
+                    document.getElementById("finalLine").innerHTML =
+                        '<span class="pink">Compilation successful ❤️</span><br>' +
+                        'There is one message waiting for you...';
+
+                }, 700);
+
+                setTimeout(() => {
+
+                    document.getElementById("terminal").style.display = "none";
+                    document.getElementById("letter").style.display = "block";
+
+                }, 3000);
+            }
+
+        }, 250);
+
+
+        // Surprise button
+        function showSurprise() {
+
+            document.getElementById("surprise").style.display = "block";
+
+            createHearts();
+
+        }
+
+
+        // Floating hearts
+        function createHearts() {
+
+            for (let i = 0; i < 25; i++) {
+
+                const heart = document.createElement("div");
+
+                heart.className = "floating-heart";
+
+                heart.innerHTML = ["❤️", "💕", "💗", "💖", "💘"]
+                    [Math.floor(Math.random() * 5)];
+
+                heart.style.left =
+                    Math.random() * 100 + "vw";
+
+                heart.style.animationDuration =
+                    (3 + Math.random() * 4) + "s";
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 7000);
+            }
+        }
+
+    </script>
 
 </body>
 </html>
