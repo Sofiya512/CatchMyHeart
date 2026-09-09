@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Where Our Story Began..❤️</title>
+<title>Our Unfinished Story ❤️</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
 *{
     margin:0;
@@ -21,51 +21,66 @@ html{
 }
 
 body{
-    font-family:'Poppins',sans-serif;
     background:#fff7fa;
-    color:#4b2835;
+    color:#4b2635;
+    font-family:'Poppins',sans-serif;
     overflow-x:hidden;
 }
 
-/* ---------------- BACKGROUND ---------------- */
+/* MUSIC */
 
-.background-hearts{
+audio{
+    display:none;
+}
+
+/* FLOATING HEARTS */
+
+.hearts{
     position:fixed;
     inset:0;
     pointer-events:none;
     overflow:hidden;
-    z-index:-1;
+    z-index:0;
 }
 
 .heart{
     position:absolute;
     bottom:-50px;
     font-size:20px;
-    opacity:.35;
-    animation:floatUp linear infinite;
+    opacity:.45;
+    animation:floatHeart linear infinite;
 }
 
-@keyframes floatUp{
+.heart:nth-child(1){left:8%;animation-duration:10s;}
+.heart:nth-child(2){left:20%;animation-duration:14s;animation-delay:2s;}
+.heart:nth-child(3){left:35%;animation-duration:11s;animation-delay:4s;}
+.heart:nth-child(4){left:52%;animation-duration:15s;animation-delay:1s;}
+.heart:nth-child(5){left:68%;animation-duration:12s;animation-delay:3s;}
+.heart:nth-child(6){left:82%;animation-duration:16s;animation-delay:5s;}
+.heart:nth-child(7){left:92%;animation-duration:13s;animation-delay:2s;}
+
+@keyframes floatHeart{
+
     0%{
         transform:translateY(0) rotate(0deg);
         opacity:0;
     }
 
-    10%{
+    15%{
+        opacity:.5;
+    }
+
+    80%{
         opacity:.4;
     }
 
-    90%{
-        opacity:.35;
-    }
-
     100%{
-        transform:translateY(-110vh) rotate(25deg);
+        transform:translateY(-110vh) rotate(360deg);
         opacity:0;
     }
 }
 
-/* ---------------- HERO ---------------- */
+/* HERO */
 
 .hero{
     min-height:100vh;
@@ -73,110 +88,155 @@ body{
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:30px;
+    padding:30px 20px;
     position:relative;
+    z-index:1;
     background:
-        radial-gradient(circle at top,#ffdce8 0,#fff7fa 45%,#fff 100%);
+        radial-gradient(circle at top left,#ffe0ea,transparent 40%),
+        radial-gradient(circle at bottom right,#f9d5e1,transparent 40%),
+        #fff7fa;
 }
 
 .hero-content{
-    max-width:700px;
-    animation:heroAppear 1.5s ease;
-}
-
-@keyframes heroAppear{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    max-width:800px;
+    animation:heroAppear 2s ease;
 }
 
 .small-title{
     font-size:14px;
     letter-spacing:4px;
     text-transform:uppercase;
-    color:#c66b88;
+    color:#a35b76;
     margin-bottom:20px;
 }
 
 .hero h1{
-    font-family:'DM Serif Display',serif;
+    font-family:'Cormorant Garamond',serif;
     font-size:clamp(55px,12vw,110px);
-    line-height:.95;
-    color:#8d3656;
+    line-height:.9;
+    color:#8f3659;
+    margin-bottom:25px;
 }
 
-.hero h1 span{
-    color:#e8799c;
+.hero h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(25px,5vw,42px);
+    font-weight:500;
+    color:#57313f;
+    margin-bottom:25px;
 }
 
 .hero p{
-    margin:25px auto;
-    max-width:550px;
-    font-size:17px;
-    line-height:1.8;
-    color:#76505e;
+    max-width:600px;
+    margin:auto;
+    line-height:1.9;
+    color:#795465;
+    font-size:15px;
 }
 
 .start-btn{
     display:inline-block;
-    margin-top:15px;
-    padding:15px 30px;
+    margin-top:35px;
+    padding:14px 30px;
     border-radius:50px;
-    background:#d85b82;
+    background:#9e4565;
     color:white;
     text-decoration:none;
-    box-shadow:0 12px 30px rgba(216,91,130,.3);
+    box-shadow:0 10px 30px rgba(158,69,101,.25);
     transition:.3s;
 }
 
 .start-btn:hover{
     transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(158,69,101,.35);
 }
 
-/* ---------------- STORY ---------------- */
+.scroll-text{
+    margin-top:50px;
+    font-size:12px;
+    letter-spacing:2px;
+    color:#a77b89;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(8px);}
+
+}
+
+@keyframes heroAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* STORY */
 
 .story{
-    width:min(900px,92%);
+    position:relative;
+    z-index:1;
+    padding:100px 20px;
+    max-width:1000px;
     margin:auto;
-    padding:100px 0;
 }
 
-.section-title{
+.section-heading{
     text-align:center;
-    margin-bottom:80px;
+    margin-bottom:70px;
 }
 
-.section-title span{
-    color:#d85b82;
-    font-size:13px;
-    letter-spacing:3px;
+.section-heading span{
+    font-size:12px;
+    letter-spacing:4px;
+    color:#a35b76;
     text-transform:uppercase;
 }
 
-.section-title h2{
-    font-family:'DM Serif Display',serif;
-    font-size:50px;
-    color:#78334d;
+.section-heading h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:55px;
+    color:#843b58;
     margin-top:10px;
 }
 
-/* ---------------- STORY CARD ---------------- */
+/* TIMELINE */
+
+.timeline{
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:#edc8d3;
+    transform:translateX(-50%);
+}
 
 .story-card{
+    width:45%;
+    background:rgba(255,255,255,.8);
+    border:1px solid #f1d9e1;
+    border-radius:25px;
+    padding:30px;
+    margin-bottom:70px;
+    box-shadow:0 15px 45px rgba(120,55,80,.08);
     position:relative;
-    margin:100px 0;
-    padding:35px;
-    border-radius:30px;
-    background:rgba(255,255,255,.82);
-    border:1px solid #f4d7e1;
-    box-shadow:0 20px 60px rgba(120,50,75,.09);
     opacity:0;
-    transform:translateY(70px);
+    transform:translateY(50px);
     transition:1s ease;
 }
 
@@ -185,1533 +245,254 @@ body{
     transform:translateY(0);
 }
 
-.story-card::before{
-    content:"";
-    position:absolute;
-    left:-8px;
-    top:35px;
-    width:16px;
-    height:16px;
-    background:#e8799c;
-    border-radius:50%;
-    box-shadow:0 0 0 7px #fff0f5;
+.story-card:nth-child(odd){
+    margin-right:auto;
 }
 
-.story-date{
-    color:#d85b82;
-    font-size:13px;
-    font-weight:600;
+.story-card:nth-child(even){
+    margin-left:auto;
+}
+
+.story-card::after{
+    content:"❤️";
+    position:absolute;
+    top:30px;
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    border:2px solid #edc8d3;
+    border-radius:50%;
+    font-size:17px;
+}
+
+.story-card:nth-child(odd)::after{
+    right:-75px;
+}
+
+.story-card:nth-child(even)::after{
+    left:-75px;
+}
+
+.date{
+    color:#a84f70;
+    font-size:12px;
     letter-spacing:2px;
     text-transform:uppercase;
     margin-bottom:12px;
 }
 
 .story-card h3{
-    font-family:'DM Serif Display',serif;
-    font-size:35px;
-    color:#713047;
+    font-family:'Cormorant Garamond',serif;
+    font-size:34px;
+    color:#74354f;
     margin-bottom:15px;
 }
 
 .story-card p{
-    font-size:15px;
-    line-height:1.9;
-    color:#6e535c;
+    font-size:14px;
+    line-height:1.95;
+    color:#705563;
 }
-
-.emoji{
-    font-size:45px;
-    margin-bottom:15px;
-    display:block;
-    animation:bounce 2s infinite;
-}
-
-@keyframes bounce{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-8px)}
-}
-
-/* ---------------- CUTE REACTION ---------------- */
 
 .reaction{
-    margin-top:25px;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:#fff0f5;
-    border-radius:50px;
-    padding:10px 17px;
-    color:#a34b68;
-    font-size:13px;
+    margin-top:20px;
+    font-size:25px;
 }
 
-.reaction span{
-    animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    50%{
-        transform:scale(1.3);
-    }
-}
-
-/* ---------------- SPECIAL MOMENT ---------------- */
-
-.special{
-    margin:130px auto;
-    width:min(800px,92%);
-    text-align:center;
-    padding:60px 30px;
-    border-radius:35px;
-    background:linear-gradient(135deg,#ffe5ed,#fff4f7);
-    box-shadow:0 25px 70px rgba(180,70,110,.12);
-}
-
-.special .big-heart{
-    font-size:70px;
-    animation:heartbeat 1.5s infinite;
-}
-
-@keyframes heartbeat{
-    0%,100%{transform:scale(1)}
-    15%{transform:scale(1.15)}
-    30%{transform:scale(1)}
-    45%{transform:scale(1.12)}
-}
-
-.special h2{
-    font-family:'DM Serif Display',serif;
-    font-size:42px;
-    margin:20px 0;
-    color:#873752;
-}
-
-.special p{
-    line-height:1.9;
-    color:#70535d;
-}
-
-/* ---------------- QUOTE ---------------- */
+/* SPECIAL QUOTE */
 
 .quote{
-    margin:130px auto;
-    width:min(700px,90%);
+    margin:100px auto;
+    max-width:800px;
     text-align:center;
+    padding:60px 30px;
+    background:linear-gradient(135deg,#fff,#fff0f5);
+    border-radius:35px;
+    box-shadow:0 20px 60px rgba(130,50,80,.1);
+    position:relative;
+    z-index:1;
 }
 
-.quote-mark{
-    font-family:Georgia,serif;
-    font-size:90px;
-    color:#e89ab2;
-    line-height:.5;
+.quote .symbol{
+    font-size:35px;
+    margin-bottom:20px;
 }
 
 .quote p{
-    font-family:'DM Serif Display',serif;
-    font-size:32px;
-    line-height:1.5;
-    color:#78334d;
+    font-family:'Cormorant Garamond',serif;
+    font-size:35px;
+    line-height:1.4;
+    color:#7e3855;
 }
 
-/* ---------------- QUESTIONS ---------------- */
+.quote small{
+    display:block;
+    margin-top:20px;
+    color:#a47787;
+}
+
+/* QUESTIONS */
 
 .questions{
-    padding:120px 0;
-    background:#fff0f5;
+    max-width:850px;
+    margin:100px auto;
+    padding:20px;
+    position:relative;
+    z-index:1;
 }
 
-.questions-inner{
-    width:min(750px,92%);
-    margin:auto;
-}
-
-.question-card{
+.question-box{
     background:white;
     padding:30px;
-    border-radius:25px;
-    margin:25px 0;
-    box-shadow:0 12px 40px rgba(120,50,75,.08);
+    margin-bottom:25px;
+    border-radius:22px;
+    box-shadow:0 10px 35px rgba(100,40,65,.08);
+    border:1px solid #f1dce3;
 }
 
-.question-number{
-    color:#df7195;
-    font-size:13px;
-    letter-spacing:2px;
-    margin-bottom:10px;
-}
-
-.question-card h3{
-    font-family:'DM Serif Display',serif;
+.question-box label{
+    display:block;
+    font-family:'Cormorant Garamond',serif;
     font-size:25px;
-    color:#713047;
-    margin-bottom:18px;
+    color:#783851;
+    margin-bottom:15px;
 }
 
 textarea{
     width:100%;
-    min-height:110px;
-    resize:vertical;
-    border:1px solid #f0ccd9;
-    border-radius:17px;
+    min-height:100px;
+    border:1px solid #ebcbd6;
+    border-radius:15px;
     padding:15px;
-    font-family:Poppins,sans-serif;
-    font-size:14px;
+    resize:vertical;
     outline:none;
-    background:#fffafd;
+    font-family:'Poppins',sans-serif;
+    color:#593342;
+    background:#fffafb;
 }
 
 textarea:focus{
-    border-color:#dc7194;
-    box-shadow:0 0 0 4px #ffe7ef;
+    border-color:#b45b79;
+    box-shadow:0 0 0 3px rgba(180,91,121,.1);
 }
 
-/* ---------------- LETTER ---------------- */
-
-.letter-section{
-    padding:130px 20px;
-    text-align:center;
-}
-
-.letter{
-    width:min(700px,95%);
-    margin:50px auto;
-    padding:50px 40px;
-    text-align:left;
-    background:#fffdf7;
-    border-radius:5px;
-    box-shadow:0 25px 70px rgba(70,30,40,.12);
-    position:relative;
-}
-
-.letter::before{
-    content:"💌";
-    position:absolute;
-    right:25px;
-    top:-30px;
-    font-size:50px;
-}
-
-.letter h3{
-    font-family:'DM Serif Display',serif;
-    font-size:30px;
-    color:#79364f;
-    margin-bottom:25px;
-}
-
-.letter textarea{
-    background:#fffefb;
-    border:1px solid #eadfce;
-    min-height:220px;
-}
-
-/* ---------------- SEND BUTTON ---------------- */
-
-.send-area{
-    text-align:center;
-    padding:30px;
-}
-
-.send-btn{
-    border:none;
-    padding:17px 40px;
+.submit-btn{
+    width:100%;
+    padding:17px;
+    border:0;
     border-radius:50px;
-    background:#d85b82;
+    background:#923e60;
     color:white;
-    font-family:Poppins,sans-serif;
-    font-size:15px;
+    font-size:16px;
     cursor:pointer;
-    box-shadow:0 15px 35px rgba(216,91,130,.3);
     transition:.3s;
 }
 
-.send-btn:hover{
-    transform:translateY(-4px) scale(1.02);
+.submit-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(146,62,96,.3);
 }
 
 #status{
+    text-align:center;
     margin-top:20px;
-    font-size:14px;
-    color:#9d526e;
+    color:#8f4562;
+    font-weight:500;
 }
 
-/* ---------------- END ---------------- */
+/* LETTER */
 
-.final{
-    min-height:70vh;
+.letter-section{
+    max-width:800px;
+    margin:100px auto;
+    padding:20px;
+    position:relative;
+    z-index:1;
+}
+
+.letter{
+    background:#fff;
+    padding:50px 35px;
+    border-radius:25px;
+    box-shadow:0 15px 50px rgba(100,40,65,.1);
+    border:1px solid #f1dce3;
+}
+
+.letter h2{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:45px;
+    color:#843b58;
+    margin-bottom:30px;
+}
+
+.letter p{
+    text-align:center;
+    color:#765563;
+    line-height:1.9;
+    margin-bottom:25px;
+}
+
+/* END */
+
+.end{
+    min-height:80vh;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:50px 20px;
-    background:linear-gradient(#fff7fa,#ffe3ec);
+    padding:50px 25px;
+    position:relative;
+    z-index:1;
+    background:linear-gradient(180deg,#fff7fa,#ffe8f0);
 }
 
-.final h2{
-    font-family:'DM Serif Display',serif;
-    font-size:clamp(40px,8vw,70px);
-    color:#85344f;
+.end-content{
+    max-width:700px;
 }
 
-.final p{
-    margin-top:20px;
-    color:#75545e;
+.end .heart-big{
+    font-size:70px;
+    animation:heartbeat 1.5s infinite;
 }
 
-/* ---------------- MUSIC ---------------- */
-
-.music{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:50;
+.end h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:65px;
+    color:#813650;
+    margin:20px 0;
 }
 
-.music button{
-    width:55px;
-    height:55px;
-    border:none;
-    border-radius:50%;
-    background:#d85b82;
-    color:white;
-    font-size:21px;
-    cursor:pointer;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+.end p{
+    line-height:2;
+    color:#735362;
 }
 
-/* ---------------- MOBILE ---------------- */
+.final-line{
+    margin-top:35px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    color:#913f60;
+}
 
-@media(max-width:600px){
+@keyframes heartbeat{
 
-    .hero{
-        min-height:95vh;
+    0%,100%{
+        transform:scale(1);
     }
 
-    .hero p{
-        font-size:15px;
-    }
-
-    .story{
-        padding:70px 0;
-    }
-
-    .story-card{
-        margin:70px 0;
-        padding:27px 22px;
-    }
-
-    .story-card h3{
-        font-size:30px;
-    }
-
-    .section-title h2{
-        font-size:40px;
-    }
-
-    .special{
-        padding:45px 22px;
-    }
-
-    .special h2{
-        font-size:35px;
-    }
-
-    .quote p{
-        font-size:26px;
-    }
-
-    .letter{
-        padding:35px 22px;
+    50%{
+        transform:scale(1.18);
     }
 
 }
 
-</style>
-</head>
+/* MOBILE */
 
-<body>
+@media(max-width:700px){
 
-<!-- Floating hearts -->
-
-<div class="background-hearts" id="hearts"></div>
-
-<!-- MUSIC -->
-
-<div class="music">
-    <button id="musicBtn">🎵</button>
-    <audio id="music" loop>
-        <source src="./Love%20Story%20%28Instrumental%29.mp3" type="audio/mpeg">
-    </audio>
-</div>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="small-title">
-            A little story about us
-        </div>
-
-        <h1>
-            Catch<br>
-            <span>My Heart</span> ❤️
-        </h1>
-
-        <p>
-            Some stories are written with ink.
-            Ours was written with late-night calls,
-            silly fights, unexpected meetings,
-            and a heart that never really learned
-            how to let go.
-        </p>
-
-        <a href="#story" class="start-btn">
-            Start our story ↓
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- STORY -->
-
-<section class="story" id="story">
-
-    <div class="section-title">
-        <span>Chapter one</span>
-        <h2>How it all started...</h2>
-    </div>
-
-
-    <!-- 1 -->
-
-    <div class="story-card">
-
-        <span class="emoji">💬</span>
-
-        <div class="story-date">
-            September 2024
-        </div>
-
-        <h3>
-            A group chat...
-        </h3>
-
-        <p>
-            It started with something so ordinary —
-            a group called <b>Mabrook</b> on Sharchat.
-            Eva was one of the admins and Fab was just
-            another member.
-        </p>
-
-        <p style="margin-top:15px">
-            They weren't particularly close.
-            They didn't know that this little group chat
-            was quietly preparing the beginning of
-            their story.
-        </p>
-
-        <div class="reaction">
-            <span>👀</span>
-            Nobody knew what was coming...
-        </div>
-
-    </div>
-
-
-    <!-- 2 -->
-
-    <div class="story-card">
-
-        <span class="emoji">🥹</span>
-
-        <div class="story-date">
-            November 2024
-        </div>
-
-        <h3>
-            “Stay away from him.”
-        </h3>
-
-        <p>
-            Eva's friends told her to distance herself
-            from Fab and Mabru.
-        </p>
-
-        <p style="margin-top:15px">
-            But Eva didn't listen.
-            Instead, after a fight with Anzu, Layla
-            and Jeevan, she somehow became even closer
-            to Fab.
-        </p>
-
-        <div class="reaction">
-            <span>🙈</span>
-            She probably should have listened...
-        </div>
-
-    </div>
-
-
-    <!-- 3 -->
-
-    <div class="story-card">
-
-        <span class="emoji">🌙</span>
-
-        <div class="story-date">
-            January 2025
-        </div>
-
-        <h3>
-            4 AM conversations
-        </h3>
-
-        <p>
-            Somewhere between random conversations,
-            group chats and staying awake until 4 AM,
-            something changed.
-        </p>
-
-        <p style="margin-top:15px">
-            Eva started making an effort to keep Fab
-            around. Fab was still attached to Sangu,
-            but Eva and Fab were becoming closer.
-        </p>
-
-        <div class="reaction">
-            <span>🌙</span>
-            4 AM was apparently their time.
-        </div>
-
-    </div>
-
-
-    <!-- 4 -->
-
-    <div class="story-card">
-
-        <span class="emoji">❤️</span>
-
-        <div class="story-date">
-            The question
-        </div>
-
-        <h3>
-            “Do you love me?”
-        </h3>
-
-        <p>
-            Then came the question.
-        </p>
-
-        <p style="margin-top:15px">
-            Fab asked Eva,
-            <b>“Do you love me?”</b>
-        </p>
-
-        <p style="margin-top:15px">
-            And Eva said yes.
-        </p>
-
-        <p style="margin-top:15px">
-            He didn't clearly say what he felt,
-            but his actions were starting to say
-            enough.
-        </p>
-
-        <div class="reaction">
-            <span>🥰</span>
-            The group definitely noticed.
-        </div>
-
-    </div>
-
-
-    <!-- 5 -->
-
-    <div class="story-card">
-
-        <span class="emoji">💔</span>
-
-        <div class="story-date">
-            The first goodbye
-        </div>
-
-        <h3>
-            A little break...
-        </h3>
-
-        <p>
-            A fight happened.
-            The Sharchat conversation was deleted.
-            Then came Instagram's second accounts,
-            late-night conversations and calls.
-        </p>
-
-        <p style="margin-top:15px">
-            There was even a video-call request...
-            but Eva refused.
-        </p>
-
-        <p style="margin-top:15px">
-            Another fight followed.
-            And eventually, they stopped talking.
-        </p>
-
-        <div class="reaction">
-            <span>🥺</span>
-            But that wasn't really the end.
-        </div>
-
-    </div>
-
-
-    <!-- 6 -->
-
-    <div class="story-card">
-
-        <span class="emoji">📱</span>
-
-        <div class="story-date">
-            September 2025
-        </div>
-
-        <h3>
-            Silence
-        </h3>
-
-        <p>
-            September passed without contact.
-        </p>
-
-        <p style="margin-top:15px">
-            Sometimes people leave your life
-            without realizing they are leaving
-            a space that nobody else can fill.
-        </p>
-
-    </div>
-
-
-    <!-- 7 -->
-
-    <div class="story-card">
-
-        <span class="emoji">💌</span>
-
-        <div class="story-date">
-            October 2025
-        </div>
-
-        <h3>
-            “Hey...”
-        </h3>
-
-        <p>
-            October 2nd.
-            Fab messaged Eva on Instagram.
-        </p>
-
-        <p style="margin-top:15px">
-            No reply.
-        </p>
-
-        <p style="margin-top:15px">
-            October 3rd.
-            Another message.
-            Then WhatsApp.
-        </p>
-
-        <p style="margin-top:15px">
-            October 5th...
-            Eva finally replied.
-        </p>
-
-        <div class="reaction">
-            <span>🥹</span>
-            And somehow... they found each other again.
-        </div>
-
-    </div>
-
-
-    <!-- 8 -->
-
-    <div class="story-card">
-
-        <span class="emoji">🌙❤️</span>
-
-        <div class="story-date">
-            November 16, 2025
-        </div>
-
-        <h3>
-            11:30 PM → 5:45 AM
-        </h3>
-
-        <p>
-            One call.
-        </p>
-
-        <p style="margin-top:15px">
-            Six hours of talking.
-            Like nothing had changed.
-            Like the distance had never happened.
-        </p>
-
-        <p style="margin-top:15px">
-            Except this time...
-            they were even more attached.
-        </p>
-
-        <div class="reaction">
-            <span>🌙</span>
-            Sleep was cancelled.
-        </div>
-
-    </div>
-
-
-    <!-- 9 -->
-
-    <div class="story-card">
-
-        <span class="emoji">✈️</span>
-
-        <div class="story-date">
-            December 2025
-        </div>
-
-        <h3>
-            He came to India
-        </h3>
-
-        <p>
-            Fab worked in a pharmacy in Saudi Arabia.
-            Eva was building her career as a software developer.
-        </p>
-
-        <p style="margin-top:15px">
-            And then Fab decided to come to India.
-        </p>
-
-        <p style="margin-top:15px">
-            His flight was delayed...
-            and he finally landed on December 6 —
-            Eva's birthday.
-        </p>
-
-        <div class="reaction">
-            <span>🎂</span>
-            What a birthday surprise.
-        </div>
-
-    </div>
-
-
-    <!-- 10 -->
-
-    <div class="story-card">
-
-        <span class="emoji">🫶</span>
-
-        <div class="story-date">
-            December 15, 2025
-        </div>
-
-        <h3>
-            The first meeting
-        </h3>
-
-        <p>
-            December 15.
-        </p>
-
-        <p style="margin-top:15px">
-            This time there were no screens,
-            no typing bubbles,
-            and no “good night” messages.
-        </p>
-
-        <p style="margin-top:15px">
-            They were finally standing next to each other.
-        </p>
-
-        <p style="margin-top:15px">
-            Walking.
-            Lulu Mall.
-            Kalamkaval.
-            Laughing.
-            A private moment together.
-            Food.
-            And memories that neither of them
-            could simply delete.
-        </p>
-
-        <div class="reaction">
-            <span>🥰</span>
-            Finally... real life.
-        </div>
-
-    </div>
-
-
-</section>
-
-
-<!-- SPECIAL -->
-
-<section class="special">
-
-    <div class="big-heart">
-        ❤️
-    </div>
-
-    <h2>
-        Some moments don't need photographs.
-    </h2>
-
-    <p>
-        Sometimes your heart remembers everything —
-        the place, the smile, the silence,
-        the way someone looked at you,
-        and how it felt when they were finally there.
-    </p>
-
-</section>
-
-
-<!-- MORE STORY -->
-
-<section class="story">
-
-
-    <div class="story-card">
-
-        <span class="emoji">🌅</span>
-
-        <div class="story-date">
-            The next morning
-        </div>
-
-        <h3>
-            5:30 AM
-        </h3>
-
-        <p>
-            Eva watched Fab sleeping.
-        </p>
-
-        <p style="margin-top:15px">
-            Then he woke up.
-            A kiss.
-            Another unforgettable morning.
-            And eventually, sleep again.
-        </p>
-
-        <div class="reaction">
-            <span>🥹</span>
-            Some mornings stay forever.
-        </div>
-
-    </div>
-
-
-    <div class="story-card">
-
-        <span class="emoji">🦁</span>
-
-        <div class="story-date">
-            Later that day
-        </div>
-
-        <h3>
-            Trivandrum Zoo
-        </h3>
-
-        <p>
-            They decided they shouldn't spend
-            the entire day inside.
-        </p>
-
-        <p style="margin-top:15px">
-            So they went to Trivandrum Zoo
-            and eventually separated around 2 PM.
-        </p>
-
-        <div class="reaction">
-            <span>🐒</span>
-            At least the animals got to see them.
-        </div>
-
-    </div>
-
-
-    <div class="story-card">
-
-        <span class="emoji">💔</span>
-
-        <div class="story-date">
-            The difficult part
-        </div>
-
-        <h3>
-            “I'm going to marry someone else.”
-        </h3>
-
-        <p>
-            Fab told Eva that he wanted to marry someone else.
-        </p>
-
-        <p style="margin-top:15px">
-            Then he found the girl.
-            Then came the engagement.
-        </p>
-
-        <p style="margin-top:15px">
-            Eva tried to distance herself.
-            She became sad.
-            She cried.
-            And somewhere in all that pain,
-            she finally understood how deeply
-            she loved him.
-        </p>
-
-    </div>
-
-
-    <div class="story-card">
-
-        <span class="emoji">📞</span>
-
-        <div class="story-date">
-            The next two months
-        </div>
-
-        <h3>
-            Not together... not apart
-        </h3>
-
-        <p>
-            Messages became dry.
-            Every couple of days.
-            No calls.
-        </p>
-
-        <p style="margin-top:15px">
-            Then one call would happen.
-            One person would console the other.
-            And the cycle would begin again.
-        </p>
-
-        <div class="reaction">
-            <span>🥺</span>
-            Hearts don't always know when to leave.
-        </div>
-
-    </div>
-
-
-    <div class="story-card">
-
-        <span class="emoji">🚌❤️</span>
-
-        <div class="story-date">
-            May 25, 2026
-        </div>
-
-        <h3>
-            Calicut
-        </h3>
-
-        <p>
-            Eva travelled to Calicut to meet Fab.
-        </p>
-
-        <p style="margin-top:15px">
-            At first she decided:
-            <b>“No touching.”</b>
-        </p>
-
-        <p style="margin-top:15px">
-            But sometimes you can make rules
-            with your mind...
-            while your heart has already decided.
-        </p>
-
-        <p style="margin-top:15px">
-            They spent time together,
-            went to Forum Mall,
-            watched Drishyam 3,
-            and eventually Fab dropped Eva
-            at the Calicut bus stop.
-        </p>
-
-        <p style="margin-top:15px">
-            Her bus was late.
-            He stayed and waited.
-        </p>
-
-        <div class="reaction">
-            <span>🥹</span>
-            He didn't leave until she was okay.
-        </div>
-
-    </div>
-
-
-    <div class="story-card">
-
-        <span class="emoji">❤️</span>
-
-        <div class="story-date">
-            That day
-        </div>
-
-        <h3>
-            “I truly love you.”
-        </h3>
-
-        <p>
-            Fab told Eva that he truly loved her.
-        </p>
-
-        <p style="margin-top:15px">
-            And this time,
-            she didn't just hear the words.
-        </p>
-
-        <p style="margin-top:15px">
-            She felt them.
-        </p>
-
-    </div>
-
-
-    <div class="story-card">
-
-        <span class="emoji">📱💕</span>
-
-        <div class="story-date">
-            After Calicut
-        </div>
-
-        <h3>
-            Trying to say goodbye
-        </h3>
-
-        <p>
-            They tried to separate again.
-        </p>
-
-        <p style="margin-top:15px">
-            But the calls became daily.
-            Video calls.
-            Conversations.
-            Little moments.
-        </p>
-
-        <p style="margin-top:15px">
-            Apparently,
-            goodbye wasn't working very well.
-        </p>
-
-        <div class="reaction">
-            <span>😂❤️</span>
-            Failed successfully.
-        </div>
-
-    </div>
-
-
-</section>
-
-
-<!-- QUOTE -->
-
-<section class="quote">
-
-    <div class="quote-mark">
-        “
-    </div>
-
-    <p>
-        Maybe our story isn't perfect.
-        Maybe it isn't simple.
-        But somehow, my heart still knows your name.
-    </p>
-
-</section>
-
-
-<!-- QUESTIONS -->
-
-<section class="questions">
-
-<div class="questions-inner">
-
-    <div class="section-title">
-
-        <span>Now it's your turn</span>
-
-        <h2>
-            Five little questions ❤️
-        </h2>
-
-    </div>
-
-
-    <div class="question-card">
-
-        <div class="question-number">
-            QUESTION 01
-        </div>
-
-        <h3>
-            What do you think about me and the way we first met?
-        </h3>
-
-        <textarea id="answer1"
-        placeholder="Tell me honestly... ❤️"></textarea>
-
-    </div>
-
-
-    <div class="question-card">
-
-        <div class="question-number">
-            QUESTION 02
-        </div>
-
-        <h3>
-            Do you really think I am worth your time?
-        </h3>
-
-        <textarea id="answer2"
-        placeholder="Your answer... 🥹"></textarea>
-
-    </div>
-
-
-    <div class="question-card">
-
-        <div class="question-number">
-            QUESTION 03
-        </div>
-
-        <h3>
-            Do you love me more now than you did at the beginning?
-        </h3>
-
-        <textarea id="answer3"
-        placeholder="Don't be shy... ❤️"></textarea>
-
-    </div>
-
-
-    <div class="question-card">
-
-        <div class="question-number">
-            QUESTION 04
-        </div>
-
-        <h3>
-            If you could change one thing about our story, what would it be?
-        </h3>
-
-        <textarea id="answer4"
-        placeholder="What would you change? 💭"></textarea>
-
-    </div>
-
-
-    <div class="question-card">
-
-        <div class="question-number">
-            QUESTION 05
-        </div>
-
-        <h3>
-            If we get one more full day together, what would you want us to do?
-        </h3>
-
-        <textarea id="answer5"
-        placeholder="Imagine our perfect day... 🌸"></textarea>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- LETTER -->
-
-<section class="letter-section">
-
-    <div class="section-title">
-
-        <span>The last page</span>
-
-        <h2>
-            Now forget the questions... 💌
-        </h2>
-
-    </div>
-
-    <div class="letter">
-
-        <h3>
-            Dear Eva,
-        </h3>
-
-        <textarea
-        id="letter"
-        placeholder="Just write what your heart wants to tell me..."></textarea>
-
-    </div>
-
-
-    <div class="send-area">
-
-        <button class="send-btn" onclick="saveAnswers()">
-            Send My Heart ❤️
-        </button>
-
-        <div id="status"></div>
-
-    </div>
-
-</section>
-
-
-<!-- FINAL -->
-
-<section class="final">
-
-    <div>
-
-        <div style="font-size:60px">
-            ❤️
-        </div>
-
-        <h2>
-            To be continued...
-        </h2>
-
-        <p>
-            Because maybe this isn't the end of our story.
-        </p>
-
-        <p style="margin-top:10px">
-            Maybe we just haven't written the next chapter yet.
-        </p>
-
-    </div>
-
-</section>
-
-
-<script>
-
-/* ---------------- FLOATING HEARTS ---------------- */
-
-const heartContainer =
-document.getElementById("hearts");
-
-const heartSymbols =
-["❤️","💕","💗","💖","🌸","✨","♡"];
-
-for(let i=0;i<30;i++){
-
-    const heart =
-    document.createElement("div");
-
-    heart.className="heart";
-
-    heart.innerText =
-    heartSymbols[
-        Math.floor(
-            Math.random()*heartSymbols.length
-        )
-    ];
-
-    heart.style.left =
-    Math.random()*100+"%";
-
-    heart.style.animationDuration =
-    (8+Math.random()*12)+"s";
-
-    heart.style.animationDelay =
-    Math.random()*10+"s";
-
-    heart.style.fontSize =
-    (12+Math.random()*20)+"px";
-
-    heartContainer.appendChild(heart);
-}
-
-
-/* ---------------- SCROLL ANIMATION ---------------- */
-
-const cards =
-document.querySelectorAll(".story-card");
-
-const observer =
-new IntersectionObserver(
-
-    entries => {
-
-        entries.forEach(entry => {
-
-            if(entry.isIntersecting){
-
-                entry.target.classList.add("show");
-
-            }
-
-        });
-
-    },
-
-    {
-        threshold:.15
-    }
-
-);
-
-cards.forEach(card =>
-    observer.observe(card)
-);
-
-
-/* ---------------- MUSIC ---------------- */
-
-const music =
-document.getElementById("music");
-
-const musicBtn =
-document.getElementById("musicBtn");
-
-let playing=false;
-
-musicBtn.addEventListener("click",()=>{
-
-    if(playing){
-
-        music.pause();
-
-        musicBtn.innerText="🎵";
-
-        playing=false;
-
-    }else{
-
-        music.play()
-        .then(()=>{
-
-            musicBtn.innerText="🔊";
-
-            playing=true;
-
-        })
-        .catch(()=>{
-
-            alert(
-                "Please tap the music button again ❤️"
-            );
-
-        });
-
-    }
-
-});
-
-
-/* ---------------- GOOGLE SHEETS ---------------- */
-
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbyzkx9WSuYOv7Ciha0xd2AQk5RDA_i91FNZT2c5S3RIQADLwch5P_1bOtkdtZ2Yvs0p/exec";
-
-
-async function saveAnswers(){
-
-    const answers = [
-
-        document.getElementById("answer1").value.trim(),
-
-        document.getElementById("answer2").value.trim(),
-
-        document.getElementById("answer3").value.trim(),
-
-        document.getElementById("answer4").value.trim(),
-
-        document.getElementById("answer5").value.trim()
-
-    ];
-
-
-    const letter =
-    document.getElementById("letter")
-    .value.trim();
-
-
-    const status =
-    document.getElementById("status");
-
-
-    if(
-        answers.some(answer => !answer)
-        || !letter
-    ){
-
-        status.innerText =
-        "Please answer everything first ❤️";
-
-        return;
-
-    }
-
-
-    status.innerText =
-    "Sending your heart... 💌";
-
-
-    const payload = {
-
-        answers:answers,
-
-        letter:letter
-
-    };
-
-
-    try{
-
-        await fetch(
-
-            SCRIPT_URL,
-
-            {
-
-                method:"POST",
-
-                mode:"no-cors",
-
-                headers:{
-
-                    "Content-Type":
-                    "text/plain;charset=utf-8"
-
-                },
-
-                body:
-                JSON.stringify(payload)
-
-            }
-
-        );
-
-
-        status.innerText =
-        "Your answers reached my heart ❤️";
-
-
-        createHeartExplosion();
-
-    }
-
-    catch(error){
-
-        status.innerText =
-        "Something went wrong. Please try again 💔";
-
-    }
-
-}
-
-
-/* ---------------- HEART EXPLOSION ---------------- */
-
-function createHeartExplosion(){
-
-    for(let i=0;i<35;i++){
-
-        const heart =
-        document.createElement("div");
-
-        heart.innerText =
-        heartSymbols[
-            Math.floor(
-                Math.random()*heartSymbols.length
-            )
-        ];
-
-        heart.style.position="fixed";
-
-        heart.style.left="50%";
-
-        heart.style.top="50%";
-
-        heart.style.zIndex="999";
-
-        heart.style.fontSize =
-        (15+Math.random()*25)+"px";
-
-        heart.style.pointerEvents="none";
-
-        const x =
-        (Math.random()-.5)*600;
-
-        const y =
-        (Math.random()-.5)*600;
-
-        heart.animate(
-
-            [
-
-                {
-                    transform:"translate(-50%,-50%) scale(0)",
-                    opacity:1
-                },
-
-                {
-                    transform:
-                    `translate(${x}px,${y}px) scale(1.4)`,
-                    opacity:0
-                }
-
-            ],
-
-            {
-
-                duration:
-                1200+Math.random()*700,
-
-                easing:"cubic-bezier(.2,.8,.3,1)"
-
-            }
-
-        );
-
-
-        document.body.appendChild(heart);
-
-
-        setTimeout(
-            ()=>heart.remove(),
-            2000
-        );
-
-    }
-
-}
-
-</script>
-
-</body>
-</html>
+    .hero h1{
+        font-size:65
