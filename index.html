@@ -1,421 +1,2069 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>For You ❤️</title>
+<title>Eva ❤️ Fab — Our Story</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            min-height: 100vh;
-            background: #080808;
-            color: #fff;
-            font-family: Consolas, monospace;
-            overflow-x: hidden;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        /* Developer opening screen */
-        #terminal {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+body {
+    background: #08070c;
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    overflow-x: hidden;
+}
 
-        .terminal-box {
-            width: 100%;
-            max-width: 700px;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(255, 0, 100, 0.15);
-            overflow: hidden;
-        }
+/* =========================
+   LOADING SCREEN
+========================= */
 
-        .terminal-header {
-            background: #1c1c1c;
-            padding: 12px 15px;
-            color: #aaa;
-            font-size: 13px;
-        }
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: #050507;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
-        .terminal-body {
-            padding: 25px;
-            line-height: 1.9;
-            color: #ddd;
-            min-height: 350px;
-        }
+.loader-heart {
+    font-size: 65px;
+    animation: heartbeat 1s infinite;
+}
 
-        .pink {
-            color: #ff5c93;
-        }
+.loading-text {
+    margin-top: 20px;
+    font-family: monospace;
+    color: #ff6b9d;
+    font-size: 16px;
+}
 
-        .green {
-            color: #72f1b8;
-        }
+.progress {
+    width: 230px;
+    height: 5px;
+    background: #222;
+    margin-top: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 17px;
-            background: #fff;
-            animation: blink 0.8s infinite;
-        }
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #ff5c93;
+    animation: loading 3s forwards;
+}
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
+@keyframes loading {
+    to {
+        width: 100%;
+    }
+}
 
-        /* Love letter */
-        #letter {
-            display: none;
-            min-height: 100vh;
-            padding: 50px 20px;
-            text-align: center;
-            position: relative;
-        }
+@keyframes heartbeat {
+    50% {
+        transform: scale(1.2);
+    }
+}
 
-        .letter-card {
-            width: 100%;
-            max-width: 750px;
-            margin: auto;
-            padding: 40px 30px;
-            border-radius: 20px;
-            background: linear-gradient(145deg, #151515, #0d0d0d);
-            border: 1px solid #333;
-            box-shadow: 0 0 50px rgba(255, 60, 120, 0.15);
-            position: relative;
-            z-index: 2;
-        }
 
-        .heart {
-            font-size: 55px;
-            animation: heartbeat 1.3s infinite;
-        }
+/* =========================
+   COMMON
+========================= */
 
-        @keyframes heartbeat {
-            50% {
-                transform: scale(1.18);
-            }
-        }
+section {
+    min-height: 100vh;
+    padding: 90px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
 
-        h1 {
-            margin: 20px 0;
-            color: #ff5c93;
-            font-family: Georgia, serif;
-            font-size: 38px;
-        }
+.container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
 
-        .letter {
-            text-align: left;
-            font-family: Georgia, serif;
-            font-size: 18px;
-            line-height: 1.9;
-            color: #eee;
-        }
+.year {
+    color: #ff6b9d;
+    font-size: 15px;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
 
-        .letter p {
-            margin-bottom: 20px;
-        }
+.title {
+    font-size: clamp(38px, 8vw, 75px);
+    font-family: Georgia, serif;
+    margin-bottom: 25px;
+}
 
-        .signature {
-            text-align: right;
-            margin-top: 35px;
-            font-size: 20px;
-            color: #ff7aa8;
-        }
+.subtitle {
+    color: #bbb;
+    font-size: 18px;
+    line-height: 1.8;
+}
 
-        button {
-            margin-top: 35px;
-            padding: 14px 25px;
-            border: none;
-            border-radius: 30px;
-            background: #ff4f8b;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.story-text {
+    margin: 25px auto;
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.9;
+    color: #ddd;
+}
 
-        button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 25px rgba(255, 79, 139, 0.5);
-        }
+.highlight {
+    color: #ff6b9d;
+}
 
-        #surprise {
-            display: none;
-            margin-top: 25px;
-            font-family: Georgia, serif;
-            font-size: 24px;
-            color: #ff7aa8;
-        }
+.divider {
+    width: 70px;
+    height: 2px;
+    background: #ff5c93;
+    margin: 30px auto;
+}
 
-        /* Floating hearts */
-        .floating-heart {
-            position: fixed;
-            bottom: -30px;
-            font-size: 20px;
-            animation: floatUp linear forwards;
-            pointer-events: none;
-            z-index: 1;
-        }
 
-        @keyframes floatUp {
-            from {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
+/* =========================
+   HERO
+========================= */
 
-            to {
-                transform: translateY(-110vh) scale(1.5);
-                opacity: 0;
-            }
-        }
+#hero {
+    background:
+        radial-gradient(circle at center, #301522 0%, #100b11 45%, #08070c 80%);
+}
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 30px;
-            }
+.hero-heart {
+    font-size: 100px;
+    animation: heartbeat 1.3s infinite;
+}
 
-            .letter-card {
-                padding: 30px 20px;
-            }
+.hero h1 {
+    margin-top: 25px;
+}
 
-            .letter {
-                font-size: 17px;
-            }
-        }
-    </style>
+.scroll {
+    margin-top: 45px;
+    color: #999;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+
+/* =========================
+   STORY CARDS
+========================= */
+
+.story-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 25px;
+    padding: 40px 30px;
+    margin-top: 35px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+.icon {
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 30px;
+    font-family: Georgia, serif;
+    margin-bottom: 20px;
+    color: #ff82aa;
+}
+
+
+/* =========================
+   CHAT ANIMATION
+========================= */
+
+.chat-box {
+    max-width: 600px;
+    margin: 30px auto;
+    text-align: left;
+}
+
+.message {
+    padding: 13px 17px;
+    margin: 12px 0;
+    border-radius: 18px;
+    width: fit-content;
+    max-width: 80%;
+    opacity: 0;
+    animation: messageIn 1s forwards;
+}
+
+.eva {
+    background: #ff4f8b;
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+}
+
+.fab {
+    background: #29272d;
+    border-bottom-left-radius: 5px;
+}
+
+.delay1 { animation-delay: .5s; }
+.delay2 { animation-delay: 1.2s; }
+.delay3 { animation-delay: 1.9s; }
+.delay4 { animation-delay: 2.6s; }
+.delay5 { animation-delay: 3.3s; }
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline {
+    position: relative;
+    max-width: 750px;
+    margin: 50px auto;
+    text-align: left;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ff5c93;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 55px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 10px;
+    top: 4px;
+    width: 22px;
+    height: 22px;
+    background: #ff5c93;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ff5c93;
+}
+
+.timeline-date {
+    color: #ff6b9d;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.timeline-title {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.timeline-text {
+    color: #bbb;
+    line-height: 1.8;
+}
+
+
+/* =========================
+   SPECIAL MOMENTS
+========================= */
+
+.memory {
+    margin: 25px auto;
+    padding: 30px;
+    max-width: 700px;
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(255,80,140,.12),
+        rgba(255,255,255,.03)
+    );
+}
+
+.memory span {
+    display: block;
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   SAD CHAPTER
+========================= */
+
+#separation {
+    background:
+        radial-gradient(circle at center, #211018, #08070c 70%);
+}
+
+.sad {
+    color: #aaa;
+}
+
+.sad-heart {
+    font-size: 70px;
+    filter: grayscale(1);
+    opacity: .8;
+}
+
+
+/* =========================
+   CALICUT CHAPTER
+========================= */
+
+#calicut {
+    background:
+        radial-gradient(circle at center, #24121d, #08070c 70%);
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+#final {
+    background:
+        radial-gradient(circle at center, #3a1427, #09070c 75%);
+}
+
+.final-message {
+    font-family: Georgia, serif;
+    font-size: clamp(27px, 5vw, 45px);
+    line-height: 1.5;
+}
+
+.final-heart {
+    font-size: 80px;
+    margin: 25px;
+    animation: heartbeat 1.3s infinite;
+}
+
+.status {
+    margin-top: 35px;
+    font-family: monospace;
+    color: #72f1b8;
+    font-size: 17px;
+}
+
+button {
+    border: none;
+    padding: 15px 28px;
+    border-radius: 30px;
+    margin-top: 30px;
+    background: #ff4f8b;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(255,70,130,.5);
+}
+
+
+/* =========================
+   LOVE LETTER
+========================= */
+
+#letter {
+    display: none;
+}
+
+.letter-box {
+    background: #fff9f2;
+    color: #3c3030;
+    max-width: 750px;
+    padding: 50px 35px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 30px 80px rgba(0,0,0,.5);
+    transform: rotate(-1deg);
+}
+
+.letter-box h2 {
+    font-family: Georgia, serif;
+    text-align: center;
+    color: #b83260;
+    margin-bottom: 30px;
+}
+
+.letter-box p {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+.signature {
+    text-align: right;
+    font-family: cursive;
+    font-size: 25px;
+    color: #b83260;
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    pointer-events: none;
+    z-index: 1000;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:600px) {
+
+    section {
+        padding: 70px 17px;
+    }
+
+    .story-card {
+        padding: 30px 20px;
+    }
+
+    .story-text {
+        font-size: 16px;
+    }
+
+    .timeline-text {
+        font-size: 15px;
+    }
+
+    .letter-box {
+        padding: 35px 22px;
+    }
+
+}
+</style>
 </head>
+
 
 <body>
 
-    <!-- Developer Intro -->
-    <section id="terminal">
-        <div class="terminal-box">
 
-            <div class="terminal-header">
-                ❤️ love.exe — Terminal
-            </div>
+<!-- =========================
+     LOADING
+========================= -->
 
-            <div class="terminal-body">
+<div id="loadingScreen">
 
-                <div>
-                    <span class="green">user@heart</span>:~$ npm start love
-                </div>
+    <div class="loader-heart">❤️</div>
 
-                <br>
+    <div class="loading-text">
+        Initializing Eva & Fab...
+    </div>
 
-                <div class="pink">
-                    Initializing feelings...
-                </div>
+    <div class="progress">
+        <div class="progress-bar"></div>
+    </div>
 
-                <div id="loading">
-                    Loading memories... 0%
-                </div>
-
-                <div>
-                    Checking compatibility...
-                    <span class="green">100%</span>
-                </div>
-
-                <div>
-                    Searching heart...
-                    <span class="pink">Found ❤️</span>
-                </div>
-
-                <br>
-
-                <div id="finalLine"></div>
-
-                <br>
-
-                <div>
-                    <span class="green">user@heart</span>:~$
-                    <span class="cursor"></span>
-                </div>
-
-            </div>
-        </div>
-    </section>
+</div>
 
 
-    <!-- Love Letter -->
-    <section id="letter">
+<!-- =========================
+     HERO
+========================= -->
 
-        <div class="letter-card">
+<section id="hero">
 
-            <div class="heart">❤️</div>
+    <div class="container hero">
 
-            <h1>To The One I Love</h1>
+        <div class="hero-heart">❤️</div>
 
-            <div class="letter">
-
-                <p>
-                    Hey you...
-                </p>
-
-                <p>
-                    As a developer, I spend so much time thinking about
-                    code, fixing bugs, building things and making everything
-                    work perfectly.
-                </p>
-
-                <p>
-                    But then you came into my life and made me realize
-                    something...
-                </p>
-
-                <p>
-                    Not everything beautiful needs to be coded.
-                    Some things are simply felt.
-                </p>
-
-                <p>
-                    You became one of the most special parts of my life.
-                    Your smile, your voice, your little habits,
-                    our conversations and even our silly moments
-                    mean more to me than I can explain.
-                </p>
-
-                <p>
-                    If my life were a project, you would be my favorite
-                    feature. ❤️
-                </p>
-
-                <p>
-                    If my heart were a database, your name would be
-                    permanently stored with no DELETE permission.
-                </p>
-
-                <p>
-                    And if love were code...
-                    I think I would choose you again and again,
-                    every time I ran it.
-                </p>
-
-                <p>
-                    I don't know what the future will look like,
-                    but I know that the memories we have created
-                    will always be special to me.
-                </p>
-
-                <p>
-                    Thank you for being a part of my story.
-                    And thank you for giving my heart something
-                    worth writing about.
-                </p>
-
-                <p>
-                    I love you. ❤️
-                </p>
-
-            </div>
-
-            <div class="signature">
-                — Yours forever ❤️
-            </div>
-
-            <button onclick="showSurprise()">
-                One More Thing... 💌
-            </button>
-
-            <div id="surprise">
-                No matter how many bugs life gives us...<br><br>
-                <strong>
-                    I still choose you. ❤️
-                </strong>
-            </div>
-
+        <div class="year">
+            SEPTEMBER 2024
         </div>
 
-    </section>
+        <h1 class="title">
+            Eva & Fab
+        </h1>
+
+        <p class="subtitle">
+            A story that started in a group chat...
+            <br>
+            and somehow became a story of two hearts.
+        </p>
+
+        <div class="divider"></div>
+
+        <p class="subtitle">
+            Scroll down to see our story.
+        </p>
+
+        <div class="scroll">
+            ↓
+        </div>
+
+    </div>
+
+</section>
 
 
-    <script>
+<!-- =========================
+     CHAPTER 1
+========================= -->
 
-        // Loading animation
-        let progress = 0;
+<section>
 
-        const loading = document.getElementById("loading");
+<div class="container">
 
-        const loader = setInterval(() => {
+    <div class="year">
+        CHAPTER 01
+    </div>
 
-            progress += 10;
+    <h2 class="title">
+        Two strangers
+    </h2>
 
-            loading.innerHTML =
-                "Loading memories... " + progress + "%";
+    <div class="story-card">
 
-            if (progress >= 100) {
+        <div class="icon">💬</div>
 
-                clearInterval(loader);
+        <h3 class="card-title">
+            Mabrook Group
+        </h3>
 
-                setTimeout(() => {
+        <p class="story-text">
 
-                    document.getElementById("finalLine").innerHTML =
-                        '<span class="pink">Compilation successful ❤️</span><br>' +
-                        'There is one message waiting for you...';
+            In September 2024, Eva was a
+            <span class="highlight">co-admin</span>
+            in a Sharchat group.
 
-                }, 700);
+            Fab was just a normal member.
 
-                setTimeout(() => {
+            <br><br>
 
-                    document.getElementById("terminal").style.display = "none";
-                    document.getElementById("letter").style.display = "block";
+            Eva had her own little gang —
+            Jeevan, Anzu and Layla.
 
-                }, 3000);
+            Eva was especially close to Anzu.
+
+            Fab was closer to Sangu.
+
+            <br><br>
+
+            At that time...
+
+            <span class="highlight">
+                Eva and Fab weren't even that close.
+            </span>
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CHAPTER 2
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        NOVEMBER 2024
+    </div>
+
+    <h2 class="title">
+        A choice
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">🫂</div>
+
+        <p class="story-text">
+
+            After some time, Eva's friends told her
+            to keep some distance from Fab and Mabru.
+
+            <br><br>
+
+            But Eva didn't want to leave them.
+
+            <br><br>
+
+            She fought with Anzu, Layla and Jeevan...
+
+            and slowly became closer to Fab.
+
+            <br><br>
+
+            Sometimes one small decision
+            changes the entire story.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     JANUARY
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        JANUARY 2025
+    </div>
+
+    <h2 class="title">
+        4:00 AM
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">🌙</div>
+
+        <p class="story-text">
+
+            By January, Eva and Fab had become
+            close friends.
+
+            <br><br>
+
+            They talked in the group...
+
+            mornings...
+
+            nights...
+
+            sometimes even around
+            <span class="highlight">4 AM.</span>
+
+            <br><br>
+
+            Eva even made extra effort to get Fab
+            into the group sometimes.
+
+            <br><br>
+
+            Neither of them knew how important
+            those little conversations would become.
+
+        </p>
+
+    </div>
+
+
+    <div class="chat-box">
+
+        <div class="message fab delay1">
+            Do you love me?
+        </div>
+
+        <div class="message eva delay2">
+            Yes. ❤️
+        </div>
+
+        <div class="message fab delay3">
+            ...
+        </div>
+
+        <div class="message eva delay4">
+            Some feelings don't need an answer.
+        </div>
+
+        <div class="message fab delay5">
+            ❤️
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ROMANCE
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        THE BEGINNING
+    </div>
+
+    <h2 class="title">
+        Something changed
+    </h2>
+
+    <div class="memory">
+
+        <span>❤️</span>
+
+        <p class="story-text">
+
+            Fab became attached to Eva.
+
+            Eva became attached to Fab.
+
+            <br><br>
+
+            Their conversations became more romantic.
+
+            The admins knew.
+
+            The group started noticing.
+
+            <br><br>
+
+            And somewhere between jokes,
+            messages and late nights...
+
+            <strong>
+                they started becoming more than friends.
+            </strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FIGHT
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        THE FIRST GOODBYE
+    </div>
+
+    <h2 class="title">
+        One small fight
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">💔</div>
+
+        <p class="story-text">
+
+            One day, Eva and Fab had a fight
+            over something small.
+
+            <br><br>
+
+            Their Sharchat conversation was deleted.
+
+            <br><br>
+
+            But the story wasn't over.
+
+            <br><br>
+
+            They found another way to talk...
+
+            <span class="highlight">
+                Instagram.
+            </span>
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     INSTAGRAM
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        A NEW CHAPTER
+    </div>
+
+    <h2 class="title">
+        Instagram nights
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">📱</div>
+
+        <p class="story-text">
+
+            Their conversations became longer.
+
+            <br><br>
+
+            One message became another.
+
+            Another became hours.
+
+            <br><br>
+
+            And soon...
+
+            night calls became part of their lives.
+
+            <br><br>
+
+            It felt like there was
+            <span class="highlight">
+                no tomorrow.
+            </span>
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SEPTEMBER SILENCE
+========================= -->
+
+<section id="separation">
+
+<div class="container">
+
+    <div class="sad-heart">
+        💔
+    </div>
+
+    <div class="year">
+        SEPTEMBER 2025
+    </div>
+
+    <h2 class="title">
+        Silence
+    </h2>
+
+    <p class="story-text sad">
+
+        The relationship broke apart.
+
+        <br><br>
+
+        September passed without messages.
+
+        No calls.
+
+        No contact.
+
+        <br><br>
+
+        Sometimes two people can be
+        apart...
+
+        while still thinking about each other.
+
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     OCTOBER
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        OCTOBER 2025
+    </div>
+
+    <h2 class="title">
+        One message
+    </h2>
+
+    <div class="chat-box">
+
+        <div class="message fab">
+            October 2 ❤️
+        </div>
+
+        <div class="message fab">
+            October 3...
+        </div>
+
+        <div class="message fab">
+            WhatsApp...
+        </div>
+
+        <div class="message eva">
+            October 5 — finally replied.
+        </div>
+
+    </div>
+
+    <p class="story-text">
+
+        Sometimes one reply is enough
+        to reopen a door that was never
+        completely closed.
+
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     NOVEMBER
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        NOVEMBER 16, 2025
+    </div>
+
+    <h2 class="title">
+        11:30 PM → 5:45 AM
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">🌙❤️</div>
+
+        <p class="story-text">
+
+            They called at 11:30 PM.
+
+            <br><br>
+
+            And talked...
+
+            and talked...
+
+            until the morning.
+
+            <br><br>
+
+            <span class="highlight">
+                5:45 AM.
+            </span>
+
+            <br><br>
+
+            That night felt different.
+
+            They talked like a real couple.
+
+            And Fab made a decision...
+
+            <br><br>
+
+            <strong>
+                He would come to India.
+            </strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FIRST MEETING
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        DECEMBER 2025
+    </div>
+
+    <h2 class="title">
+        Finally...
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">✈️</div>
+
+        <p class="story-text">
+
+            Fab was working in a pharmacy
+            in Saudi Arabia.
+
+            Eva was working as a software developer.
+
+            <br><br>
+
+            Fab decided to come to India.
+
+            <br><br>
+
+            His flight was delayed...
+
+            but finally,
+
+            <span class="highlight">
+                December 6, 2025
+            </span>
+
+            he landed in India.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     DECEMBER 15
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        DECEMBER 15, 2025
+    </div>
+
+    <h2 class="title">
+        Our first meeting
+    </h2>
+
+    <div class="memory">
+
+        <span>🥹❤️</span>
+
+        <p class="story-text">
+
+            December 15.
+
+            <br><br>
+
+            Eva and Fab finally met
+            face-to-face for the first time.
+
+            <br><br>
+
+            They walked...
+
+            talked...
+
+            laughed...
+
+            and spent the day together.
+
+        </p>
+
+    </div>
+
+
+    <div class="memory">
+
+        <span>🎬</span>
+
+        <p class="story-text">
+
+            They went to Lulu Mall
+
+            and watched
+
+            <strong>
+                Kalamkaval.
+            </strong>
+
+        </p>
+
+    </div>
+
+
+    <div class="memory">
+
+        <span>🌙</span>
+
+        <p class="story-text">
+
+            Later, they went somewhere
+            quiet to rest.
+
+            It became one of the most
+            intimate and unforgettable
+            days of their relationship.
+
+            <br><br>
+
+            Two people who had known each other
+            through screens...
+
+            were finally together.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     LITTLE GIRL MEMORY
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        A LITTLE MEMORY
+    </div>
+
+    <h2 class="title">
+        A tiny stranger
+    </h2>
+
+    <div class="memory">
+
+        <span>👶❤️</span>
+
+        <p class="story-text">
+
+            That night, while they were outside
+            to eat, they met a little girl.
+
+            <br><br>
+
+            She was around one year old.
+
+            <br><br>
+
+            She looked at Fab...
+
+            giggled...
+
+            and seemed to love him immediately.
+
+            <br><br>
+
+            Eva simply enjoyed watching them.
+
+            <br><br>
+
+            One tiny moment.
+
+            One beautiful memory.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     MORNING
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        THE NEXT MORNING
+    </div>
+
+    <h2 class="title">
+        5:30 AM
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">🌅</div>
+
+        <p class="story-text">
+
+            Around 5:30 in the morning,
+            Eva woke up.
+
+            <br><br>
+
+            Fab was still sleeping deeply.
+
+            <br><br>
+
+            Eva looked at him...
+
+            and quietly admired
+            his sleeping face.
+
+            <br><br>
+
+            She made a tiny movement
+            to wake him.
+
+            <br><br>
+
+            He opened his eyes.
+
+            <br><br>
+
+            And the morning became
+            another precious memory
+            for both of them.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ZOO
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        DECEMBER 16, 2025
+    </div>
+
+    <h2 class="title">
+        Let's escape the room
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">🦁🌳</div>
+
+        <p class="story-text">
+
+            They realized that if they stayed
+            alone together...
+
+            they would probably never stop
+            being distracted by each other.
+
+            😄❤️
+
+            <br><br>
+
+            So they went to the
+            <span class="highlight">
+                Trivandrum Zoo.
+            </span>
+
+            <br><br>
+
+            They spent the day together...
+
+            until it was time to separate.
+
+            <br><br>
+
+            Around 2 PM,
+
+            Eva and Fab said goodbye.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ENGAGEMENT
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        THE PAINFUL CHAPTER
+    </div>
+
+    <h2 class="title">
+        A different future
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">💔</div>
+
+        <p class="story-text">
+
+            After that, they continued talking.
+
+            <br><br>
+
+            But things became complicated.
+
+            <br><br>
+
+            Fab decided he wanted to marry someone.
+
+            He asked Eva if it was okay.
+
+            <br><br>
+
+            Eva said yes...
+
+            even though it hurt.
+
+            <br><br>
+
+            He found a girl.
+
+            And they became engaged.
+
+            <br><br>
+
+            Eva tried to create distance.
+
+            She cried.
+
+            She missed him.
+
+            And she finally understood
+            how deeply she loved him.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     TOO LATE
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        A QUESTION
+    </div>
+
+    <h2 class="title">
+        "Can you marry me?"
+    </h2>
+
+    <p class="story-text">
+
+        Eva finally asked the question
+        that had been living inside her heart.
+
+        <br><br>
+
+        But by then...
+
+        <span class="highlight">
+            it was too late.
+        </span>
+
+        <br><br>
+
+        Fab refused.
+
+        <br><br>
+
+        They tried to live with the distance.
+
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     TWO MONTHS
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        THE DISTANCE
+    </div>
+
+    <h2 class="title">
+        Dry messages
+    </h2>
+
+    <div class="memory">
+
+        <span>📱</span>
+
+        <p class="story-text">
+
+            Messages came every few days.
+
+            No more regular calls.
+
+            Sometimes weeks passed.
+
+            <br><br>
+
+            Then one day...
+
+            they called.
+
+            <br><br>
+
+            Both were sad.
+
+            Both consoled each other.
+
+            <br><br>
+
+            And somehow...
+
+            the separation made their connection
+            even stronger.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CALICUT
+========================= -->
+
+<section id="calicut">
+
+<div class="container">
+
+    <div class="year">
+        MAY 25, 2026
+    </div>
+
+    <h2 class="title">
+        Calicut
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">🚍❤️</div>
+
+        <p class="story-text">
+
+            Eva travelled to Calicut
+            to meet Fab.
+
+            <br><br>
+
+            She had already decided
+            that she would keep some boundaries.
+
+            <br><br>
+
+            But when two people
+            who deeply miss each other
+            finally meet...
+
+            emotions don't always follow plans.
+
+            <br><br>
+
+            They spent the day together.
+
+        </p>
+
+    </div>
+
+
+    <div class="memory">
+
+        <span>🎬</span>
+
+        <p class="story-text">
+
+            They went to Forum Mall
+
+            and watched
+
+            <strong>
+                Drishyam 3.
+            </strong>
+
+        </p>
+
+    </div>
+
+
+    <div class="memory">
+
+        <span>🚌</span>
+
+        <p class="story-text">
+
+            Then Fab dropped Eva
+            at the Calicut bus stop.
+
+            <br><br>
+
+            The bus was late.
+
+            So they sat there together
+            for a long time.
+
+            <br><br>
+
+            And then Fab said something
+            Eva would never forget:
+
+            <br><br>
+
+            <span class="highlight">
+                "I truly love you."
+            </span>
+
+            <br><br>
+
+            Eva felt those words
+            come straight from his heart.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SEPTEMBER 2026
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        SEPTEMBER 9, 2026
+    </div>
+
+    <h2 class="title">
+        Still here
+    </h2>
+
+    <div class="story-card">
+
+        <div class="icon">📞❤️</div>
+
+        <p class="story-text">
+
+            After trying to separate themselves...
+
+            something unexpected happened.
+
+            <br><br>
+
+            They became closer again.
+
+            <br><br>
+
+            Calls.
+
+            Video calls.
+
+            Messages.
+
+            Every day.
+
+            <br><br>
+
+            The story that was supposed to end...
+
+            <span class="highlight">
+                didn't.
+            </span>
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FUTURE
+========================= -->
+
+<section>
+
+<div class="container">
+
+    <div class="year">
+        THE NEXT CHAPTER
+    </div>
+
+    <h2 class="title">
+        Maybe someday...
+    </h2>
+
+    <div class="memory">
+
+        <span>🌅</span>
+
+        <p class="story-text">
+
+            Today, Eva is happy.
+
+            She still wants to meet Fab.
+
+            <br><br>
+
+            She doesn't know exactly
+            what the future will bring.
+
+            <br><br>
+
+            But if they meet again...
+
+            she wants to make that one day
+            unforgettable.
+
+            <br><br>
+
+            More walks.
+
+            More conversations.
+
+            More laughter.
+
+            More memories.
+
+            <br><br>
+
+            Just one beautiful day together.
+
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FINAL
+========================= -->
+
+<section id="final">
+
+<div class="container">
+
+    <div class="final-heart">
+        ❤️
+    </div>
+
+    <div class="year">
+        SEPTEMBER 9, 2026
+    </div>
+
+    <div class="final-message">
+
+        Some stories don't end
+        when people say goodbye.
+
+        <br><br>
+
+        Some stories keep finding
+        their way back.
+
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="subtitle">
+
+        Eva ❤️ Fab
+
+    </p>
+
+    <p class="status">
+
+        relationship.status = "still_running";
+
+    </p>
+
+    <button onclick="openLetter()">
+        Read One Last Message 💌
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     LOVE LETTER
+========================= -->
+
+<section id="letter">
+
+<div class="letter-box">
+
+    <h2>
+        A Letter From Eva ❤️
+    </h2>
+
+    <p>
+        Fab,
+    </p>
+
+    <p>
+        If someone had told me in September 2024
+        that a person from a random group would
+        become such an important part of my life,
+        I probably wouldn't have believed them.
+    </p>
+
+    <p>
+        We started as two people who weren't even
+        that close.
+    </p>
+
+    <p>
+        Then came the late-night conversations,
+        the silly fights, the calls, the silence,
+        the distance, and all the moments that
+        somehow brought us back to each other.
+    </p>
+
+    <p>
+        I don't know what you felt during every
+        moment of our story, but I know what
+        I felt.
+    </p>
+
+    <p>
+        I was happy when I was with you.
+        I missed you when you were away.
+        And I realized how much you meant to me
+        when I thought I had lost you.
+    </p>
+
+    <p>
+        I still remember December 15.
+        Walking beside you.
+        Watching a movie.
+        Spending those little hours together.
+        And waking up and seeing you sleeping.
+    </p>
+
+    <p>
+        I remember Calicut too.
+        Sitting at the bus stop and hearing you
+        tell me that you truly loved me.
+    </p>
+
+    <p>
+        Those moments are mine forever,
+        no matter what happens next.
+    </p>
+
+    <p>
+        I don't know where our story will end.
+        Maybe neither of us knows.
+    </p>
+
+    <p>
+        But if life gives us another day together,
+        I want to fill it with everything we missed.
+    </p>
+
+    <p>
+        More walking.
+        More talking.
+        More laughing.
+        More memories.
+    </p>
+
+    <p>
+        And maybe...
+        just maybe...
+        another chapter.
+    </p>
+
+    <p>
+        Whatever happens,
+        thank you for becoming
+        one of the most unforgettable
+        parts of my life.
+    </p>
+
+    <p>
+        I love you. ❤️
+    </p>
+
+    <div class="signature">
+        — Eva ❤️
+    </div>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   LOADING SCREEN
+========================= */
+
+window.addEventListener("load", function() {
+
+    setTimeout(function() {
+
+        document.getElementById("loadingScreen").style.opacity = "0";
+
+        setTimeout(function() {
+
+            document.getElementById("loadingScreen").style.display = "none";
+
+        }, 700);
+
+    }, 3200);
+
+});
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    const hearts = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💘",
+        "💓"
+    ];
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function() {
+        heart.remove();
+    }, 9000);
+}
+
+
+/* Create hearts occasionally */
+
+setInterval(createHeart, 900);
+
+
+/* =========================
+   FINAL LETTER
+========================= */
+
+function openLetter() {
+
+    document.getElementById("letter").style.display = "flex";
+
+    setTimeout(function() {
+
+        document.getElementById("letter")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }, 100);
+
+    for (let i = 0; i < 35; i++) {
+
+        setTimeout(function() {
+            createHeart();
+        }, i * 80);
+
+    }
+
+}
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer = new IntersectionObserver(
+
+    function(entries) {
+
+        entries.forEach(function(entry) {
+
+            if (entry.isIntersecting) {
+
+                entry.target.style.opacity = "1";
+                entry.target.style.transform =
+                    "translateY(0)";
+
             }
 
-        }, 250);
+        });
+
+    },
+
+    {
+        threshold: 0.15
+    }
+
+);
 
 
-        // Surprise button
-        function showSurprise() {
+document.querySelectorAll(
+    ".story-card, .memory, .timeline-item"
+).forEach(function(element) {
 
-            document.getElementById("surprise").style.display = "block";
+    element.style.opacity = "0";
+    element.style.transform = "translateY(40px)";
+    element.style.transition =
+        "opacity 1s ease, transform 1s ease";
 
-            createHearts();
+    observer.observe(element);
 
-        }
+});
 
 
-        // Floating hearts
-        function createHearts() {
-
-            for (let i = 0; i < 25; i++) {
-
-                const heart = document.createElement("div");
-
-                heart.className = "floating-heart";
-
-                heart.innerHTML = ["❤️", "💕", "💗", "💖", "💘"]
-                    [Math.floor(Math.random() * 5)];
-
-                heart.style.left =
-                    Math.random() * 100 + "vw";
-
-                heart.style.animationDuration =
-                    (3 + Math.random() * 4) + "s";
-
-                document.body.appendChild(heart);
-
-                setTimeout(() => {
-                    heart.remove();
-                }, 7000);
-            }
-        }
-
-    </script>
+</script>
 
 </body>
 </html>
