@@ -3,10 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eva & Fab ❤️ Our Little Story</title>
+<title>Our Story ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap');
+:root{
+    --paper:#fffaf3;
+    --paper2:#f8eee3;
+    --rose:#a94d68;
+    --deep:#54263a;
+    --gold:#c99a52;
+    --ink:#38242a;
+    --soft:#ead4d7;
+}
 
 *{
     box-sizing:border-box;
@@ -14,1322 +26,388 @@
     padding:0;
 }
 
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-}
-
 body{
-    font-family:'Poppins',sans-serif;
-    background:#fff0f6;
-}
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-#app{
-    width:100%;
-    height:100vh;
-    position:relative;
-    overflow:hidden;
-}
-
-.scene{
-    position:absolute;
-    inset:0;
-    display:none;
-    overflow:hidden;
-}
-
-.scene.active{
-    display:block;
-    animation:sceneEnter 1s ease;
-}
-
-@keyframes sceneEnter{
-    from{
-        opacity:0;
-        transform:scale(1.06);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-/* =====================================================
-   BACKGROUNDS
-===================================================== */
-
-.bg-day{
+    min-height:100vh;
     background:
-    linear-gradient(
-        #bdeaff 0%,
-        #e5f8ff 55%,
-        #b8e6a0 55%,
-        #91cf78 100%
-    );
-}
-
-.bg-evening{
-    background:
-    linear-gradient(
-        #ffb6c9,
-        #ffd9b8 58%,
-        #d39a72 58%,
-        #9d705a
-    );
-}
-
-.bg-night{
-    background:
-    linear-gradient(
-        #101832,
-        #252c55 65%,
-        #191d36 65%
-    );
-}
-
-.bg-room{
-    background:
-    linear-gradient(
-        #ffe9f0 0%,
-        #fff7fa 65%,
-        #d99a84 65%
-    );
-}
-
-.bg-sad{
-    background:
-    linear-gradient(
-        #68748a,
-        #a3adbb 65%,
-        #626978 65%
-    );
-}
-
-.bg-future{
-    background:
-    radial-gradient(
-        circle at 50% 30%,
-        #fff7fc,
-        #ffd6e8 40%,
-        #a9b6ff 100%
-    );
-}
-
-/* =====================================================
-   CLOUDS
-===================================================== */
-
-.cloud{
-    position:absolute;
-    width:130px;
-    height:40px;
-    background:white;
-    border-radius:50px;
-    opacity:.8;
-    animation:cloudMove linear infinite;
-}
-
-.cloud:before,
-.cloud:after{
-    content:"";
-    position:absolute;
-    background:white;
-    border-radius:50%;
-}
-
-.cloud:before{
-    width:55px;
-    height:55px;
-    left:20px;
-    top:-25px;
-}
-
-.cloud:after{
-    width:70px;
-    height:70px;
-    right:15px;
-    top:-35px;
-}
-
-@keyframes cloudMove{
-    from{
-        transform:translateX(-200px);
-    }
-    to{
-        transform:translateX(calc(100vw + 300px));
-    }
-}
-
-/* =====================================================
-   SUN
-===================================================== */
-
-.sun{
-    position:absolute;
-    width:85px;
-    height:85px;
-    right:10%;
-    top:10%;
-    border-radius:50%;
-    background:#ffe16b;
-    box-shadow:0 0 45px #ffe98a;
-    animation:sunPulse 3s infinite alternate;
-}
-
-@keyframes sunPulse{
-    to{
-        box-shadow:0 0 70px #fff1a0;
-    }
-}
-
-/* =====================================================
-   MOON + STARS
-===================================================== */
-
-.moon{
-    position:absolute;
-    width:75px;
-    height:75px;
-    right:11%;
-    top:9%;
-    border-radius:50%;
-    background:#fff5c9;
-    box-shadow:0 0 35px #fff;
-}
-
-.star{
-    position:absolute;
-    width:4px;
-    height:4px;
-    background:white;
-    border-radius:50%;
-    animation:starBlink 1.5s infinite alternate;
-}
-
-@keyframes starBlink{
-    from{opacity:.2}
-    to{opacity:1}
-}
-
-/* =====================================================
-   TITLE
-===================================================== */
-
-.title{
-    position:absolute;
-    width:100%;
-    top:5%;
-    text-align:center;
-    z-index:40;
-    color:white;
-    text-shadow:0 4px 12px #0004;
-}
-
-.title h1{
-    font-family:'Baloo 2',cursive;
-    font-size:clamp(28px,6vw,58px);
-    line-height:1;
-}
-
-.title p{
-    font-size:clamp(11px,2vw,16px);
-    margin-top:7px;
-    opacity:.95;
-}
-
-/* =====================================================
-   GROUND
-===================================================== */
-
-.ground{
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:22%;
-    background:#82c96e;
-    border-radius:50% 50% 0 0;
-}
-
-/* =====================================================
-   CHIBI CHARACTER
-===================================================== */
-
-.character{
-    position:absolute;
-    width:145px;
-    height:275px;
-    bottom:15%;
-    z-index:20;
-    transition:all 1.3s cubic-bezier(.2,.8,.2,1);
-}
-
-/* head */
-
-.head{
-    position:absolute;
-    width:88px;
-    height:88px;
-    left:29px;
-    top:0;
-    background:#ffd0ad;
-    border-radius:48% 48% 45% 45%;
-    z-index:4;
-    box-shadow:inset 0 -5px #f3b68f;
-}
-
-/* ears */
-
-.ear{
-    position:absolute;
-    width:17px;
-    height:27px;
-    background:#f5bd99;
-    border-radius:50%;
-    top:31px;
-}
-
-.ear.left{
-    left:-9px;
-}
-
-.ear.right{
-    right:-9px;
-}
-
-/* hair */
-
-.hair{
-    position:absolute;
-    width:96px;
-    height:67px;
-    left:25px;
-    top:-9px;
-    z-index:7;
-}
-
-.eva .hair{
-    background:#342019;
-    border-radius:55% 50% 40% 45%;
-}
-
-.fab .hair{
-    background:#19171b;
-    border-radius:55% 55% 35% 35%;
-}
-
-/* Eva hair strands */
-
-.eva .hair:after{
-    content:"";
-    position:absolute;
-    width:25px;
-    height:95px;
-    background:#342019;
-    left:-8px;
-    top:30px;
-    border-radius:30px;
-    transform:rotate(8deg);
-}
-
-/* Fab hair */
-
-.fab .hair:after{
-    content:"";
-    position:absolute;
-    width:32px;
-    height:32px;
-    background:#19171b;
-    left:7px;
-    top:-8px;
-    transform:rotate(-20deg);
-    border-radius:50%;
-}
-
-/* eyes */
-
-.eye{
-    position:absolute;
-    width:10px;
-    height:14px;
-    background:#30252b;
-    border-radius:50%;
-    top:40px;
-    z-index:8;
-    animation:blink 4s infinite;
-}
-
-.eye.left{
-    left:25px;
-}
-
-.eye.right{
-    right:25px;
-}
-
-@keyframes blink{
-    0%,94%,100%{
-        transform:scaleY(1);
-    }
-    96%{
-        transform:scaleY(.1);
-    }
-}
-
-/* cheeks */
-
-.cheek{
-    position:absolute;
-    width:17px;
-    height:9px;
-    background:#f69ba0;
-    border-radius:50%;
-    top:57px;
-    opacity:.7;
-}
-
-.cheek.left{
-    left:10px;
-}
-
-.cheek.right{
-    right:10px;
-}
-
-/* mouth */
-
-.mouth{
-    position:absolute;
-    left:34px;
-    top:62px;
-    width:20px;
-    height:10px;
-    border-bottom:3px solid #b34f58;
-    border-radius:50%;
-    z-index:9;
-}
-
-/* body */
-
-.body{
-    position:absolute;
-    top:83px;
-    left:29px;
-    width:88px;
-    height:98px;
-    border-radius:28px 28px 17px 17px;
-    z-index:3;
-}
-
-.eva .body{
-    background:linear-gradient(#ff8eb4,#ff679d);
-}
-
-.fab .body{
-    background:linear-gradient(#6e9cff,#4774dc);
-}
-
-/* Eva dress */
-
-.eva .body:after{
-    content:"♡";
-    position:absolute;
-    left:34px;
-    top:24px;
-    font-size:25px;
-    color:white;
-}
-
-/* Fab shirt */
-
-.fab .body:after{
-    content:"F";
-    position:absolute;
-    left:36px;
-    top:18px;
-    color:white;
-    font-weight:bold;
-    font-size:25px;
-}
-
-/* arms */
-
-.arm{
-    position:absolute;
-    width:22px;
-    height:82px;
-    background:#ffd0ad;
-    border-radius:20px;
-    top:91px;
-    z-index:2;
-    transform-origin:top center;
-}
-
-.arm.left{
-    left:15px;
-    transform:rotate(12deg);
-}
-
-.arm.right{
-    right:15px;
-    transform:rotate(-12deg);
-}
-
-/* hands */
-
-.hand{
-    position:absolute;
-    width:25px;
-    height:25px;
-    border-radius:50%;
-    background:#ffd0ad;
-    bottom:-8px;
-    left:-2px;
-}
-
-/* legs */
-
-.leg{
-    position:absolute;
-    width:25px;
-    height:75px;
-    background:#35354b;
-    top:173px;
-    border-radius:18px;
-}
-
-.leg.left{
-    left:48px;
-}
-
-.leg.right{
-    right:48px;
-}
-
-.eva .leg{
-    background:#76506b;
-}
-
-/* shoes */
-
-.shoe{
-    position:absolute;
-    width:43px;
-    height:20px;
-    background:#282735;
-    border-radius:20px;
-    top:242px;
-}
-
-.shoe.left{
-    left:30px;
-}
-
-.shoe.right{
-    right:30px;
-}
-
-/* =====================================================
-   CHARACTER NAME
-===================================================== */
-
-.name{
-    position:absolute;
-    bottom:-30px;
-    left:50%;
-    transform:translateX(-50%);
-    padding:5px 13px;
-    border-radius:20px;
-    background:white;
-    color:#555;
-    font-size:12px;
-    white-space:nowrap;
-    box-shadow:0 4px 12px #0002;
-}
-
-/* =====================================================
-   WALKING
-===================================================== */
-
-.walk{
-    animation:bodyWalk .55s infinite alternate;
-}
-
-@keyframes bodyWalk{
-    from{
-        transform:translateY(0) rotate(-2deg);
-    }
-    to{
-        transform:translateY(-8px) rotate(2deg);
-    }
-}
-
-.walk .leg.left{
-    animation:legLeft .5s infinite alternate;
-}
-
-.walk .leg.right{
-    animation:legRight .5s infinite alternate;
-}
-
-@keyframes legLeft{
-    to{
-        transform:rotate(18deg);
-    }
-}
-
-@keyframes legRight{
-    to{
-        transform:rotate(-18deg);
-    }
-}
-
-/* =====================================================
-   WAVE
-===================================================== */
-
-.wave .arm.right{
-    animation:wave .45s infinite alternate;
-}
-
-@keyframes wave{
-    to{
-        transform:rotate(-65deg);
-    }
-}
-
-/* =====================================================
-   PHONE
-===================================================== */
-
-.phone .arm.right{
-    transform:rotate(-55deg);
-}
-
-.phone .hand{
-    font-size:23px;
-}
-
-.phone .hand:after{
-    content:"📱";
-    position:absolute;
-    left:-3px;
-    top:-4px;
-}
-
-/* =====================================================
-   SIT
-===================================================== */
-
-.sit{
-    transform:translateY(35px);
-}
-
-.sit .leg{
-    transform:rotate(70deg);
-}
-
-/* =====================================================
-   SLEEP
-===================================================== */
-
-.sleep{
-    transform:rotate(8deg);
-}
-
-.sleep .eye{
-    height:3px;
-    border-radius:10px;
-    top:45px;
-}
-
-.zzz{
-    position:absolute;
-    font-size:25px;
-    color:white;
-    animation:zzz 2s infinite;
-}
-
-@keyframes zzz{
-    from{
-        transform:translateY(0);
-        opacity:0;
-    }
-    30%{
-        opacity:1;
-    }
-    to{
-        transform:translateY(-45px);
-        opacity:0;
-    }
-}
-
-/* =====================================================
-   CHAT BUBBLES
-===================================================== */
-
-.chat{
-    position:absolute;
-    padding:13px 17px;
-    background:white;
-    border-radius:22px;
-    color:#444;
-    font-size:14px;
-    max-width:245px;
-    z-index:50;
-    box-shadow:0 8px 25px #0002;
-    animation:chatAppear .7s ease;
-}
-
-.chat:after{
-    content:"";
-    position:absolute;
-    bottom:-10px;
-    left:25px;
-    border:10px solid transparent;
-    border-top-color:white;
-}
-
-.chat.pink{
-    background:#ff75a7;
-    color:white;
-}
-
-.chat.pink:after{
-    border-top-color:#ff75a7;
-}
-
-@keyframes chatAppear{
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.85);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-/* =====================================================
-   HEARTS
-===================================================== */
-
-.heart{
-    position:absolute;
-    font-size:25px;
-    z-index:70;
-    animation:heartFloat 3s linear forwards;
-    pointer-events:none;
-}
-
-@keyframes heartFloat{
-    0%{
-        opacity:0;
-        transform:translateY(0) scale(.5) rotate(-10deg);
-    }
-    20%{
-        opacity:1;
-    }
-    100%{
-        opacity:0;
-        transform:translateY(-280px) scale(1.4) rotate(15deg);
-    }
-}
-
-/* =====================================================
-   SPARKLES
-===================================================== */
-
-.sparkle{
-    position:absolute;
-    color:white;
-    font-size:20px;
-    animation:sparkle 1.5s infinite alternate;
-}
-
-@keyframes sparkle{
-    from{
-        opacity:.2;
-        transform:scale(.5);
-    }
-    to{
-        opacity:1;
-        transform:scale(1.3);
-    }
-}
-
-/* =====================================================
-   CHAT PHONE
-===================================================== */
-
-.chatPhone{
-    position:absolute;
-    width:190px;
-    height:330px;
-    left:50%;
-    top:47%;
-    transform:translate(-50%,-50%);
-    border:8px solid #24212c;
-    border-radius:28px;
-    background:#fff7fb;
-    z-index:60;
-    box-shadow:0 20px 60px #0005;
-    overflow:hidden;
-}
-
-.phoneTop{
-    height:45px;
-    background:#ff6fa2;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
-}
-
-.phoneMessages{
-    padding:15px;
-}
-
-.msg{
-    padding:8px 11px;
-    margin-bottom:10px;
-    border-radius:15px;
-    font-size:11px;
-    max-width:85%;
-}
-
-.msg.evaMsg{
-    background:#ffd1e1;
-    margin-right:auto;
-}
-
-.msg.fabMsg{
-    background:#d2dcff;
-    margin-left:auto;
-}
-
-.typing{
-    display:flex;
-    gap:3px;
-}
-
-.typing span{
-    width:5px;
-    height:5px;
-    background:#999;
-    border-radius:50%;
-    animation:typing 1s infinite alternate;
-}
-
-.typing span:nth-child(2){
-    animation-delay:.2s;
-}
-
-.typing span:nth-child(3){
-    animation-delay:.4s;
-}
-
-@keyframes typing{
-    from{opacity:.2}
-    to{opacity:1}
-}
-
-/* =====================================================
-   PHONE CALL
-===================================================== */
-
-.callCard{
-    position:absolute;
-    width:240px;
-    height:290px;
-    left:50%;
-    top:45%;
-    transform:translate(-50%,-50%);
-    background:#ffffffee;
-    border-radius:35px;
-    box-shadow:0 20px 60px #0005;
-    z-index:60;
-    text-align:center;
-    padding:30px;
-}
-
-.callAvatar{
-    width:80px;
-    height:80px;
-    margin:auto;
-    border-radius:50%;
-    background:#ff92b8;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:40px;
-    animation:callPulse 1.5s infinite;
-}
-
-@keyframes callPulse{
-    50%{
-        transform:scale(1.1);
-        box-shadow:0 0 0 15px #ff92b833;
-    }
-}
-
-.callCard h3{
-    margin-top:15px;
-    color:#444;
-}
-
-.callCard p{
-    color:#888;
-    font-size:13px;
-    margin-top:8px;
-}
-
-/* =====================================================
-   PLANE
-===================================================== */
-
-.plane{
-    position:absolute;
-    font-size:70px;
-    left:-120px;
-    top:40%;
-    animation:planeFly 5s linear infinite;
-    z-index:30;
-}
-
-@keyframes planeFly{
-    0%{
-        left:-120px;
-        transform:rotate(-4deg);
-    }
-    100%{
-        left:110%;
-        transform:rotate(-4deg);
-    }
-}
-
-/* =====================================================
-   BIRTHDAY
-===================================================== */
-
-.cake{
-    position:absolute;
-    left:50%;
-    top:47%;
-    transform:translate(-50%,-50%);
-    font-size:110px;
-    animation:cakeBounce 1s infinite alternate;
-    z-index:50;
-}
-
-@keyframes cakeBounce{
-    to{
-        transform:translate(-50%,-50%) translateY(-12px);
-    }
-}
-
-/* =====================================================
-   HUG
-===================================================== */
-
-.hug{
-    animation:hugBounce 1.2s infinite alternate;
-}
-
-@keyframes hugBounce{
-    to{
-        transform:translateY(-6px) scale(1.04);
-    }
-}
-
-/* =====================================================
-   MALL
-===================================================== */
-
-.mallBuilding{
-    position:absolute;
-    width:72%;
-    height:45%;
-    left:14%;
-    bottom:18%;
-    background:#fff;
-    border-radius:30px 30px 0 0;
-    box-shadow:0 20px 40px #0003;
-    border:5px solid #ddd;
-}
-
-.mallSign{
-    text-align:center;
-    font-family:'Baloo 2',cursive;
-    font-size:42px;
-    color:#ff6699;
-    padding-top:25px;
-}
-
-.shopRow{
-    display:flex;
-    justify-content:space-around;
-    margin-top:35px;
-}
-
-.shopBox{
-    width:25%;
-    height:80px;
-    border:3px solid #ddd;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-}
-
-/* =====================================================
-   MOVIE SCREEN
-===================================================== */
-
-.screen{
-    position:absolute;
-    width:70%;
-    height:55%;
-    left:15%;
-    top:18%;
-    background:#18151d;
-    border:12px solid #39343d;
-    border-radius:15px;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-family:'Baloo 2',cursive;
-    font-size:clamp(25px,6vw,65px);
-    box-shadow:0 20px 50px #0008;
-    z-index:10;
-}
-
-.popcorn{
-    position:absolute;
-    font-size:70px;
-    left:10%;
-    bottom:18%;
-}
-
-/* =====================================================
-   ZOO
-===================================================== */
-
-.zooAnimal{
-    position:absolute;
-    font-size:80px;
-    animation:animalBounce 2s infinite alternate;
-}
-
-@keyframes animalBounce{
-    to{
-        transform:translateY(-15px);
-    }
-}
-
-/* =====================================================
-   BUS
-===================================================== */
-
-.busStop{
-    position:absolute;
-    width:100%;
-    height:100%;
-}
-
-.busShelter{
-    position:absolute;
-    left:8%;
-    bottom:20%;
-    width:35%;
-    height:32%;
-    border:7px solid #555;
-    border-bottom:0;
-    border-radius:20px 20px 0 0;
-    background:#ffffff33;
-}
-
-.busSign{
-    position:absolute;
-    left:19%;
-    bottom:55%;
-    background:#fff;
-    padding:8px 15px;
-    border-radius:10px;
-    font-weight:bold;
-}
-
-.bus{
-    position:absolute;
-    right:-300px;
-    bottom:8%;
-    width:260px;
-    height:110px;
-    background:#e95358;
-    border-radius:25px;
-    animation:busComing 7s linear infinite;
-}
-
-.bus:before{
-    content:"";
-    position:absolute;
-    left:25px;
-    top:18px;
-    width:210px;
-    height:48px;
-    background:#bdeaff;
-    border-radius:10px;
-}
-
-@keyframes busComing{
-    0%{
-        right:-300px;
-    }
-    50%{
-        right:30%;
-    }
-    65%{
-        right:30%;
-    }
-    100%{
-        right:110%;
-    }
-}
-
-/* =====================================================
-   CALENDAR
-===================================================== */
-
-.calendar{
-    position:absolute;
-    left:50%;
-    top:45%;
-    transform:translate(-50%,-50%);
-    background:white;
-    width:230px;
-    border-radius:25px;
-    padding:25px;
-    text-align:center;
-    box-shadow:0 20px 50px #0004;
-    z-index:50;
-}
-
-.calendar .month{
-    background:#ff6f9f;
-    color:white;
-    padding:8px;
-    border-radius:15px;
-    margin-bottom:15px;
-}
-
-.calendar .big{
-    font-size:55px;
-    font-family:'Baloo 2',cursive;
-}
-
-/* =====================================================
-   PRIVATE MEMORY
-===================================================== */
-
-.private{
-    position:absolute;
-    inset:0;
-    background:
-        radial-gradient(circle,#48283c,#130f18);
-    z-index:80;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:white;
-}
-
-.private div{
-    animation:softAppear 2s ease;
-}
-
-.private h2{
-    font-family:'Baloo 2',cursive;
-    font-size:40px;
-}
-
-.private p{
-    margin-top:10px;
-    opacity:.8;
-}
-
-@keyframes softAppear{
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-/* =====================================================
-   FINAL
-===================================================== */
-
-.final{
-    position:absolute;
-    width:90%;
-    max-width:800px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    color:#56344a;
-    z-index:50;
-}
-
-.final h1{
-    font-family:'Baloo 2',cursive;
-    font-size:clamp(40px,8vw,80px);
-}
-
-.final .heartBig{
-    font-size:65px;
-    animation:heartBig 1.3s infinite alternate;
-}
-
-@keyframes heartBig{
-    to{
-        transform:scale(1.2);
-    }
-}
-
-.final p{
-    margin-top:15px;
-    font-size:clamp(14px,2.3vw,21px);
-    line-height:1.8;
-}
-
-/* =====================================================
-   CAPTION
-===================================================== */
-
-.caption{
-    position:absolute;
-    bottom:13%;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(90%,720px);
-    background:#ffffffec;
-    color:#54404b;
-    padding:15px 20px;
-    border-radius:25px;
-    text-align:center;
-    font-size:clamp(12px,2vw,17px);
-    box-shadow:0 8px 30px #0002;
-    z-index:90;
-}
-
-/* =====================================================
-   CONTROLS
-===================================================== */
-
-.controls{
-    position:absolute;
-    bottom:3%;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:200;
-    display:flex;
-    gap:10px;
-    align-items:center;
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.8),transparent 30%),
+        linear-gradient(135deg,#3d1d2b,#71384d,#321722);
+    color:var(--ink);
+    font-family:"Cormorant Garamond",serif;
+    overflow-x:hidden;
 }
 
 button{
-    border:none;
-    background:#ff6f9f;
+    font-family:inherit;
+}
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at center,rgba(255,255,255,.08),transparent 45%),
+        #321722;
+    transition:opacity 1s,visibility 1s;
+}
+
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.intro-box{
+    width:min(90%,520px);
+    text-align:center;
     color:white;
-    padding:11px 20px;
-    border-radius:30px;
-    font-family:'Poppins',sans-serif;
-    font-weight:600;
+    padding:50px 30px;
+}
+
+.intro-box .small{
+    letter-spacing:5px;
+    text-transform:uppercase;
+    font-size:13px;
+    opacity:.75;
+}
+
+.intro-box h1{
+    font-family:"Dancing Script",cursive;
+    font-size:clamp(48px,12vw,85px);
+    margin:20px 0;
+}
+
+.intro-box p{
+    font-size:20px;
+    opacity:.85;
+    margin-bottom:35px;
+}
+
+.open-btn{
+    border:1px solid rgba(255,255,255,.5);
+    background:rgba(255,255,255,.1);
+    color:white;
+    padding:15px 32px;
+    border-radius:40px;
+    font-size:18px;
     cursor:pointer;
-    box-shadow:0 6px 20px #0003;
-    transition:.2s;
+    transition:.3s;
+    backdrop-filter:blur(8px);
 }
 
-button:hover{
-    transform:translateY(-2px) scale(1.03);
-    background:#ff4f89;
+.open-btn:hover{
+    background:white;
+    color:var(--deep);
+    transform:translateY(-3px);
 }
 
-#counter{
-    background:#ffffffdd;
-    color:#555;
-    padding:9px 15px;
-    border-radius:20px;
-    font-size:12px;
+.book-area{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px 15px 90px;
 }
 
-/* music */
+.book{
+    position:relative;
+    width:min(94vw,900px);
+    height:min(78vh,650px);
+    min-height:540px;
+    perspective:2200px;
+}
 
-.music{
+.page{
     position:absolute;
-    right:18px;
-    top:18px;
-    z-index:200;
-    padding:9px 14px;
-    font-size:12px;
+    inset:0;
+    transform-origin:left center;
+    transform-style:preserve-3d;
+    transition:transform 1s cubic-bezier(.77,0,.18,1);
+    cursor:pointer;
 }
 
-/* =====================================================
-   MOBILE
-===================================================== */
+.page.flipped{
+    transform:rotateY(-180deg);
+}
+
+.page-front,
+.page-back{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    overflow:hidden;
+    border-radius:4px 14px 14px 4px;
+    background:
+        linear-gradient(rgba(255,255,255,.45),rgba(255,255,255,.45)),
+        var(--paper);
+    box-shadow:0 12px 35px rgba(0,0,0,.3);
+}
+
+.page-back{
+    transform:rotateY(180deg);
+}
+
+.page-front::before,
+.page-back::before{
+    content:"";
+    position:absolute;
+    inset:14px;
+    border:1px solid rgba(169,77,104,.2);
+    pointer-events:none;
+}
+
+.page-content{
+    height:100%;
+    padding:clamp(35px,7vw,70px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+
+.cover{
+    background:
+        linear-gradient(rgba(60,20,35,.72),rgba(60,20,35,.72)),
+        radial-gradient(circle at center,#b06a7e,#391925);
+    color:white;
+}
+
+.cover .page-content{
+    border:8px solid rgba(201,154,82,.45);
+    margin:15px;
+    height:calc(100% - 30px);
+}
+
+.cover h1{
+    font-family:"Dancing Script",cursive;
+    font-size:clamp(55px,10vw,95px);
+    line-height:1;
+}
+
+.cover h2{
+    font-size:26px;
+    font-weight:400;
+    margin-top:20px;
+    letter-spacing:3px;
+}
+
+.cover .date{
+    margin-top:35px;
+    color:#e5c98f;
+    letter-spacing:4px;
+}
+
+.chapter{
+    color:var(--rose);
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.page-content h2{
+    font-size:clamp(30px,5vw,48px);
+    color:var(--deep);
+    margin-bottom:22px;
+}
+
+.page-content p{
+    max-width:680px;
+    font-size:clamp(18px,2.5vw,23px);
+    line-height:1.65;
+}
+
+.script{
+    font-family:"Dancing Script",cursive;
+    color:var(--rose);
+}
+
+.quote{
+    font-family:"Dancing Script",cursive;
+    font-size:clamp(27px,5vw,45px);
+    color:var(--rose);
+    line-height:1.35;
+}
+
+.heart{
+    font-size:55px;
+    margin-bottom:20px;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.12)}
+}
+
+.controls{
+    position:fixed;
+    z-index:500;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+    padding:8px;
+    background:rgba(35,14,24,.75);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:40px;
+    backdrop-filter:blur(12px);
+}
+
+.controls button{
+    border:0;
+    background:transparent;
+    color:white;
+    padding:10px 14px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.controls button:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.page-number{
+    position:absolute;
+    bottom:22px;
+    color:#967b80;
+    font-size:14px;
+}
+
+.question-page{
+    justify-content:flex-start;
+    overflow-y:auto;
+}
+
+.question-page h2{
+    margin-bottom:10px;
+}
+
+.question-number{
+    font-size:15px;
+    color:var(--gold);
+    letter-spacing:3px;
+    margin-bottom:12px;
+}
+
+.answer-box{
+    width:min(100%,650px);
+    min-height:110px;
+    resize:vertical;
+    border:1px solid #d7bfc3;
+    border-radius:15px;
+    background:rgba(255,255,255,.65);
+    padding:15px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:19px;
+    color:var(--ink);
+    outline:none;
+}
+
+.answer-box:focus{
+    border-color:var(--rose);
+    box-shadow:0 0 0 3px rgba(169,77,104,.1);
+}
+
+.letter-box{
+    min-height:230px;
+}
+
+.send-btn{
+    margin-top:20px;
+    padding:14px 28px;
+    border:0;
+    border-radius:30px;
+    background:var(--rose);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 7px 20px rgba(169,77,104,.3);
+    transition:.3s;
+}
+
+.send-btn:hover{
+    transform:translateY(-2px);
+    background:var(--deep);
+}
+
+.status{
+    margin-top:12px;
+    min-height:25px;
+    color:var(--rose);
+    font-size:17px;
+}
+
+.final{
+    background:
+        radial-gradient(circle at center,rgba(255,255,255,.7),transparent 60%),
+        var(--paper2);
+}
+
+.petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+    overflow:hidden;
+}
+
+.petal{
+    position:absolute;
+    top:-30px;
+    animation:fall linear infinite;
+    opacity:.55;
+}
+
+@keyframes fall{
+    0%{
+        transform:translateY(-30px) rotate(0deg);
+    }
+    100%{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
+
+.music-btn{
+    position:fixed;
+    right:15px;
+    top:15px;
+    z-index:600;
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(40,15,27,.7);
+    color:white;
+    border-radius:50%;
+    width:45px;
+    height:45px;
+    cursor:pointer;
+}
 
 @media(max-width:600px){
-
-    .character{
-        transform:scale(.72);
-        transform-origin:bottom center;
+    .book{
+        height:76vh;
+        min-height:570px;
     }
 
-    .title{
-        top:4%;
+    .page-content{
+        padding:42px 28px;
     }
 
-    .caption{
-        bottom:13%;
-        padding:12px 15px;
-    }
-
-    .chat{
-        max-width:170px;
-        font-size:11px;
-    }
-
-    .mallBuilding{
-        width:92%;
-        left:4%;
-    }
-
-    .screen{
-        width:88%;
-        left:6%;
+    .page-content p{
+        font-size:18px;
     }
 
     .controls{
-        bottom:2%;
+        width:max-content;
+        max-width:95vw;
     }
 
-    button{
-        padding:9px 14px;
-        font-size:11px;
+    .controls button{
+        padding:9px 10px;
     }
 }
 </style>
@@ -1337,1558 +415,1059 @@ button:hover{
 
 <body>
 
-<div id="app">
+<div id="intro">
+    <div class="intro-box">
+        <div class="small">A story written by two hearts</div>
+        <h1>Our Story</h1>
+        <p>Some stories are not written in books.<br>They are written in memories. ❤️</p>
+        <button class="open-btn" onclick="startStory()">Open our story ❤️</button>
+    </div>
+</div>
+
+<div class="petals" id="petals"></div>
+
+<audio id="music" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-<button class="music" id="musicBtn">♫ Music</button>
+<button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵</button>
 
+<div class="book-area">
+<div class="book" id="book">
 
-<!-- =====================================================
-     1 — BEGINNING
-===================================================== -->
+<!-- PAGE 1 -->
+<div class="page" data-page="0">
+<div class="page-front cover">
+<div class="page-content">
+    <div class="heart">❤️</div>
+    <h1>Our Story</h1>
+    <h2>Eva & Fab</h2>
+    <div class="date">SEPTEMBER 2024 — FOREVER</div>
+</div>
+</div>
+</div>
 
-<section class="scene active bg-day">
+<!-- PAGE 2 -->
+<div class="page" data-page="1">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Chapter One</div>
+    <h2>September 2024</h2>
+    <p>
+        It started in a group called <span class="script">Mabrook</span>.
+        Eva was one of the co-admins and Fab was simply another member.
+        They weren't close. They didn't know that this ordinary beginning
+        would become one of the most important stories of their lives.
+    </p>
+</div>
+</div>
+</div>
 
-<div class="cloud" style="top:18%;animation-duration:28s;"></div>
-<div class="cloud" style="top:28%;animation-duration:38s;"></div>
-
-<div class="sun"></div>
-
-<div class="title">
-<h1>Eva ❤️ Fab</h1>
-<p>September 2024</p>
-</div>
-
-<div class="ground"></div>
-
-<div class="character eva" id="eva1" style="left:12%;">
-<div class="head">
-<div class="ear left"></div>
-<div class="ear right"></div>
-<div class="eye left"></div>
-<div class="eye right"></div>
-<div class="cheek left"></div>
-<div class="cheek right"></div>
-<div class="mouth"></div>
-</div>
-<div class="hair"></div>
-<div class="body"></div>
-<div class="arm left"><div class="hand"></div></div>
-<div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div>
-<div class="leg right"></div>
-<div class="shoe left"></div>
-<div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab" id="fab1" style="right:12%;">
-<div class="head">
-<div class="ear left"></div>
-<div class="ear right"></div>
-<div class="eye left"></div>
-<div class="eye right"></div>
-<div class="cheek left"></div>
-<div class="cheek right"></div>
-<div class="mouth"></div>
-</div>
-<div class="hair"></div>
-<div class="body"></div>
-<div class="arm left"><div class="hand"></div></div>
-<div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div>
-<div class="leg right"></div>
-<div class="shoe left"></div>
-<div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="chat" style="left:8%;top:30%;">
-👩🏻‍💻 Eva: I'm one of the admins here.
-</div>
-
-<div class="chat" style="right:8%;top:30%;">
-👨🏻‍💻 Fab: Just another member...
-</div>
-
-<div class="caption">
-In September 2024, Eva and Fab were simply two people in the same Mabrook group. They weren't close. They didn't know what was coming.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     2 — FRIENDS
-===================================================== -->
-
-<section class="scene bg-day">
-
-<div class="sun"></div>
-
-<div class="title">
-<h1>November 2024 🌸</h1>
-<p>Everyone had something to say...</p>
-</div>
-
-<div class="ground"></div>
-
-<div class="character eva wave" style="left:23%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div>
-<div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div>
-<div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab" style="right:23%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div>
-<div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div>
-<div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="chat" style="left:4%;top:25%;">
-👭 Anzu, Layla & Jeevan:<br>
-"Keep some distance from Fab..."
-</div>
-
-<div class="chat pink" style="right:4%;top:25%;">
-Eva:<br>
-"No. I don't want to leave him."
-</div>
-
-<div class="caption">
-Eva's friends told her to stay away from Fab and Mabru. But Eva refused. She fought with the people closest to her... and somehow became even closer to Fab.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     3 — BECOMING CLOSE
-===================================================== -->
-
-<section class="scene bg-day">
-
-<div class="sun"></div>
-
-<div class="title">
-<h1>January 2025 💕</h1>
-<p>From friends... to something more</p>
-</div>
-
-<div class="ground"></div>
-
-<div class="character eva walk" id="evaWalk" style="left:18%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div>
-<div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab walk" id="fabWalk" style="right:18%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div>
-<div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="heart" style="left:50%;bottom:50%;">💗</div>
-
-<div class="caption">
-They became best friends. Eva tried to get Fab properly into the group. They talked constantly. Sometimes their conversations lasted until 4 AM.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     4 — 4 AM
-===================================================== -->
-
-<section class="scene bg-night">
-
-<div class="moon"></div>
-
-<div class="star" style="left:10%;top:15%;"></div>
-<div class="star" style="left:25%;top:25%;"></div>
-<div class="star" style="left:38%;top:12%;"></div>
-<div class="star" style="left:65%;top:18%;"></div>
-<div class="star" style="left:80%;top:30%;"></div>
-<div class="star" style="left:55%;top:35%;"></div>
-
-<div class="title">
-<h1>4:00 AM 🌙</h1>
-<p>Still talking...</p>
-</div>
-
-<div class="character eva phone sit" style="left:12%;bottom:10%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand>📱</div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab phone sit" style="right:12%;bottom:10%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="chat" style="left:17%;top:30%;">
-Still awake? 😭
-</div>
-
-<div class="chat pink" style="right:17%;top:30%;">
-Of course 😂
-</div>
-
-<div class="chatPhone">
-<div class="phoneTop">💬 Sharchat</div>
-<div class="phoneMessages">
-<div class="msg evaMsg">What are you doing?</div>
-<div class="msg fabMsg">Talking to you 😌</div>
-<div class="msg evaMsg">At 4 AM?</div>
-<div class="msg fabMsg">Why not? 😂</div>
-<div class="typing">
-<span></span><span></span><span></span>
-</div>
-</div>
-</div>
-
-<div class="caption">
-The kind of conversations where neither person wants to say goodnight.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     5 — THE QUESTION
-===================================================== -->
-
-<section class="scene bg-night">
-
-<div class="moon"></div>
-
-<div class="title">
-<h1>Then came one question...</h1>
-</div>
-
-<div class="character eva" style="left:18%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab" style="right:18%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="chat" style="right:18%;top:30%;">
-Do you love me?
-</div>
-
-<div class="chat pink" style="left:18%;top:40%;">
-Yes. ❤️
-</div>
-
-<div class="heart" style="left:45%;bottom:42%;">❤️</div>
-<div class="heart" style="left:53%;bottom:40%;animation-delay:.5s;">💗</div>
-<div class="heart" style="left:49%;bottom:35%;animation-delay:1s;">💕</div>
-
-<div class="caption">
-Fab didn't say everything out loud. But the way he behaved made Eva feel the answer anyway.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     6 — FIRST FIGHT
-===================================================== -->
-
-<section class="scene bg-sad">
-
-<div class="title">
-<h1>The First Fight 💔</h1>
-<p>Sometimes little things become big things.</p>
-</div>
-
-<div class="character eva" style="left:13%;transform:scaleX(-1);">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab" style="right:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="calendar">
-<div class="month">SEPTEMBER</div>
-<div class="big">2025</div>
-💔
-</div>
-
-<div class="caption">
-They deleted their Sharchat conversation. They moved to Instagram on their second IDs. At first, they talked like there was no tomorrow... then came the calls... and another fight.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     7 — VIDEO CALL FIGHT
-===================================================== -->
-
-<section class="scene bg-room">
-
-<div class="title">
-<h1>One Video Call 📱</h1>
-</div>
-
-<div class="character eva phone" style="left:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab phone" style="right:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="chat" style="left:13%;top:28%;">
-Video call? 📹
-</div>
-
-<div class="chat pink" style="right:13%;top:40%;">
-No...
-</div>
-
-<div class="caption">
-Fab asked Eva to make a video call. Eva refused. They fought again. Then the calls stopped. Their relationship broke apart.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     8 — SILENCE
-===================================================== -->
-
-<section class="scene bg-sad">
-
-<div class="title">
-<h1>September 2025 🌧️</h1>
-<p>Silence.</p>
-</div>
-
-<div class="calendar">
-<div class="month">NO MESSAGES</div>
-<div class="big">...</div>
-📵
-</div>
-
-<div class="character eva" style="left:12%;opacity:.7;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab" style="right:12%;opacity:.7;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="caption">
-For a whole month, there were no messages. No calls. No contact.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     9 — OCTOBER
-===================================================== -->
-
-<section class="scene bg-room">
-
-<div class="title">
-<h1>October 2 → October 5 💌</h1>
-</div>
-
-<div class="chatPhone">
-
-<div class="phoneTop">Instagram 💗</div>
-
-<div class="phoneMessages">
-
-<div class="msg fabMsg">
-October 2<br>
-Hey...
-</div>
-
-<div class="msg fabMsg">
-October 3<br>
-Are you there?
-</div>
-
-<div class="msg fabMsg">
-WhatsApp too...
-</div>
-
-<div class="msg evaMsg">
-October 5<br>
-Hi...
-</div>
-
-</div>
-
-</div>
-
-<div class="heart" style="left:50%;bottom:25%;">❤️</div>
-
-<div class="caption">
-Eva saw the messages but didn't reply at first. Then on October 5, she finally replied. And the story came alive again.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     10 — NOVEMBER CALL
-===================================================== -->
-
-<section class="scene bg-night">
-
-<div class="moon"></div>
-
-<div class="title">
-<h1>November 16, 2025 🌙</h1>
-<p>11:30 PM → 5:45 AM</p>
-</div>
-
-<div class="callCard">
-<div class="callAvatar">❤️</div>
-<h3>Eva ❤️ Fab</h3>
-<p>Connected</p>
-<p>05:45:00</p>
-<p>Neither wanted to hang up.</p>
-</div>
-
-<div class="character eva phone" style="left:8%;bottom:12%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab phone" style="right:8%;bottom:12%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="caption">
-That night they talked like an actual couple. They became even more attached. And Fab decided: he would come to India.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     11 — FLIGHT
-===================================================== -->
-
-<section class="scene bg-day">
-
-<div class="cloud" style="top:20%;animation-duration:20s;"></div>
-<div class="cloud" style="top:35%;animation-duration:32s;"></div>
-
-<div class="plane">✈️</div>
-
-<div class="title">
-<h1>Saudi Arabia ✈️ India</h1>
-<p>Fab is coming...</p>
-</div>
-
-<div class="character fab" style="right:12%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab 🧳</div>
-</div>
-
-<div class="caption">
-December 2025. Fab decided to travel from Saudi Arabia to India.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     12 — BIRTHDAY
-===================================================== -->
-
-<section class="scene bg-evening">
-
-<div class="title">
-<h1>December 6 🎂</h1>
-<p>Eva's Birthday</p>
-</div>
-
-<div class="cake">🎂</div>
-
-<div class="sparkle" style="left:35%;top:30%;">✦</div>
-<div class="sparkle" style="left:65%;top:30%;">✦</div>
-<div class="sparkle" style="left:50%;top:25%;">✨</div>
-
-<div class="caption">
-The flight was delayed, but Fab finally landed in India on December 6 — Eva's birthday.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     13 — FIRST MEETING
-===================================================== -->
-
-<section class="scene bg-day" id="meetingScene">
-
-<div class="sun"></div>
-
-<div class="title">
-<h1>December 15, 2025 ❤️</h1>
-<p>The first time they saw each other.</p>
-</div>
-
-<div class="ground"></div>
-
-<div class="character eva walk" id="meetingEva" style="left:8%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Eva</div>
-</div>
-
-<div class="character fab walk" id="meetingFab" style="right:8%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-<div class="name">Fab</div>
-</div>
-
-<div class="caption">
-After months of messages, calls, fights, silence and waiting... they finally stood in front of each other.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     14 — HUG
-===================================================== -->
-
-<section class="scene bg-evening">
-
-<div class="title">
-<h1>Finally... 🫂</h1>
-<p>The hug they'd been waiting for.</p>
-</div>
-
-<div class="ground"></div>
-
-<div class="character eva hug" style="left:36%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab hug" style="right:36%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="heart" style="left:47%;bottom:50%;">❤️</div>
-<div class="heart" style="left:52%;bottom:45%;animation-delay:.5s;">💗</div>
-
-<div class="caption">
-Eva was extremely happy. They walked together for what felt like forever.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     15 — LULU
-===================================================== -->
-
-<section class="scene bg-room">
-
-<div class="title">
-<h1>Then... Lulu Mall 🛍️</h1>
-</div>
-
-<div class="mallBuilding">
-<div class="mallSign">LULU MALL</div>
-
-<div class="shopRow">
-<div class="shopBox">🛍️</div>
-<div class="shopBox">🍕</div>
-<div class="shopBox">🎬</div>
-</div>
+<!-- PAGE 3 -->
+<div class="page" data-page="2">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">The Beginning</div>
+    <p>
+        Eva had her little circle — Jeevan, Anzu and Layla.
+        Fab was closer to Sangu.
+        Everyone had their own people and their own world.
+        And somehow, two people who weren't supposed to become close
+        slowly started finding their way toward each other.
+    </p>
+</div>
+</div>
 </div>
 
-<div class="character eva walk" style="left:20%;bottom:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
+<!-- PAGE 4 -->
+<div class="page" data-page="3">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">November 2024</div>
+    <h2>A Choice</h2>
+    <p>
+        Eva's friends told her to keep her distance from Fab and Mabru.
+        But Eva didn't listen.
+        Little by little, things changed.
+        She fought with Anzu, Layla and Jeevan...
+        and somehow became closer to Fab.
+    </p>
+</div>
+</div>
 </div>
 
-<div class="character fab walk" style="right:20%;bottom:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
+<!-- PAGE 5 -->
+<div class="page" data-page="4">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">January 2025</div>
+    <h2>4 AM Conversations</h2>
+    <p>
+        They became close friends.
+        They talked in Sharchat, sometimes until four in the morning.
+        Eva even tried to bring Fab deeper into the group.
+        What began as friendship was quietly becoming something neither
+        of them could ignore.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" data-page="5">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">The Question</div>
+    <div class="quote">"Do you love me?"</div>
+    <p style="margin-top:25px;">
+        Fab asked Eva the question.
+        She answered yes.
+        He didn't say everything directly...
+        but sometimes actions speak louder than words.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" data-page="6">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Closer</div>
+    <p>
+        Their feelings slowly became obvious.
+        Their conversations changed.
+        Their interactions became noticeable even inside the group.
+        The admins knew.
+        The people around them knew.
+        And somewhere between friendship and love,
+        their story had already begun.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 8 -->
+<div class="page" data-page="7">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Instagram</div>
+    <h2>A New Place</h2>
+    <p>
+        Then came a small fight.
+        They deleted their Sharchat conversation.
+        Instead of ending everything, they started talking on Instagram
+        through their second accounts.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 9 -->
+<div class="page" data-page="8">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">No Tomorrow</div>
+    <p>
+        On that first day, they talked as if tomorrow didn't exist.
+        Messages became longer.
+        Night calls began.
+        They were becoming more attached with every conversation.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 10 -->
+<div class="page" data-page="9">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">September 2025</div>
+    <h2>Silence</h2>
+    <p>
+        A video call became the reason for another fight.
+        Eva refused.
+        Things broke apart.
+        Then came silence.
+        September passed without messages, calls or contact.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 11 -->
+<div class="page" data-page="10">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">October 2025</div>
+    <h2>The Return</h2>
+    <p>
+        October 2 — Fab messaged Eva.
+        She saw it but didn't reply.
+        October 3 — another message.
+        Then WhatsApp.
+        Finally, on October 5, Eva replied.
+    </p>
+    <div class="quote" style="margin-top:20px;">And the story came back to life. ❤️</div>
+</div>
+</div>
+</div>
+
+<!-- PAGE 12 -->
+<div class="page" data-page="11">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">November 16, 2025</div>
+    <h2>5:45 AM</h2>
+    <p>
+        At 11:30 PM they started a call.
+        They talked until 5:45 AM.
+        For those hours, they weren't just friends anymore.
+        They talked like a real couple.
+        The distance between them felt smaller.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 13 -->
+<div class="page" data-page="12">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Saudi Arabia → India</div>
+    <h2>A Decision</h2>
+    <p>
+        Fab was working in a pharmacy in Saudi Arabia.
+        Eva was working as a software developer.
+        And then Fab decided to come to India.
+        Suddenly, the person on the other side of the phone
+        was going to be standing in front of her.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 14 -->
+<div class="page" data-page="13">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">December 6, 2025</div>
+    <h2>A Birthday Arrival</h2>
+    <p>
+        The flight was delayed.
+        Fab finally landed in India on December 6 —
+        Eva's birthday.
+        But after arriving, life became busy with family,
+        friends and election work.
+        Calls became occasional.
+        Eva missed him.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 15 -->
+<div class="page" data-page="14">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">December 15, 2025</div>
+    <h2>The First Meeting</h2>
+    <p>
+        Then came the day they had imagined so many times.
+        December 15.
+        They finally met.
+        Eva was incredibly happy.
+        They walked and walked — probably much more than Fab expected.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 16 -->
+<div class="page" data-page="15">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">A Day Together</div>
+    <p>
+        They went to Lulu Mall and watched <span class="script">Kalamkaval</span>.
+        Everything felt different when they were finally together.
+        A day that had existed only in imagination had become real.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 17 -->
+<div class="page" data-page="16">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">A Private Memory</div>
+    <div class="heart">❤️</div>
+    <p>
+        They shared a private moment together,
+        remembered not for the details,
+        but for the closeness, trust and emotions they felt that day.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 18 -->
+<div class="page" data-page="17">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">That Little Girl</div>
+    <p>
+        Later that night, they went out to eat.
+        They met a little girl who was about a year old.
+        She liked Fab and giggled at him.
+        Eva loved watching the moment.
+        Sometimes the smallest memories become the ones we remember most.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 19 -->
+<div class="page" data-page="18">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">5:30 AM</div>
+    <h2>Watching You Sleep</h2>
+    <p>
+        The next morning, Eva woke around 5:30.
+        Fab was sleeping deeply.
+        She looked at his sleeping face and quietly loved the moment.
+        Then he woke, kissed her,
+        and they simply stayed close for a little longer.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 20 -->
+<div class="page" data-page="19">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Trivandrum Zoo</div>
+    <h2>One More Place</h2>
+    <p>
+        They decided to go to the zoo because staying in the room
+        would make it impossible to stop missing each other.
+        So they went out.
+        Around 2 PM, the day together finally came to an end.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 21 -->
+<div class="page" data-page="20">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">After That Day</div>
+    <p>
+        After they separated, the calls continued.
+        Almost every day.
+        The distance was back,
+        but the connection was stronger than before.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 22 -->
+<div class="page" data-page="21">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">A Difficult Truth</div>
+    <h2>Too Late</h2>
+    <p>
+        Fab wanted to marry someone else.
+        He asked Eva if it was okay.
+        She said yes.
+        He found someone and became engaged.
+        Eva tried to create distance.
+        But that was when she realized just how deeply she loved him.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 23 -->
+<div class="page" data-page="22">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">The Realization</div>
+    <p>
+        Eva finally asked if he could marry her.
+        But by then, it was too late.
+        He refused.
+        Their conversations became dry.
+        One message every couple of days.
+        No calls.
+        Just distance.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 24 -->
+<div class="page" data-page="23">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Two or Three Weeks Later</div>
+    <h2>A Call</h2>
+    <p>
+        Then they called again.
+        Both were sad.
+        Both needed comfort.
+        They consoled each other.
+        Two months passed in that strange space
+        between letting go and not being able to let go.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 25 -->
+<div class="page" data-page="24">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">May 25, 2026</div>
+    <h2>Calicut</h2>
+    <p>
+        Separation had made their connection stronger.
+        Eva travelled to Calicut to meet Fab.
+        She had decided there would be no touching,
+        because she knew how easily missing each other
+        could turn into wanting to stay close.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 26 -->
+<div class="page" data-page="25">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">But Hearts Don't Follow Rules</div>
+    <p>
+        They missed each other too much.
+        The plans they made for distance didn't survive the emotions
+        of finally being together again.
+        They shared another private memory,
+        held together by everything they had been through.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 27 -->
+<div class="page" data-page="26">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Forum Mall</div>
+    <h2>Another Movie</h2>
+    <p>
+        They went to Forum Mall in Calicut
+        and watched <span class="script">Drishyam 3</span>.
+        Another ordinary activity became another extraordinary memory
+        simply because they were together.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 28 -->
+<div class="page" data-page="27">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">Calicut Bus Stop</div>
+    <h2>Don't Go Yet</h2>
+    <p>
+        Fab dropped Eva at the bus stop.
+        Her bus was late.
+        Instead of leaving, Fab stayed.
+        They sat together for a long time.
+        Sometimes love is simply choosing to stay a little longer.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 29 -->
+<div class="page" data-page="28">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">The Words</div>
+    <div class="quote">"I truly love you."</div>
+    <p style="margin-top:25px;">
+        Fab said it.
+        Eva felt those words came from his heart.
+        She wanted to kiss him,
+        but the moment didn't allow it.
+        Still, she carried those words with her.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 30 -->
+<div class="page" data-page="29">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">After Calicut</div>
+    <h2>Closer Again</h2>
+    <p>
+        They tried to separate themselves.
+        Somehow, the opposite happened.
+        Video calls returned.
+        Calls became daily.
+        The distance remained,
+        but the connection refused to disappear.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 31 -->
+<div class="page" data-page="30">
+<div class="page-front">
+<div class="page-content">
+    <div class="chapter">September 9, 2026</div>
+    <h2>Today</h2>
+    <p>
+        Eva is happy.
+        She wants to meet Fab again.
+        She doesn't know exactly when it will happen.
+        But she knows one thing:
+        if they get another full day together,
+        she wants to make every minute count.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 32 -->
+<div class="page" data-page="31">
+<div class="page-front final">
+<div class="page-content">
+    <div class="heart">❤️</div>
+    <div class="chapter">Before the End</div>
+    <h2>Now It's Your Turn</h2>
+    <p>
+        I've told you my side of our story.
+        Now I want to hear yours.
+    </p>
+    <p class="script" style="margin-top:25px;">
+        Answer honestly. Don't overthink it. ❤️
+    </p>
+</div>
+</div>
+</div>
+
+<!-- PAGE 33 -->
+<div class="page" data-page="32">
+<div class="page-front">
+<div class="page-content question-page">
+    <div class="question-number">QUESTION 1 OF 5</div>
+    <h2>Our Beginning</h2>
+    <p style="margin-bottom:18px;">
+        What do you think about me and the way we first met?
+    </p>
+    <textarea class="answer-box" id="answer1" placeholder="Write what you really think..."></textarea>
+</div>
+</div>
+</div>
+
+<!-- PAGE 34 -->
+<div class="page" data-page="33">
+<div class="page-front">
+<div class="page-content question-page">
+    <div class="question-number">QUESTION 2 OF 5</div>
+    <h2>Worth It?</h2>
+    <p style="margin-bottom:18px;">
+        Do you really think I am worth your time?
+    </p>
+    <textarea class="answer-box" id="answer2" placeholder="Tell me honestly..."></textarea>
+</div>
+</div>
+</div>
+
+<!-- PAGE 35 -->
+<div class="page" data-page="34">
+<div class="page-front">
+<div class="page-content question-page">
+    <div class="question-number">QUESTION 3 OF 5</div>
+    <h2>Then & Now</h2>
+    <p style="margin-bottom:18px;">
+        Do you love me more now than you did at the beginning?
+    </p>
+    <textarea class="answer-box" id="answer3" placeholder="Your answer..."></textarea>
+</div>
+</div>
+</div>
+
+<!-- PAGE 36 -->
+<div class="page" data-page="35">
+<div class="page-front">
+<div class="page-content question-page">
+    <div class="question-number">QUESTION 4 OF 5</div>
+    <h2>One Change</h2>
+    <p style="margin-bottom:18px;">
+        If you could change one thing about our story, what would it be?
+    </p>
+    <textarea class="answer-box" id="answer4" placeholder="If you could change anything..."></textarea>
+</div>
+</div>
+</div>
+
+<!-- PAGE 37 -->
+<div class="page" data-page="36">
+<div class="page-front">
+<div class="page-content question-page">
+    <div class="question-number">QUESTION 5 OF 5</div>
+    <h2>One More Day</h2>
+    <p style="margin-bottom:18px;">
+        If we get one more full day together, what would you want us to do?
+    </p>
+    <textarea class="answer-box" id="answer5" placeholder="Imagine our perfect day..."></textarea>
+</div>
+</div>
+</div>
+
+<!-- PAGE 38 -->
+<div class="page" data-page="37">
+<div class="page-front">
+<div class="page-content question-page">
+    <div class="question-number">THE LAST PAGE</div>
+    <h2>Now Forget The Questions...</h2>
+    <p style="margin-bottom:15px;">
+        Just write what your heart wants to tell me.
+    </p>
+
+    <div class="script" style="font-size:25px;margin-bottom:8px;">
+        Dear Eva,
+    </div>
+
+    <textarea
+        class="answer-box letter-box"
+        id="letter"
+        placeholder="Write everything you want to say..."
+    ></textarea>
+
+    <button class="send-btn" onclick="sendAnswers()">
+        Send My Answers & Letter ❤️
+    </button>
+
+    <div class="status" id="status"></div>
 </div>
-
-<div class="caption">
-Eva made Fab walk so much 😂. They went to Lulu Mall and watched Kalamkaval.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     16 — PRIVATE MEMORY
-===================================================== -->
-
-<section class="scene">
-
-<div class="private">
-
-<div>
-<h2>❤️ A Private Memory ❤️</h2>
-<p>
-Some moments don't need to be shown.<br>
-They only need to be remembered.
-</p>
-<br>
-<span style="font-size:35px;">🫂 💕 🌙</span>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     17 — LITTLE GIRL
-===================================================== -->
-
-<section class="scene bg-day">
-
-<div class="sun"></div>
-
-<div class="title">
-<h1>A Tiny Little Memory 👧🏻</h1>
-</div>
-
-<div class="ground"></div>
-
-<div class="zooAnimal" style="left:45%;bottom:33%;">
-👧🏻
-</div>
-
-<div class="character fab" style="left:34%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character eva" style="right:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="chat pink" style="left:39%;top:30%;">
-Hahaha! 😂
-</div>
-
-<div class="caption">
-They met a little girl who liked Fab and giggled at him. Eva loved watching the moment.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     18 — MORNING
-===================================================== -->
-
-<section class="scene bg-room">
-
-<div class="title">
-<h1>5:30 AM 🌅</h1>
-<p>One of those quiet mornings...</p>
-</div>
-
-<div class="character eva" style="left:22%;bottom:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab sleep" style="right:23%;bottom:13%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="zzz" style="left:65%;top:34%;">Zzz...</div>
-
-<div class="chat pink" style="left:19%;top:30%;">
-He looks so cute sleeping... ❤️
-</div>
-
-<div class="caption">
-Eva woke up at around 5:30 AM and quietly looked at Fab sleeping beside her. Then he woke up.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     19 — ZOO
-===================================================== -->
-
-<section class="scene bg-day">
-
-<div class="sun"></div>
-
-<div class="title">
-<h1>Trivandrum Zoo 🦁</h1>
-<p>Because they needed to leave the room 😂</p>
-</div>
-
-<div class="ground"></div>
-
-<div class="zooAnimal" style="left:8%;bottom:35%;">🦁</div>
-<div class="zooAnimal" style="left:44%;bottom:37%;">🦒</div>
-<div class="zooAnimal" style="right:8%;bottom:35%;">🐘</div>
-
-<div class="character eva walk" style="left:25%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab walk" style="right:25%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="caption">
-They went to Trivandrum Zoo. Because if they stayed in the room... they probably wouldn't stop being close. 😂❤️
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     20 — GOODBYE
-===================================================== -->
-
-<section class="scene bg-evening">
-
-<div class="title">
-<h1>2:00 PM 💔</h1>
-<p>Time to say goodbye.</p>
-</div>
-
-<div class="character eva wave" style="left:10%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab wave" style="right:10%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="heart" style="left:49%;bottom:40%;">💔</div>
-
-<div class="caption">
-At around 2 PM, they separated. Fab went his way. Eva went hers. But after that day, they called each other every single day.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     21 — ENGAGEMENT
-===================================================== -->
-
-<section class="scene bg-sad">
-
-<div class="title">
-<h1>The Chapter That Hurt 💔</h1>
-</div>
-
-<div class="character eva" style="left:14%;opacity:.85;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab" style="right:14%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="calendar">
-<div class="month">💍 ENGAGED</div>
-<div class="big">...</div>
-</div>
-
-<div class="caption">
-Fab told Eva he wanted to marry someone else. Eva said it was okay. But when he found a girl and got engaged, everything changed inside her.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     22 — TOO LATE
-===================================================== -->
-
-<section class="scene bg-sad">
-
-<div class="title">
-<h1>Too Late 💔</h1>
-</div>
-
-<div class="character eva" style="left:17%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab" style="right:17%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="chat pink" style="left:13%;top:28%;">
-Can you marry me? ❤️
-</div>
-
-<div class="chat" style="right:13%;top:42%;">
-I'm sorry... it's too late.
-</div>
-
-<div class="caption">
-Eva finally admitted how much she loved him and asked if he could marry her. But the decision had already been made.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     23 — DRY MESSAGES
-===================================================== -->
-
-<section class="scene bg-night">
-
-<div class="moon"></div>
-
-<div class="title">
-<h1>Two Months 🌙</h1>
-<p>Trying to live without each other...</p>
-</div>
-
-<div class="chat" style="left:15%;top:28%;">
-Hey.
-</div>
-
-<div class="chat" style="right:15%;top:35%;">
-Hmm.
-</div>
-
-<div class="chat" style="left:25%;top:45%;">
-How are you?
-</div>
-
-<div class="calendar">
-<div class="month">2–3 WEEKS</div>
-<div class="big">📞</div>
-</div>
-
-<div class="caption">
-For 2–3 weeks, there were only dry messages every couple of days. No calls. Then they called again. Both were sad. Both comforted each other.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     24 — CALICUT
-===================================================== -->
-
-<section class="scene bg-day">
-
-<div class="sun"></div>
-
-<div class="title">
-<h1>May 25, 2026 ❤️</h1>
-<p>Eva went to Calicut.</p>
-</div>
-
-<div class="ground"></div>
-
-<div class="character eva walk" style="left:8%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab walk" style="right:8%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="heart" style="left:50%;bottom:45%;">❤️</div>
-
-<div class="caption">
-Eva travelled to Calicut to meet Fab. She had decided there would be "no touch"... because she knew what might happen if they got too close.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     25 — THEY COULDN'T STAY APART
-===================================================== -->
-
-<section class="scene bg-evening">
-
-<div class="title">
-<h1>But they missed each other... 🫂</h1>
-</div>
-
-<div class="ground"></div>
-
-<div class="character eva hug" style="left:36%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab hug" style="right:36%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="heart" style="left:48%;bottom:52%;">❤️</div>
-
-<div class="caption">
-The plan was distance. The reality was that they missed each other too much.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     26 — PRIVATE AGAIN
-===================================================== -->
-
-<section class="scene">
-
-<div class="private">
-
-<div>
-<h2>Another Private Memory 🌙</h2>
-<p>
-Some moments are too personal<br>
-to turn into animation.
-</p>
-<br>
-<span style="font-size:35px;">❤️ 🫂 ✨</span>
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     27 — FORUM MALL
-===================================================== -->
-
-<section class="scene bg-room">
-
-<div class="title">
-<h1>Forum Mall 🎬</h1>
-<p>Calicut</p>
-</div>
-
-<div class="mallBuilding">
-<div class="mallSign">FORUM MALL</div>
-
-<div class="shopRow">
-<div class="shopBox">🛍️</div>
-<div class="shopBox">🍿</div>
-<div class="shopBox">🎬</div>
-</div>
-</div>
-
-<div class="caption">
-They went to Forum Mall and watched Drishyam 3.
-Another day. Another memory.
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     28 — BUS STOP
-===================================================== -->
-
-<section class="scene bg-evening">
-
-<div class="title">
-<h1>Calicut Bus Stop 🚌</h1>
-<p>The bus was late...</p>
-</div>
-
-<div class="busStop">
-<div class="busShelter"></div>
-<div class="busSign">BUS STOP</div>
-<div class="bus"></div>
-</div>
-
-<div class="character eva sit" style="left:25%;bottom:9%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab sit" style="right:25%;bottom:9%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="chat pink" style="right:21%;top:25%;">
-I truly love you. ❤️
-</div>
-
-<div class="caption">
-Fab stayed with Eva while she waited for her bus. And then he said something that went straight to her heart:
-"I truly love you."
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     29 — AFTER CALICUT
-===================================================== -->
-
-<section class="scene bg-night">
-
-<div class="moon"></div>
-
-<div class="title">
-<h1>And then something changed... 📱</h1>
-<p>They tried to separate. It didn't work.</p>
-</div>
-
-<div class="callCard">
-<div class="callAvatar">📹</div>
-<h3>Video Call</h3>
-<p>Eva ❤️ Fab</p>
-<p>Connected every day</p>
-</div>
-
-<div class="character eva phone" style="left:8%;bottom:10%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="character fab phone" style="right:8%;bottom:10%;">
-<div class="head"><div class="ear left"></div><div class="ear right"></div><div class="eye left"></div><div class="eye right"></div><div class="cheek left"></div><div class="cheek right"></div><div class="mouth"></div></div>
-<div class="hair"></div><div class="body"></div>
-<div class="arm left"><div class="hand"></div></div><div class="arm right"><div class="hand"></div></div>
-<div class="leg left"></div><div class="leg right"></div><div class="shoe left"></div><div class="shoe right"></div>
-</div>
-
-<div class="caption">
-After Calicut, they tried to separate themselves again. Instead, they became closer. Calls. Video calls. Every day.
 </div>
-
-</section>
-
-
-<!-- =====================================================
-     30 — TODAY
-===================================================== -->
-
-<section class="scene bg-future">
-
-<div class="sparkle" style="left:15%;top:20%;">✦</div>
-<div class="sparkle" style="right:15%;top:25%;">✦</div>
-<div class="sparkle" style="left:30%;top:65%;">✨</div>
-<div class="sparkle" style="right:30%;top:60%;">✧</div>
-
-<div class="final">
-
-<div class="heartBig">❤️</div>
-
-<h1>September 9, 2026</h1>
-
-<p>
-After all the fights...<br>
-after all the silence...<br>
-after all the distance...<br>
-after all the "goodbyes"...
-</p>
-
-<p>
-<strong>
-They are still here.
-</strong>
-</p>
-
-<p>
-Still talking.<br>
-Still calling.<br>
-Still caring.<br>
-Still missing each other.
-</p>
-
-<p>
-They don't know exactly when they will meet again.
-</p>
-
-<p>
-But Eva already knows one thing...
-</p>
-
-<p>
-<strong>
-If they meet again,<br>
-one day won't be enough. ❤️
-</strong>
-</p>
-
 </div>
-
-</section>
-
 
-<!-- =====================================================
-     31 — FUTURE
-===================================================== -->
-
-<section class="scene bg-future">
-
-<div class="final">
-
-<div class="heartBig">💗</div>
-
-<h1>To Be Continued...</h1>
-
-<p>
-There are still places they haven't visited.
-</p>
-
-<p>
-Movies they haven't watched.<br>
-Food they haven't shared.<br>
-Long walks they haven't taken.<br>
-Arguments they haven't had yet. 😂<br>
-And countless memories still waiting.
-</p>
-
-<p>
-Maybe their next meeting will be another ordinary day...
-</p>
-
-<p>
-Or maybe it will become their favorite day ever.
-</p>
-
-<p>
-<strong>
-Whatever happens next,<br>
-this little story will always belong to Eva & Fab. ❤️
-</strong>
-</p>
-
-<br>
-
-<div style="font-family:'Baloo 2';font-size:35px;">
-Eva ❤️ Fab
 </div>
-
 </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTROLS
-===================================================== -->
 
 <div class="controls">
-
-<button id="back">← Back</button>
-
-<div id="counter">1 / 31</div>
-
-<button id="next">Next ❤️</button>
-
+    <button onclick="previousPage()">← Previous</button>
+    <button onclick="nextPage()">Next →</button>
+    <button onclick="restartStory()">↻ Restart</button>
 </div>
-
-</div>
-
 
 <script>
 
-/* =====================================================
-   STORY ENGINE
-===================================================== */
+/* =========================================================
+   GOOGLE APPS SCRIPT
+   ========================================================= */
 
-const scenes =
-document.querySelectorAll(".scene");
-
-let current = 0;
-
-const next =
-document.getElementById("next");
-
-const back =
-document.getElementById("back");
-
-const counter =
-document.getElementById("counter");
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyzkx9WSuYOv7Ciha0xd2AQk5RDA_i91FNZT2c5S3RIQADLwch5P_1bOtkdtZ2Yvs0p/exec";
 
 
-function showScene(index){
+/* =========================================================
+   QUESTIONS
+   ========================================================= */
 
-    if(index < 0)
-        index = 0;
+const QUESTIONS = [
+    "What do you think about me and the way we first met?",
+    "Do you really think I am worth your time?",
+    "Do you love me more now than you did at the beginning?",
+    "If you could change one thing about our story, what would it be?",
+    "If we get one more full day together, what would you want us to do?"
+];
 
-    if(index >= scenes.length)
-        index = scenes.length - 1;
 
-    scenes.forEach(scene=>{
-        scene.classList.remove("active");
+/* =========================================================
+   BOOK
+   ========================================================= */
+
+const pages = document.querySelectorAll(".page");
+
+let currentPage = 0;
+let storyStarted = false;
+
+function updatePage(){
+
+    pages.forEach((page,index)=>{
+
+        if(index < currentPage){
+            page.classList.add("flipped");
+            page.style.zIndex = index;
+        }
+        else{
+            page.classList.remove("flipped");
+            page.style.zIndex = pages.length - index;
+        }
+
     });
+}
 
-    scenes[index].classList.add("active");
+function nextPage(){
 
-    current = index;
+    if(currentPage < pages.length){
 
-    counter.textContent =
-        `${current + 1} / ${scenes.length}`;
+        currentPage++;
 
-    if(current === scenes.length - 1){
-
-        next.textContent = "Replay ❤️";
-
-    }else{
-
-        next.textContent = "Next ❤️";
-
+        updatePage();
     }
+}
 
-    /* special first meeting */
+function previousPage(){
 
-    if(index === 12){
+    if(currentPage > 0){
 
-        const eva =
-            document.getElementById("meetingEva");
+        currentPage--;
 
-        const fab =
-            document.getElementById("meetingFab");
-
-        setTimeout(()=>{
-
-            eva.style.left = "37%";
-            fab.style.right = "37%";
-
-        },400);
-
+        updatePage();
     }
+}
 
+function startStory(){
+
+    document.getElementById("intro").classList.add("hide");
+
+    storyStarted = true;
+
+    const music = document.getElementById("music");
+
+    music.play().catch(()=>{});
+
+    createPetals();
+
+    updatePage();
+}
+
+function restartStory(){
+
+    currentPage = 0;
+
+    updatePage();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
 
-/* =====================================================
-   NEXT
-===================================================== */
-
-next.addEventListener("click",()=>{
-
-    if(current === scenes.length - 1){
-
-        showScene(0);
-
-    }else{
-
-        showScene(current + 1);
-
-    }
-
-});
-
-
-/* =====================================================
-   BACK
-===================================================== */
-
-back.addEventListener("click",()=>{
-
-    showScene(current - 1);
-
-});
-
-
-/* =====================================================
+/* =========================================================
    KEYBOARD
-===================================================== */
+   ========================================================= */
 
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown",function(e){
+
+    if(!storyStarted) return;
 
     if(e.key === "ArrowRight"){
-        showScene(current + 1);
+        nextPage();
     }
 
     if(e.key === "ArrowLeft"){
-        showScene(current - 1);
+        previousPage();
     }
 
 });
 
 
-/* =====================================================
-   HEART GENERATOR
-===================================================== */
+/* =========================================================
+   TOUCH SWIPE
+   ========================================================= */
 
-function makeHearts(){
+let touchStartX = 0;
 
-    for(let i=0;i<5;i++){
+document.addEventListener("touchstart",function(e){
 
-        const heart =
-            document.createElement("div");
+    touchStartX = e.changedTouches[0].screenX;
 
-        heart.className="heart";
+},{passive:true});
 
-        const types=[
-            "❤️",
-            "💗",
-            "💕",
-            "💖",
-            "✨"
-        ];
+document.addEventListener("touchend",function(e){
 
-        heart.textContent =
-            types[Math.floor(Math.random()*types.length)];
+    const touchEndX = e.changedTouches[0].screenX;
 
-        heart.style.left =
-            Math.random()*100+"%";
+    const difference = touchEndX - touchStartX;
 
-        heart.style.bottom =
-            Math.random()*30+"%";
+    if(Math.abs(difference) < 50) return;
 
-        heart.style.animationDelay =
-            Math.random()*2+"s";
-
-        document
-            .getElementById("app")
-            .appendChild(heart);
-
-        setTimeout(()=>{
-            heart.remove();
-        },3500);
-
+    if(difference < 0){
+        nextPage();
+    }
+    else{
+        previousPage();
     }
 
-}
+},{passive:true});
 
 
-/* =====================================================
-   AUTOMATIC HEARTS
-===================================================== */
-
-setInterval(()=>{
-
-    if(current===4 ||
-       current===13 ||
-       current===14 ||
-       current===24 ||
-       current===25 ||
-       current===30){
-
-        makeHearts();
-
-    }
-
-},2200);
-
-
-/* =====================================================
+/* =========================================================
    MUSIC
-===================================================== */
+   ========================================================= */
 
-const music =
-    new Audio("music.mp3");
+let musicPlaying = false;
 
-music.loop=true;
+function toggleMusic(){
 
-let musicOn=false;
+    const music = document.getElementById("music");
+    const button = document.getElementById("musicBtn");
 
-document
-.getElementById("musicBtn")
-.addEventListener("click",()=>{
-
-    if(!musicOn){
+    if(music.paused){
 
         music.play()
         .then(()=>{
-
-            musicOn=true;
-
-            document
-            .getElementById("musicBtn")
-            .textContent="♫ Music ON";
-
+            musicPlaying = true;
+            button.textContent = "🔊";
         })
-        .catch(()=>{
+        .catch(()=>{});
 
-            alert(
-                "Put a file named music.mp3 beside index.html."
-            );
-
-        });
-
-    }else{
+    }
+    else{
 
         music.pause();
 
-        musicOn=false;
+        musicPlaying = false;
 
-        document
-        .getElementById("musicBtn")
-        .textContent="♫ Music";
+        button.textContent = "🎵";
+    }
+}
+
+
+/* =========================================================
+   PETALS
+   ========================================================= */
+
+function createPetals(){
+
+    const container = document.getElementById("petals");
+
+    if(container.children.length > 0) return;
+
+    for(let i=0;i<18;i++){
+
+        const petal = document.createElement("div");
+
+        petal.className = "petal";
+
+        petal.textContent = Math.random() > .5 ? "🌸" : "♡";
+
+        petal.style.left = Math.random()*100 + "%";
+
+        petal.style.animationDuration =
+            (7 + Math.random()*8) + "s";
+
+        petal.style.animationDelay =
+            (Math.random()*8) + "s";
+
+        petal.style.fontSize =
+            (12 + Math.random()*15) + "px";
+
+        container.appendChild(petal);
+    }
+}
+
+
+/* =========================================================
+   SAVE ANSWERS LOCALLY
+   ========================================================= */
+
+function saveLocalAnswers(){
+
+    const data = {
+        answer1:document.getElementById("answer1").value,
+        answer2:document.getElementById("answer2").value,
+        answer3:document.getElementById("answer3").value,
+        answer4:document.getElementById("answer4").value,
+        answer5:document.getElementById("answer5").value,
+        letter:document.getElementById("letter").value
+    };
+
+    localStorage.setItem(
+        "catchMyHeartAnswers",
+        JSON.stringify(data)
+    );
+}
+
+function loadLocalAnswers(){
+
+    const saved =
+        localStorage.getItem("catchMyHeartAnswers");
+
+    if(!saved) return;
+
+    try{
+
+        const data = JSON.parse(saved);
+
+        document.getElementById("answer1").value =
+            data.answer1 || "";
+
+        document.getElementById("answer2").value =
+            data.answer2 || "";
+
+        document.getElementById("answer3").value =
+            data.answer3 || "";
+
+        document.getElementById("answer4").value =
+            data.answer4 || "";
+
+        document.getElementById("answer5").value =
+            data.answer5 || "";
+
+        document.getElementById("letter").value =
+            data.letter || "";
 
     }
+    catch(error){
+        console.log(error);
+    }
+}
+
+
+/* =========================================================
+   SEND TO GOOGLE SHEET
+   ========================================================= */
+
+async function sendAnswers(){
+
+    const status =
+        document.getElementById("status");
+
+    const answers = [
+        document.getElementById("answer1").value.trim(),
+        document.getElementById("answer2").value.trim(),
+        document.getElementById("answer3").value.trim(),
+        document.getElementById("answer4").value.trim(),
+        document.getElementById("answer5").value.trim()
+    ];
+
+    const letter =
+        document.getElementById("letter").value.trim();
+
+
+    // Check answers
+
+    for(let i=0;i<answers.length;i++){
+
+        if(!answers[i]){
+
+            status.textContent =
+                "Please answer all five questions ❤️";
+
+            return;
+        }
+    }
+
+
+    if(!letter){
+
+        status.textContent =
+            "Please write your letter to me ❤️";
+
+        return;
+    }
+
+
+    status.textContent =
+        "Sending your heart to me... ❤️";
+
+
+    const payload = {
+
+        answers: answers,
+
+        letter: letter
+
+    };
+
+
+    try{
+
+        await fetch(SCRIPT_URL,{
+
+            method:"POST",
+
+            mode:"no-cors",
+
+            headers:{
+                "Content-Type":"text/plain;charset=utf-8"
+            },
+
+            body:JSON.stringify(payload)
+
+        });
+
+
+        saveLocalAnswers();
+
+
+        status.textContent =
+            "Your answers and letter have been sent to me. ❤️";
+
+
+        // Disable button after sending
+
+        const button =
+            document.querySelector(".send-btn");
+
+        button.disabled = true;
+
+        button.textContent =
+            "Sent With Love ❤️";
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        status.textContent =
+            "Something went wrong. Please try again ❤️";
+    }
+}
+
+
+/* =========================================================
+   AUTO SAVE WHILE TYPING
+   ========================================================= */
+
+document.querySelectorAll("textarea")
+.forEach(function(textarea){
+
+    textarea.addEventListener(
+        "input",
+        saveLocalAnswers
+    );
 
 });
 
 
-/* =====================================================
-   AUTO PLAY
-   Change 0 to enable automatic movie mode.
-===================================================== */
+/* =========================================================
+   STARTUP
+   ========================================================= */
 
-let autoPlay=false;
+loadLocalAnswers();
 
-setInterval(()=>{
-
-    if(autoPlay){
-
-        showScene(
-            current === scenes.length-1
-            ? 0
-            : current+1
-        );
-
-    }
-
-},8000);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-showScene(0);
+updatePage();
 
 </script>
 
